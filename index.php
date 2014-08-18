@@ -26,6 +26,6 @@
 
 </head>
 <body>
-<h1>Hello Team Shruikan!</h1>
+
 </body>
 </html>
