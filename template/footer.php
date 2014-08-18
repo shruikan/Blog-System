@@ -4,8 +4,10 @@
     </div>
 </footer>
 
-<?php include(D_CONFIG . '/js.php'); ?>
+<?php
+include(D_WIDGETS . '/debug.php');
+include(D_CONFIG . '/js.php');
+?>
 
 </body>
-
 </html>

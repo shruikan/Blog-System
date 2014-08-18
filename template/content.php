@@ -1,7 +1,7 @@
 <section class="container">
     <header>
-        <h1>Header</h1>
+        <h1><?php echo $page['header']; ?></h1>
     </header>
 
-    <p>Content</p>
+    <?php echo $page['body_formatted']; ?>
 </section>

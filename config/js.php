@@ -6,3 +6,11 @@
 
 <!-- Bootstrap JS -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn-debug').click(function () {
+            $('#console-debug').toggleClass('hide');
+        });
+    });
+</script>

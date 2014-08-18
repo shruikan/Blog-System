@@ -11,8 +11,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
 <style>
-    /* Basic Footer Style */
-
+    /* Basic Styles */
     html {
         position: relative;
         min-height: 100%;
@@ -27,5 +26,22 @@
         height: 60px;
         padding-top: 20px;
         background-color: #f5f5f5;
+    }
+    #btn-debug {
+        position: absolute;
+    }
+    .hide {
+        display: none;
+    }
+    .show {
+        display: inline-block;
+    }
+
+    #console-debug {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+
     }
 </style>
