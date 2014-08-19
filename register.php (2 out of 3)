@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
    $email2= $_POST['email2'];
    $pass1 = $_POST['pass1'];
    $pass2 = $_POST['pass2'];
-   
+   $today = date("Y-m-d H:i:s");      
    if($email1==$email2){
       if($pass1==$pass2){
 	  //all good
@@ -30,7 +30,7 @@ if(isset($_POST['submit'])){
 	  $pass1 = md5($pass1);
 	  
 	  //check if the user exists
-	  $sql = mysql_query("SELECT * FROM 'users' WHERE 'user' = '$user'");
+	  $sql = mysql_query("SELECT * FROM `users` WHERE `user` = '$user'");
 	  if(mysql_num_rows($sql)>0){
 	  echo "Sorry, that user already exists.";
 	  exit();
@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
 	  }
 	  //Липсват: reg_date,status,url
 	  //new user into bd
-	  mysql_query("INSERT INTO 'users' ('id', 'name', 'family', 'user', 'email', 'password') VALUES (NULL, '$name','$family', '$user', '$email1', '$pass1' )") or die(mysql_error());
+	  mysql_query("INSERT INTO `users` (`id`,`user`, `name`, `family`, `email`, `password`, `reg_date`) VALUES (NULL,'$user', '$name','$family', '$email1', '$pass1', '$today')") or die(mysql_error());
 	  
 	  }else{
 	  echo "Sorry, your passwords do not match.<br/>";
@@ -61,7 +61,7 @@ First Name: <input type ="text"  name="name"/><br/>
 Last Name: <input type ="text"  name="family"/><br/>
 User Name: <input type ="text"  name="user"/><br/>
 Email: <input type ="text"  name="email1"/><br/>
-Confirm Email: <input type ="text"  name="email2"/><br/>
+Confirm Email: <input type ="email"  name="email2"/><br/>
 Password: <input type ="password"  name="pass1"/><br/>
 Confirm Password: <input type ="password"  name="pass2"/><br/>
 <input type="submit" value="Register" name="submit"/>
