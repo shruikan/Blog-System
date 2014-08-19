@@ -1,0 +1,72 @@
+
+
+
+<?php
+require('config.php');
+ 
+if(isset($_POST['submit'])){
+// Perform the verification
+   $email1= $_POST('email1');
+   $email2= $_POST('email2');
+   $pass1 = $_POST('pass1');
+   $pass2 = $_POST('pass2');
+   
+   if($email1==$email2){
+      if($pass1==pass2){
+	  //all good
+	  
+	  $name= mysql_escape_string($_POST['name']);
+	  //lname or family
+	  $family= mysql_escape_string($_POST['family']);
+	  //uname or user
+	  $user= mysql_escape_string($_POST['user']);
+	  $email1= mysql_escape_string($_POST['email1']);
+	  $email2= mysql_escape_string($_POST['email2']);
+	  //pass or password
+	  $pass1= mysql_escape_string($_POST['pass1']);
+	  $pass2= mysql_escape_string($_POST['pass2']);
+	  
+	  //decrypt pass
+	  $pass1 = md5($pass1);
+	  
+	  //check if the user exists
+	  $sql = mysql_query("SELECT * FROM 'users' WHERE 'user' = '$user'");
+	  if(mysql_num_row($sql)>0){
+	  echo "Sorry, that user already exists.";
+	  exit();
+	  
+	  }
+	  //Липсват: reg_date,status,url
+	  
+	  mysql_query("INSERT INTO 'users' ('id', 'name', family', 'user', 'email', 'password') VALUES (NULL, '$name','$family', '$user', '$email1', '$pass1' )") or die(mysql_error());
+	  
+	  }else
+	  echo "Sorry, your passwords do not match.<br/>";
+	  exit();
+   }else{
+   echo "Sorry, your email's do not match.<br/>";
+   }
+   
+   
+   
+
+
+}else{
+
+$form = <<<EOT
+<form action="register.php" method="POST">
+
+First Name: <input type ="text"  name="name"/><br/>
+Last Name: <input type ="text"  name="family"/><br/>
+User Name: <input type ="text"  name="user"/><br/>
+Email: <input type ="text"  name="email1"/><br/>
+Confirm Email: <input type ="text"  name="email2"/><br/>
+Password: <input type ="password"  name="pass1"/><br/>
+Confirm Password: <input type ="password"  name="pass1"/><br/>
+<input type="submit" value="REgister" name="submit"/>
+</form>
+EOT;
+
+echo $form;
+}
+?>
