@@ -1,6 +1,0 @@
-<?php
-// host root pass
-mysql_connect("http://blog.vezni.org/","****","****");
-mysql_select_db("****");
-
-?>
