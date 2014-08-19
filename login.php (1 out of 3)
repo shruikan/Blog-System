@@ -1,14 +1,14 @@
 <?php
 //error_reporting(E_ERROR);
 require('config.php');
-//or die ("Cannot find the config file");
+
 
 if(isset($_POST['submit'])){
 $user=mysql_escape_string($_POST['user']);
 $password=mysql_escape_string($_POST['password']);
-$password = md5($pass);
+$password = md5($password);
 
-$sql=mysql_query("SELECT * FROM 'users' WHERE 'user'='$user' AND 'password' = 'password'");
+$sql=mysql_query("SELECT * FROM 'users' WHERE 'user'='$user' AND 'password' = '$password'");
 if (mysql_num_rows($sql)>0){
 echo "You are now logged in.";
 exit();
