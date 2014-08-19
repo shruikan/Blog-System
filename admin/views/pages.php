@@ -13,12 +13,17 @@
 
             while ($list = mysqli_fetch_assoc($result)) {
                 ?>
-                <a href="?p=pages&id=<?php echo $list['id'] ?>"
-                   class="list-group-item <?php selected($list['id'], $opened['id'], 'active'); ?>">
+            <div id="page_<?php echo $list['id']; ?>" href="?p=pages&id=<?php echo $list['id']; ?>"
+                     class="list-group-item <?php selected($list['id'], $opened['id'], 'active'); ?>">
                     <h4 class="list-group-item-heading"><?php echo $list['title']; ?></h4>
-
+                    
+                    <span class="pull-right">
+                        <a href="#" id="del_<?php echo $list['id']; ?>" class="btn btn-danger btn-delete"><i class="fa fa-trash-o"></i></a>
+                        <a href="?p=pages&id=<?php echo $list['id']; ?>" class="btn btn-default"><i class="fa fa-chevron-right"></i></a>
+                    </span>
+                    
                     <p class="list-group-item-text"><?php echo strip_tags(substr($list['body'], 0, 100)); ?></p>
-                </a>
+                </div>
             <?php } ?>
 
         </div>

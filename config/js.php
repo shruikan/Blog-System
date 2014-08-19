@@ -10,10 +10,23 @@
 <!-- TinyMce -->
 <script type="text/javascript" src="../assets/vendor/js/tinymce/tinymce.min.js"></script> <!-- TODO: Use site URL -->
 
+<!-- Dropzone for Upload -->
+<script type="text/javascript" src="../assets/vendor/js/dropzone.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('#btn-debug').click(function() {
             $('#console-debug').toggleClass('hide');
+        });
+
+        $('.btn-delete').on('click', function() {
+            var selected = $(this).attr('id');
+            var pageid = selected.split('del_').join('');
+
+            if (confirm('Confirm delete?')) {
+                $.get('ajax/pages.php?id=' + pageid);
+                $('#page_' + pageid).remove();
+            }
         });
     });
 

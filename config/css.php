@@ -1,4 +1,4 @@
-<!-- Bootstrap -->
+<!-- Bootstrap CSS -->
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 <!-- Bootstrap theme -->
@@ -9,6 +9,9 @@
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+<!-- Dropzone CSS -->
+<link rel="stylesheet" href="../assets/vendor/css/dropzone.css">
 
 <style>
     /* Basic Styles */
