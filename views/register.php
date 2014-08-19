@@ -2,3 +2,4 @@
 
 <?php
 
+require ('admin/' . D_VIEWS . '/register.php');
