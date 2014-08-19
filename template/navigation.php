@@ -4,5 +4,8 @@
         <ul class="nav navbar-nav">
             <?php main_nav($dbc); ?>
         </ul>
+
+        <?php include (D_TEMPLATE . '/user_panel.php'); ?>
+
     </div>
 </nav>

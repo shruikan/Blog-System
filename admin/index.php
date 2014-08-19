@@ -1,14 +1,14 @@
 <?php
 session_start();
 
-include('config/setup.php');
-include(D_TEMPLATE. '/header.php');
+require('config/setup.php');
+require(D_TEMPLATE. '/header.php');
 
 if (isset($_SESSION['username'])) {
     require(D_TEMPLATE . '/navigation.php');
-    include(D_VIEWS . '/' . $page . '.php');
+    require(D_VIEWS . '/' . $page . '.php');
 } else {
-    include(D_VIEWS . '/login.php');
+    require(D_VIEWS . '/login.php');
 }
 
-include(D_TEMPLATE. '/footer.php');
+require(D_TEMPLATE. '/footer.php');

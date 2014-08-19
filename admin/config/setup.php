@@ -1,17 +1,21 @@
 <?php
 
 # Constants
-include('../config/constants.php');
+require('../config/constants.php');
 
 # Database Connection
-include('../' . D_CONFIG . '/connection.php');
+require('../' . D_CONFIG . '/connection.php');
 
-# Queries
-include(D_CONFIG . '/post.php');
-
+# Functions
+require(D_FUNCTIONS . '/helpers.php');
+require('../' . D_FUNCTIONS . '/data.php');
 
 # User Setup
-$user = $_SESSION['username'];
+$user = data_user($dbc, $_SESSION['username']);
 
 # Page Setup
 $page = isset($_GET['p']) ? $_GET['p'] : 'dashboard';
+
+
+# Queries
+require(D_CONFIG . '/post.php');

@@ -1,6 +1,6 @@
 <?php
 
-include('config/setup.php');
-include(D_TEMPLATE . '/header.php');
-include(D_TEMPLATE . '/content.php');
-include(D_TEMPLATE . '/footer.php');
+require('config/setup.php');
+require(D_TEMPLATE . '/header.php');
+require(D_TEMPLATE . '/content.php');
+require(D_TEMPLATE . '/footer.php');

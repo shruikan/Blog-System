@@ -21,3 +21,17 @@ function data_page($dbc, $id) {
 
     return $data;
 }
+
+function data_user($dbc, $id) {
+    if (is_numeric($id)) {
+        $cond = "WHERE id = '$id'";
+    } else {
+        $cond = "WHERE user = '$id'";
+    }
+
+    $query = "SELECT * FROM users $cond";
+    $result = mysqli_query($dbc, $query);
+    $data = mysqli_fetch_assoc($result);
+
+    return $data;
+}

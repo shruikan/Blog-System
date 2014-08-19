@@ -6,8 +6,8 @@
     <div class="panel-body">
         <form role="form" method="post">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                <label for="user">Username</label>
+                <input type="text" class="form-control" id="user" name="user" placeholder="Username">
             </div>
 
             <div class="form-group">

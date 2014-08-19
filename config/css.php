@@ -36,12 +36,4 @@
     .show {
         display: inline-block;
     }
-
-    #console-debug {
-        position: absolute;
-        top: 50px;
-        left: 0;
-        width: 100%;
-
-    }
 </style>
