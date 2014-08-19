@@ -1,16 +1,23 @@
 <?php
 
-function main_nav($dbc) {
-    $query = "SELECT * FROM pages";
-    $result = mysqli_query($dbc, $query);
-
-    while($nav = mysqli_fetch_assoc($result)) {
-        echo "<li><a href='$nav[slug]'>$nav[label]</a></li>";
+function selected($value1, $value2, $return) {
+    if ($value1 == $value2) {
+        echo $return;
     }
 }
 
-function get_path()
-{
+function main_nav($dbc, $path) {
+    $query = "SELECT * FROM pages";
+    $result = mysqli_query($dbc, $query);
+
+    while ($nav = mysqli_fetch_assoc($result)) {
+        ?>
+        <li <?php selected($path[call_parts][0], $nav[slug], 'class="active"'); ?>><a href="<?php echo $nav[slug]; ?>"><?php echo $nav[label]; ?></a></li>
+        <?php
+    }
+}
+
+function get_path() {
     $path = array();
 
     if (isset($_SERVER['REQUEST_URI'])) {
@@ -29,7 +36,7 @@ function get_path()
         $path['query_utf8'] = urldecode($request_path[1]);
         $path['query'] = utf8_decode(urldecode($request_path[1]));
         $vars = explode('&', $path['query']);
-        
+
         foreach ($vars as $var) {
             $t = explode('=', $var);
             $path['query_vars'][$t[0]] = $t[1];
