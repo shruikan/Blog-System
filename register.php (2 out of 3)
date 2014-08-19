@@ -6,13 +6,13 @@ require('config.php');
  
 if(isset($_POST['submit'])){
 // Perform the verification
-   $email1= $_POST('email1');
-   $email2= $_POST('email2');
-   $pass1 = $_POST('pass1');
-   $pass2 = $_POST('pass2');
+   $email1= $_POST['email1'];
+   $email2= $_POST['email2'];
+   $pass1 = $_POST['pass1'];
+   $pass2 = $_POST['pass2'];
    
    if($email1==$email2){
-      if($pass1==pass2){
+      if($pass1==$pass2){
 	  //all good
 	  
 	  $name= mysql_escape_string($_POST['name']);
@@ -31,18 +31,19 @@ if(isset($_POST['submit'])){
 	  
 	  //check if the user exists
 	  $sql = mysql_query("SELECT * FROM 'users' WHERE 'user' = '$user'");
-	  if(mysql_num_row($sql)>0){
+	  if(mysql_num_rows($sql)>0){
 	  echo "Sorry, that user already exists.";
 	  exit();
 	  
 	  }
 	  //Липсват: reg_date,status,url
+	  //new user into bd
+	  mysql_query("INSERT INTO 'users' ('id', 'name', 'family', 'user', 'email', 'password') VALUES (NULL, '$name','$family', '$user', '$email1', '$pass1' )") or die(mysql_error());
 	  
-	  mysql_query("INSERT INTO 'users' ('id', 'name', family', 'user', 'email', 'password') VALUES (NULL, '$name','$family', '$user', '$email1', '$pass1' )") or die(mysql_error());
-	  
-	  }else
+	  }else{
 	  echo "Sorry, your passwords do not match.<br/>";
 	  exit();
+	  }
    }else{
    echo "Sorry, your email's do not match.<br/>";
    }
@@ -62,8 +63,8 @@ User Name: <input type ="text"  name="user"/><br/>
 Email: <input type ="text"  name="email1"/><br/>
 Confirm Email: <input type ="text"  name="email2"/><br/>
 Password: <input type ="password"  name="pass1"/><br/>
-Confirm Password: <input type ="password"  name="pass1"/><br/>
-<input type="submit" value="REgister" name="submit"/>
+Confirm Password: <input type ="password"  name="pass2"/><br/>
+<input type="submit" value="Register" name="submit"/>
 </form>
 EOT;
 
