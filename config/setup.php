@@ -1,10 +1,7 @@
 <?php
 
 # Constants
-DEFINE('D_TEMPLATE', 'template');
-DEFINE('D_CONFIG', 'config');
-DEFINE('D_FUNCTIONS', 'functions');
-DEFINE('D_WIDGETS', 'widgets');
+include('config/constants.php');
 
 # Database Connection
 include(D_CONFIG . '/connection.php');
@@ -14,5 +11,10 @@ include(D_FUNCTIONS . '/data.php');
 include(D_FUNCTIONS . '/navigation.php');
 
 $path = get_path();
+
+if(!isset($path['call_parts'][0]) || empty($path['call_parts'][0])) {
+    $path['call_parts'][0] = 'home';
+}
+
 $site_title = 'Blog System';
 $page = data_page($dbc, $path['call_parts'][0]);
