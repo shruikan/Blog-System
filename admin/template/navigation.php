@@ -6,6 +6,7 @@
         <li><a href="?p=dashboard">Dashboard</a></li>
         <li><a href="?p=pages">Pages</a></li>
         <li><a href="?p=users">Users</a></li>
+        <li><a href="?p=navigation">Navigation</a></li>
         <li><a href="?p=settings">Settings</a></li>
     </ul>
 

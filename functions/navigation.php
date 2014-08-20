@@ -6,13 +6,23 @@ function selected($value1, $value2, $return) {
     }
 }
 
+function get_slug($dbc, $url) {
+    $pos = strrpos($url, '/');
+    $slug = substr($url, $pos + 1);
+    
+    return $slug;
+}
+
 function main_nav($dbc, $path) {
-    $query = "SELECT * FROM pages";
+    $query = "SELECT * FROM navigation ORDER BY position ASC";
     $result = mysqli_query($dbc, $query);
 
     while ($nav = mysqli_fetch_assoc($result)) {
+        
+        $nav['slug'] = get_slug($dbc, $nav['url']);
+        
         ?>
-        <li <?php selected($path[call_parts][0], $nav[slug], 'class="active"'); ?>><a href="<?php echo $nav[slug]; ?>"><?php echo $nav[label]; ?></a></li>
+        <li <?php selected($path[call_parts][0], $nav[slug], 'class="active"'); ?>><a href="<?php echo $nav[url]; ?>"><?php echo $nav[label]; ?></a></li>
         <?php
     }
 }

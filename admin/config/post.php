@@ -44,7 +44,7 @@ switch ($page) {
             if ($result) {
                 $message = '<div class="alert alert-success">Page was ' . $action . '!</div>';
             } else {
-                $message = '<div class="alert alert-danger">Page coul not be ' . $action . '!Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
+                $message = '<div class="alert alert-danger">Page could not be ' . $action . '!Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
             }
         }
 
@@ -91,7 +91,7 @@ switch ($page) {
             if ($result) {
                 $message = '<div class="alert alert-success">User was ' . $action . '!</div>';
             } else {
-                $message = '<div class="alert alert-danger">User coul not be ' . $action . '!Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
+                $message = '<div class="alert alert-danger">User could not be ' . $action . '!Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
 
                 if ($verify == false) {
                     $message = '<div class="alert alert-warning">Password do not match!</div>';
@@ -103,6 +103,33 @@ switch ($page) {
             $opened = data_user($dbc, $_GET['id']);
         }
 
+        break;
+
+    case 'navigation':
+        if (isset($_POST['post']) == 1) {
+
+            $id = mysqli_real_escape_string($dbc, $_POST[id]);
+            $label = mysqli_real_escape_string($dbc, $_POST[label]);
+            $url = mysqli_real_escape_string($dbc, $_POST[url]);
+            $position = mysqli_real_escape_string($dbc, $_POST[position]);
+            $status = mysqli_real_escape_string($dbc, $_POST[status]);
+
+            if (isset($_POST['id']) != '') {
+                $action = 'updated';
+                $query = "UPDATE navigation SET id = '$id', label = '$label', url = '$url', position = $position, status = $status WHERE id = '$_POST[openedid]'";
+                $result = mysqli_query($dbc, $query);
+            }
+
+            if ($result) {
+                $message = '<div class="alert alert-success">Navigation was ' . $action . '!</div>';
+            } else {
+                $message = '<div class="alert alert-danger">Navigation could not be ' . $action . '! Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
+            }
+        }
+
+        if (isset($_GET['id'])) {
+            $opened = data_user($dbc, $_GET['id']);
+        }
         break;
 
     case 'settings':
@@ -121,7 +148,7 @@ switch ($page) {
             if ($result) {
                 $message = '<div class="alert alert-success">Settings was ' . $action . '!</div>';
             } else {
-                $message = '<div class="alert alert-danger">Settings coul not be ' . $action . '! Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
+                $message = '<div class="alert alert-danger">Settings could not be ' . $action . '! Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
             }
         }
 
