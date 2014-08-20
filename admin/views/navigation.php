@@ -12,11 +12,11 @@
             while ($list = mysqli_fetch_assoc($result)) {
                 ?>
                 <li id="list_<?php echo $list['id']; ?>" class="list-group-item">
-                    <a type="button" data-toggle="collapse" data-target="#form_<?php echo $list['id']; ?>">
+                    <a id="label_<?php echo $list['id']; ?>" type="button" data-toggle="collapse" data-target="#form_<?php echo $list['id']; ?>">
                         <?php echo $list['label']; ?> <i class="fa fa-chevron-down"></i>
                     </a>
                     <div id="form_<?php echo $list['id']; ?>" class="collapse">
-                        <form role="form" action="?p=navigation&id=<?php echo $list['id']; ?>" method="post" class="form-horizontal">
+                        <form class="form-horizontal nav-form" role="form" action="?p=navigation&id=<?php echo $list['id']; ?>" method="post">
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="id">ID:</label>
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-default">Update</button>
+                            <button type="submit" class="btn btn-default">Save</button>
                             <input type="hidden" name="post" value="1">
 
                             <input type="hidden" name="openedid" value="<?php echo $list['id']; ?>">

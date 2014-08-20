@@ -34,7 +34,7 @@
                                placeholder="Value" autocomplete="off">
                     </div>
 
-                    <button type="submit" class="btn btn-default">Update</button>
+                    <button type="submit" class="btn btn-default">Save</button>
                     <input type="hidden" name="post" value="1">
 
                     <input type="hidden" name="openedid" value="<?php echo $opened['id']; ?>">

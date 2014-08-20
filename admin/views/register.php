@@ -83,7 +83,7 @@
                    placeholder="Verify Password" autocomplete="off">
         </div>
 
-        <button type="submit" class="btn btn-default">Create</button>
+        <button type="submit" class="btn btn-default">Save</button>
         <input type="hidden" name="post" value="1">
 
         <?php if (isset($opened['id'])) { ?>

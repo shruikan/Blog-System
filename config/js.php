@@ -28,7 +28,7 @@
                 $('#page_' + pageid).remove();
             }
         });
-        
+
         $('#sort-nav').sortable({
             cursor: 'move',
             update: function() {
@@ -36,7 +36,24 @@
                 $.get('ajax/sort-list.php', order);
             }
         });
-        
+
+        $('.nav-form').submit(function(event) {
+            var navData = $(this).serializeArray();
+            var navLabel = $('input[name=label]').val();
+            var navID = $('input[name=id]').val();
+            
+            
+            $.ajax({
+                url: 'ajax/navigation.php',
+                type: 'POST',
+                data: navData
+            }).done(function() {
+                $('#label_' + navID).html(navLabel);
+            });
+            
+            event.preventDefault();
+        });
+
     }); // END document.ready();
 
     tinymce.init({
