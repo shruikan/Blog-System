@@ -6,7 +6,21 @@
     }
     ?>
 
+
+    <?php if (isset($opened['id'])) { ?>
+        <label>Drop or click to upload avatar:</label>
+        <form action="config/uploads.php?id=<?php echo $opened['id']; ?>" class="dropzone" id="avatar-dropzone">
+        </form>
+    <?php } ?>
+
     <form action="?p=users&id=<?php echo $opened['id']; ?>" method="post">
+
+        <?php if (!empty($opened['avatar'])) { ?>
+            <label for="avatar">Avatar:</label>
+            <div id="avatar">
+                <div class="avatar-container" style="background-image: url('../uploads/<?php echo $opened['avatar']; ?>')"></div>
+            </div>
+        <?php } ?>
 
         <div class="form-group">
             <label for="status">Status:</label>

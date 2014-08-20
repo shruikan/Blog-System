@@ -1,3 +1,17 @@
+<?php if (isset($opened['id'])) { ?>
+    <script>
+        $(document).ready(function() {
+            Dropzone.autoDiscover = false;
+
+            var myDrop = new Dropzone('#avatar-dropzone');
+            myDrop.on('success', function(file) {
+                $('#avatar').load('ajax/avatar.php?id=<?php echo $opened['id']; ?>');
+            });
+        });
+    </script>
+<?php } ?>
+
+
 <h1>User Manager</h1>
 
 <div class="row">
@@ -18,7 +32,7 @@
                 <a href="?p=users&id=<?php echo $list['id'] ?>"
                    class="list-group-item <?php selected($list['id'], $opened['id'], 'active'); ?>">
                     <h4 class="list-group-item-heading"><?php echo $list['user']; ?></h4>
-                    <!-- <p class="list-group-item-text"><?php //echo strip_tags(substr($page_list['body'], 0, 100));   ?></p> -->
+                    <!-- <p class="list-group-item-text"><?php //echo strip_tags(substr($page_list['body'], 0, 100));     ?></p> -->
                 </a>
             <?php } ?>
 

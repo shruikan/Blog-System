@@ -39,4 +39,13 @@
     .show {
         display: inline-block;
     }
+    .avatar-container {
+        width: 100px;
+        height: 100px;
+        
+        border-radius: 5px;
+        
+        background-size: cover;
+        background-position: center center;
+    }
 </style>
