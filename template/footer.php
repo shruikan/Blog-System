@@ -1,7 +1,8 @@
-</section>
-<footer id="footer">
+</div>
+<footer>
     <div class="container">
-        <p>&copy; <?php echo $site_title ?>. It's all free.</p>
+        <hr />
+        <p class="text-center">&copy; <?php echo $site_title ?> 2014. It's all free..</p>
     </div>
 </footer>
 
