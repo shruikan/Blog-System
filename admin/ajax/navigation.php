@@ -1,6 +1,6 @@
 <?php
 
-require ('../../config/connection.php');
+require ($_SERVER['DOCUMENT_ROOT'] . 'config' . DIRECTORY_SEPARATOR . 'connection.php');
 
 $id = mysqli_real_escape_string($dbc, $_POST[id]);
 $label = mysqli_real_escape_string($dbc, $_POST[label]);

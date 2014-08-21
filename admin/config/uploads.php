@@ -1,8 +1,10 @@
 <?php
 
-include '../../config/connection.php';
-
+$root = $_SERVER['DOCUMENT_ROOT'];
 $ds = DIRECTORY_SEPARATOR;
+
+include ($root . 'config' . $ds . 'connection.php');
+
 $storeFolder = '../../uploads';
 $id = $_GET['id'];
 

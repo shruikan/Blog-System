@@ -1,9 +1,13 @@
 <footer id="footer">
-    <p>&copy; <?php echo SITE_TITLE ?>. It's free to use it.</p>
+    <p>&copy; <?php echo $site_title ?>. It's all free.</p>
 </footer>
 
-<?php require('../widgets/debug.php'); ?>
+
+<?php
+if ($debug_status == 1) {
+    require(ROOT . D_WIDGETS . DS . 'debug.php');
+}
+?>
 
 </body>
-
 </html>

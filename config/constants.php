@@ -1,10 +1,9 @@
 <?php
 
 # Constants
-DEFINE('D_CONFIG', 'config');
-DEFINE('D_TEMPLATE', 'template');
-DEFINE('D_VIEWS', 'views');
-DEFINE('D_FUNCTIONS', 'functions');
-DEFINE('D_WIDGETS', 'widgets');
-DEFINE('SITE_TITLE', 'Blog System');
-
+define('D_CONFIG', 'config');
+define('D_TEMPLATE', 'template');
+define('D_VIEWS', 'views');
+define('D_FUNCTIONS', 'functions');
+define('D_ASSETS', 'assets');
+define('D_WIDGETS', 'widgets');

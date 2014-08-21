@@ -23,7 +23,7 @@ switch ($page) {
         // TODO: Dashboard
         break;
 
-    case 'pages':
+    case 'posts':
         if (isset($_POST['post']) == 1) {
 
             $title = mysqli_real_escape_string($dbc, $_POST[title]);
@@ -33,23 +33,23 @@ switch ($page) {
 
             if (isset($_POST['id']) != '') {
                 $action = 'updated';
-                $query = "UPDATE pages SET user = '$_POST[user]', slug = '$_POST[slug]', title = '$title', label = '$label', header = '$header', body = '$body' WHERE id = $_GET[id]";
+                $query = "UPDATE posts SET user = '$_POST[user]', slug = '$_POST[slug]', title = '$title', label = '$label', header = '$header', body = '$body' WHERE id = $_GET[id]";
             } else {
-                $query = "INSERT INTO pages (user, slug, title, label, header, body) VALUES ($_POST[user], '$_POST[slug]', '$title', '$label', '$header', '$body')";
+                $query = "INSERT INTO posts (user, slug, title, label, header, body) VALUES ($_POST[user], '$_POST[slug]', '$title', '$label', '$header', '$body')";
                 $action = 'added';
             }
 
             $result = mysqli_query($dbc, $query);
 
             if ($result) {
-                $message = '<div class="alert alert-success">Page was ' . $action . '!</div>';
+                $message = '<div class="alert alert-success">Post was ' . $action . '!</div>';
             } else {
-                $message = '<div class="alert alert-danger">Page could not be ' . $action . '!Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
+                $message = '<div class="alert alert-danger">Post could not be ' . $action . '!Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
             }
         }
 
         if (isset($_GET['id'])) {
-            $opened = data_page($dbc, $_GET['id']);
+            $opened = get_posts($dbc, $_GET['id']);
         }
 
         break;
@@ -100,7 +100,7 @@ switch ($page) {
         }
 
         if (isset($_GET['id'])) {
-            $opened = data_user($dbc, $_GET['id']);
+            $opened = get_user($dbc, $_GET['id']);
         }
 
         break;
@@ -128,7 +128,7 @@ switch ($page) {
         }
 
         if (isset($_GET['id'])) {
-            $opened = data_user($dbc, $_GET['id']);
+            $opened = get_user($dbc, $_GET['id']);
         }
         break;
 
@@ -153,7 +153,7 @@ switch ($page) {
         }
 
         if (isset($_GET['id'])) {
-            $opened = data_user($dbc, $_GET['id']);
+            $opened = get_user($dbc, $_GET['id']);
         }
         break;
 

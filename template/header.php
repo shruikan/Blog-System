@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title><?php echo $page['title'] . ' | ' . SITE_TITLE ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <title><?php echo ucfirst($url) . ' | ' . $site_title ?></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <?php require(D_CONFIG . '/css.php'); ?>
+        <?php require(D_CONFIG . DS . 'css.php'); ?>
 
-</head>
-<body>
+    </head>
+    <body>
 
-<?php require(D_TEMPLATE . '/navigation.php');
+        <?php require(D_TEMPLATE . DS . 'navigation.php'); ?>
+
+        <section class="container">

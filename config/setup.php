@@ -1,21 +1,24 @@
 <?php
 
-error_reporting(0);
-
 # Constants
-require('config/constants.php');
+define('ROOT', $_SERVER['DOCUMENT_ROOT']);
+define('DS', DIRECTORY_SEPARATOR);
+require(ROOT . 'config' . DS . 'constants.php');
 
 # Database Connection
-require(D_CONFIG . '/connection.php');
+require(ROOT . D_CONFIG . DS .'connection.php');
 
 # Functions
-require(D_FUNCTIONS . '/data.php');
-require(D_FUNCTIONS . '/navigation.php');
+require(ROOT . D_FUNCTIONS . DS . 'data.php');
+require(ROOT . D_FUNCTIONS . DS . 'navigation.php');
 
+# Site Settings
+$settings = get_settings($dbc);
+$site_title = $settings['site-title'];
+$site_url = $settings['site-url'];
+$debug_status = $settings['debug-status'];
+$user = $settings['username'];
+
+# Path
 $path = get_path();
-
-if(!isset($path['call_parts'][0]) || empty($path['call_parts'][0])) {
-    $path['call_parts'][0] = 'home';
-}
-
-$page = data_page($dbc, $path['call_parts'][0]);
+$url = $path['call_parts'][0] ? $path['call_parts'][0] : 'home';

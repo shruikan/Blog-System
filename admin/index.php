@@ -1,14 +1,15 @@
 <?php
-session_start();
 
+session_start();
 require('config/setup.php');
-require(D_TEMPLATE. '/header.php');
+
+require(D_TEMPLATE . DS . 'header.php');
 
 if (isset($_SESSION['username'])) {
-    require(D_TEMPLATE . '/navigation.php');
-    require(D_VIEWS . '/' . $page . '.php');
+    require(D_TEMPLATE . DS . 'navigation.php');
+    require(D_VIEWS . DS . $page . '.php');
 } else {
-    require(D_VIEWS . '/login.php');
+    require(D_VIEWS . DS . 'login.php');
 }
 
-require(D_TEMPLATE. '/footer.php');
+require(D_TEMPLATE . DS . 'footer.php');

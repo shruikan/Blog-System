@@ -1,23 +1,13 @@
 <?php
 
-error_reporting(0);
+# Setup
+require($_SERVER['DOCUMENT_ROOT'] . 'config' . DIRECTORY_SEPARATOR . 'setup.php');
 
-# Constants
-require('../config/constants.php');
-
-# Database Connection
-require('../' . D_CONFIG . '/connection.php');
-
-# Functions
-require(D_FUNCTIONS . '/helpers.php');
-require('../' . D_FUNCTIONS . '/data.php');
-
-# User Setup
-$user = data_user($dbc, $_SESSION['username']);
-
-# Page Setup
+# Page
 $page = isset($_GET['p']) ? $_GET['p'] : 'dashboard';
-
+if(isset($_GET['id'])) {
+    $id = $_GET['id'];
+}
 
 # Queries
-require(D_CONFIG . '/post.php');
+require(D_CONFIG . DS . 'queries.php');

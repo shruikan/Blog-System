@@ -2,4 +2,5 @@
 
 <?php
 
+require('admin/' . D_CONFIG . '/post.php');
 require('admin/' . D_VIEWS . '/login.php');

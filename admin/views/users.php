@@ -20,23 +20,18 @@
             <a href="?p=users" class="list-group-item">
                 <i class="fa fa-plus"> New User</i>
             </a>
-
             <?php
-            $query = "SELECT * FROM users ORDER BY user ASC";
-            $result = mysqli_query($dbc, $query);
+            $users = get_user($dbc);
 
-            while ($list = mysqli_fetch_assoc($result)) {
-
-                $list = data_user($dbc, $list['id']);
+            foreach ($users as $user => $value) {
                 ?>
-                <a href="?p=users&id=<?php echo $list['id'] ?>"
-                   class="list-group-item <?php selected($list['id'], $opened['id'], 'active'); ?>">
-                    <h4 class="list-group-item-heading"><?php echo $list['user']; ?></h4>
-                    <!-- <p class="list-group-item-text"><?php //echo strip_tags(substr($page_list['body'], 0, 100));     ?></p> -->
+                <a href="?p=users&id=<?php echo $users[$user]['id']; ?>"
+                   class="list-group-item <?php selected($users[$user]['id'], $opened['id'], 'active'); ?>">
+                    <h4 class="list-group-item-heading"><?php echo $users[$user]['name']; ?></h4>
+                    <p class="list-group-item-text"><?php echo $users[$user]['email'] ?></p>
                 </a>
             <?php } ?>
-
         </div>
     </div>
-    <?php require(D_VIEWS . '/register.php'); ?>
+    <?php require(D_VIEWS . DS . 'register.php'); ?>
 </div>

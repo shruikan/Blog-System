@@ -11,41 +11,6 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
 <!-- Dropzone CSS -->
-<link rel="stylesheet" href="../assets/vendor/css/dropzone.css">
+<link rel="stylesheet" href="<?php echo $site_url; ?>assets/css/dropzone.css">
 
-<style>
-    /* Basic Styles */
-    html {
-        position: relative;
-        min-height: 100%;
-    }
-    body {
-        margin-bottom: 60px;
-    }
-    #footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 60px;
-        padding-top: 20px;
-        background-color: #f5f5f5;
-    }
-    #btn-debug {
-        position: absolute;
-    }
-    .hide {
-        display: none;
-    }
-    .show {
-        display: inline-block;
-    }
-    .avatar-container {
-        width: 100px;
-        height: 100px;
-        
-        border-radius: 5px;
-        
-        background-size: cover;
-        background-position: center center;
-    }
-</style>
+<link rel="stylesheet" href="<?php echo $site_url; ?>assets/css/style.css">

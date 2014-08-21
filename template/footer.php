@@ -1,12 +1,15 @@
+</section>
 <footer id="footer">
     <div class="container">
-        <p>&copy; <?php echo SITE_TITLE ?>. It's free to use it.</p>
+        <p>&copy; <?php echo $site_title ?>. It's all free.</p>
     </div>
 </footer>
 
 <?php
-require(D_WIDGETS . '/debug.php');
-require(D_CONFIG . '/js.php');
+if ($debug_status == 1) {
+    require(D_WIDGETS . '/debug.php');
+}
+require(D_CONFIG . DS . 'js.php');
 ?>
 
 </body>
