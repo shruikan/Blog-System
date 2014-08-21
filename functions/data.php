@@ -11,23 +11,36 @@ function get_settings($dbc) {
     return $settings;
 }
 
-function get_posts($dbc) {
+function get_posts($dbc, $id) {
 
-    $query = "SELECT *, MONTHNAME(date) AS month, DAYOFMONTH(date) AS day, YEAR(date) AS year FROM posts ORDER BY date DESC";
+    if (isset($id) && is_numeric($id)) {
+        $cond = "WHERE id = $id";
+    } else if (isset($id)) {
+        $cond = "WHERE label = $id";
+    }
+
+    $query = "SELECT *, MONTHNAME(date) AS month, DAYOFMONTH(date) AS day, YEAR(date) AS year, HOUR(date) AS hour, MINUTE(date) AS minutes, SECOND(date) AS seconds FROM posts $cond ORDER BY date DESC";
     $result = mysqli_query($dbc, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {
 
+        if ($data['id'] == 0) {
+            continue;
+        }
+        if (isset($id)) {
+            $posts[$data['id']]['body'] = $data['body'];
+        } else {
+            $posts[$data['id']]['body'] = substr($data['body'], 0, 230);
+        }
+
         $posts[$data['id']]['id'] = $data['id'];
         $posts[$data['id']]['user'] = $data['user'];
-        $posts[$data['id']]['date'] = "$data[month] $data[day], $data[year]";
+        $posts[$data['id']]['date'] = "$data[month] $data[day], $data[year] at $data[hour]:$data[minutes]:$data[seconds]";
         $posts[$data['id']]['category'] = $data['category'];
         $posts[$data['id']]['slug'] = $data['slug'];
         $posts[$data['id']]['label'] = $data['label'];
         $posts[$data['id']]['title'] = $data['title'];
         $posts[$data['id']]['header'] = $data['header'];
-        $posts[$data['id']]['body'] = $data['body'];
-        $posts[$data['id']]['status'] = $data['status'];
     }
 
     return $posts;

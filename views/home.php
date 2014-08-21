@@ -3,18 +3,22 @@
         <h1>Latest Posts</h1>
 
         <?php
-        $posts = get_posts($dbc);
+        $currnet = explode('-', $path['call_parts'][1]);
+        $path['call_parts'][0] == 'home' || empty($path['call_parts'][0]) ?
+                        $posts = get_posts($dbc) : $posts = get_posts($dbc, (int)$currnet[0]);
+
         foreach ($posts as $post => $value) {
+            $post_link = $site_url . 'post' . DS . $posts[$post]['id'] . '-' . $posts[$post]['slug'];
             ?>
             <article>
-                <h2><a href="<?php echo $posts[$post]['slug']; ?>"><?php echo $posts[$post]['title']; ?></a></h2>
+                <h2><a href="<?php echo $post_link; ?>"><?php echo $posts[$post]['title']; ?></a></h2>
 
                 <div class="row">
-                    <div class="col-sm-6 col-md-8">
-                        <span class="glyphicon glyphicon-bookmark"></span> <a href="#">Tags</a>
+                    <div class="col-sm-6 col-md-7">
+                        <span class="glyphicon glyphicon-bookmark"></span> <a href="<?php $post_link ?>">Tags</a>
                     </div>
-                    <div class="col-sm-6 col-md-4">
-                        <span class="glyphicon glyphicon-pencil"></span> <a href="#">Comments</a>			          		
+                    <div class="col-sm-6 col-md-5">
+                        <span class="glyphicon glyphicon-pencil"></span> <a href="<?php echo "$post_link#comment"; ?>">Comments</a>			          		
                         &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?php echo $posts[$post]['date']; ?>			          		
                     </div>
                 </div>
@@ -25,23 +29,24 @@
 
                 <br />
 
-                <p class="lead"><?php echo $posts[$post]['body'] ?></p>
+                <p class="lead"><?php echo $posts[$post]['body']; ?></p>
 
-                       <!-- <p>Other text</p> -->
-
-                <p class="text-right">
-                    <a href="<?php echo $posts[$post]['slug'] ?>">
-                        continue reading...
-                    </a>
-                </p>
+                                                   <!-- <p>Other text</p> -->
+                <?php if (!$currnet[0]) { ?>
+                    <p class="text-right">
+                        <a href="<?php echo $post_link; ?>">
+                            continue reading...
+                        </a>
+                    </p>
+                <?php } ?>
 
                 <hr>
             </article>
         <?php } ?>
 
         <ul class="pager">
-            <li class="previous"><a href="#">&larr; Previous</a></li>
-            <li class="next"><a href="#">Next &rarr;</a></li>
+            <li class="previous"><a href="<?php echo $post_link; ?>">&larr; Previous</a></li>
+            <li class="next"><a href="<?php echo $post_link; ?>">Next &rarr;</a></li>
         </ul>
 
     </div>
@@ -78,7 +83,7 @@
                     <li class="list-group-item"><a href="#"><?php echo $category; ?></a></li>
                 </ul>
             </div>
-<?php } ?>
+        <?php } ?>
 
         <!-- Tags -->
         <div class="panel panel-default">

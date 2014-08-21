@@ -21,4 +21,8 @@ $user = $settings['username'];
 
 # Path
 $path = get_path();
-$url = $path['call_parts'][0] ? $path['call_parts'][0] : 'home';
+$url = $path['call_parts'][0];
+
+if(empty($url) || $url == 'post') {
+    $url = 'home';
+}
