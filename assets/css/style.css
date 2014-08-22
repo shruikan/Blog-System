@@ -23,8 +23,10 @@ body > .container {
 .reg-log-form input, .reg-log-form select {
 	width: 94%;
 }
-.green {
+.green-tick {
 	color: rgb(3, 199, 3);
+	top: 8px;
+	left: -14px;
 }
 
 /* Img zoom effect */
