@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand"><?php echo $site_title; ?></a>
+            <a href="/" class="navbar-brand"><img src="http://prikachi.com/images/898/7555898E.png" alt="Logo" /><span><?php echo $site_title; ?></span></a>
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <form class="navbar-form navbar-right" role="search">
