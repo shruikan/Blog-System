@@ -43,7 +43,7 @@
             <label for="user">Username:</label>
             <input class="form-control pull-left" type="text" name="user" id="user" value="<?php echo $opened['user'] ?>"
                    placeholder="Username" autocomplete="off">
-			<span class="pull-right">OK</span>
+			<span class="glyphicon glyphicon-ok pull-right"></span>
         </div>
 
         <div class="form-group">
