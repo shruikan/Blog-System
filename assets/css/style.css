@@ -23,3 +23,6 @@ body > .container {
 .reg-log-form input, .reg-log-form select {
 	width: 94%;
 }
+.green {
+	color: rgb(3, 199, 3);
+}
