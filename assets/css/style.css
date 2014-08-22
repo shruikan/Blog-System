@@ -18,3 +18,8 @@ body > .container {
     background-size: cover;
     background-position: center center;
 }
+
+/* Forms styles */
+.reg-log-form input, .reg-log-form select {
+	width: 94%;
+}
