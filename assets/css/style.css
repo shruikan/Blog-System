@@ -1,7 +1,22 @@
 /* Basic Styles */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+}
 body > .container {
     margin-top: 60px;
 }
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 0;
+  background-color: #e3e3e3;
+}
+
 #btn-debug {
     position: absolute;
 }

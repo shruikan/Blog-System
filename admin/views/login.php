@@ -1,4 +1,4 @@
-<section class="panel panel-info">
+<section class="panel panel-info login">
     <header class="panel-heading strong">
         Login
     </header> <!-- END Panel Heading -->

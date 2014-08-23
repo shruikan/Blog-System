@@ -63,8 +63,8 @@ switch ($page) {
         if (isset($_POST['post'])) {
 
             $user = mysqli_real_escape_string($dbc, $_POST['user']);
-            $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
-            $password_v = mysqli_real_escape_string($dbc, sha1($_POST['password_v']));
+            $password = mysqli_real_escape_string($dbc, $_POST['password']);
+            $password_v = mysqli_real_escape_string($dbc, $_POST['password_v']);
             $name = mysqli_real_escape_string($dbc, $_POST['name']);
             $family = mysqli_real_escape_string($dbc, $_POST['family']);
             $email = mysqli_real_escape_string($dbc, $_POST['email']);
@@ -76,7 +76,7 @@ switch ($page) {
 
             if (!empty($_POST['password'])) {
                 if ($password == $password_v) {
-                    $password = "password = '$password',";
+                    $password = "password = 'sha1($password)',";
                     $verify = true;
                 } else {
                     $verify = false;

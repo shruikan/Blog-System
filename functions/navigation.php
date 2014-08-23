@@ -6,14 +6,14 @@ function selected($value1, $value2, $return) {
     }
 }
 
-function main_nav($dbc, $path) {
+function main_nav($dbc, $path, $url) {
     $query = "SELECT * FROM navigation ORDER BY position ASC";
     $result = mysqli_query($dbc, $query);
 
     while ($nav = mysqli_fetch_assoc($result)) {
 
         ?>
-        <li <?php selected($path['call_parts'][0], $nav['url'], 'class="active"'); ?>><a href="<?php echo $nav['url']; ?>"><?php echo $nav['label']; ?></a></li>
+        <li <?php selected($path['call_parts'][0], $nav['url'], 'class="active"'); ?>><a href="<?php echo $url . $nav['url']; ?>"><?php echo $nav['label']; ?></a></li>
         <?php
     }
 }

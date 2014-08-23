@@ -4,7 +4,10 @@
         <title><?php echo ucfirst($url) . ' | ' . $site_title ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <?php require(D_CONFIG . DS . 'css.php'); ?>
+        <?php
+        require(D_CONFIG . DS . 'css.php');
+        require(D_CONFIG . DS . 'js.php');
+        ?>
 
     </head>
     <body>

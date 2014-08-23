@@ -4,7 +4,7 @@ $ds = DIRECTORY_SEPARATOR;
 
 require ('connection.php');
 
-$storeFolder = '../../uploads';
+$storeFolder = '../uploads';
 $id = $_GET['id'];
 
 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);

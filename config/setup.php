@@ -3,7 +3,8 @@
 //error_reporting(0);
 
 # Constants
-define('ROOT', ''); // TODO: USE $_SERVER
+define('ROOT', $_SERVER['DOCUMENT_ROOT']);
+//define('ROOT', '');
 define('DS', DIRECTORY_SEPARATOR);
 require(ROOT . 'config' . DS . 'constants.php');
 
@@ -17,7 +18,7 @@ require(ROOT . D_FUNCTIONS . DS . 'navigation.php');
 # Site Settings
 $settings = get_settings($dbc);
 $site_title = $settings['site-title'];
-$site_url = '/'; // User DB URL
+$site_url = $settings['site-url']; // User DB URL
 $debug_status = $settings['debug-status'];
 
 # Path
@@ -25,3 +26,7 @@ $path = get_path();
 $url = $path['call_parts'][0];
 
 require(ROOT . D_CONFIG . DS . 'queries.php');
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+}

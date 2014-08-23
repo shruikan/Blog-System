@@ -12,25 +12,25 @@ if (isset($_POST['login'])) {
         $_SESSION['username'] = $user;
         header('Location: home');
     } else {
-        //$url = 'login';
-        //echo '<div class="alert alert-warning">Wrong login data!</div>'; // TODO: Make error reporting
+        $message = '<div class="alert alert-warning">Wrong login data!</div>'; // TODO: Make error reporting
     }
 }
 
 // REGISTER
 if (isset($_POST['register'])) {
     $ip = ip2long($_SERVER['REMOTE_ADDR']);
+    $username = $_SESSION['username'];
     $user = mysqli_real_escape_string($dbc, $_POST['user']);
-    $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
-    $password_v = mysqli_real_escape_string($dbc, sha1($_POST['password_v']));
+    $password = mysqli_real_escape_string($dbc, $_POST['password']);
+    $password_v = mysqli_real_escape_string($dbc, $_POST['password_v']);
     $name = mysqli_real_escape_string($dbc, $_POST['name']);
     $family = mysqli_real_escape_string($dbc, $_POST['family']);
     $email = mysqli_real_escape_string($dbc, $_POST['email']);
-    $url = mysqli_real_escape_string($dbc, $_POST['url']);
+    $site = mysqli_real_escape_string($dbc, $_POST['url']);
 
-    if (!empty($_POST['password'])) {
+    if (!empty($password)) {
         if ($password == $password_v) {
-            $password = "password = '$password',";
+            $password = "password = 'sha1($password)',";
             $verify = true;
         } else {
             $verify = false;
@@ -40,7 +40,7 @@ if (isset($_POST['register'])) {
     }
 
     if ($url == 'edit') {
-        $query = "UPDATE users SET user = '$user', name = '$name', family = '$family', email = '$email', $password url = '$url' WHERE id = $user_id"; // TODO: Get ID
+        $query = "UPDATE users SET name = '$name', family = '$family', email = '$email', $password url = '$site' WHERE user = '$username'";
         $result = mysqli_query($dbc, $query);
     } else {
         $query = "INSERT INTO users (ip, user, email, password) VALUES ('$ip', '$user', '$email', $password)";

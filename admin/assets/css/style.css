@@ -1,12 +1,18 @@
 /* Basic Styles */
+
 #btn-debug {
     position: absolute;
 }
-.hide {
-    display: none;
+
+.login {
+    width: 50%;
+    margin: 40px auto;
 }
 .show {
     display: inline-block;
+}
+.hide {
+    display: none;
 }
 .avatar-container {
     width: 100px;

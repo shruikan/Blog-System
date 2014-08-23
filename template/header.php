@@ -21,7 +21,7 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav">
-                <?php main_nav($dbc, $path); ?>
+                <?php main_nav($dbc, $path, $site_url); ?>
             </ul>
             <?php include (ROOT . D_TEMPLATE . '/user_panel.php'); ?>
         </nav>

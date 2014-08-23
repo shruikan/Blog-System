@@ -10,4 +10,4 @@ $result = mysqli_query($dbc, $query);
 $data = mysqli_fetch_assoc($result);
 ?>
 
-<div class="avatar-container" style="background-image: url('../uploads/<?php echo $data['avatar']; ?>')"></div>
+<div class="avatar-container" style="background-image: url('/uploads/<?php echo $data['avatar']; ?>')"></div>
