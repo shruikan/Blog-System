@@ -28,7 +28,7 @@
 
                 <hr>
 
-                <img src="http://placehold.it/900x300" class="img-responsive">
+                <a href="<?php echo $post_link; ?>"><img src="http://placehold.it/900x300" class="img-responsive"></a>
 
                 <br />
 

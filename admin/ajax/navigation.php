@@ -8,7 +8,7 @@ $url = mysqli_real_escape_string($dbc, $_POST[url]);
 $position = mysqli_real_escape_string($dbc, $_POST[position]);
 $status = mysqli_real_escape_string($dbc, $_POST[status]);
 
-$query = "UPDATE navigation SET id = '$id', label = '$label', url = '$url', status = $status WHERE id = '$_POST[openedid]'";
+$query = "UPDATE navigation SET id = '$id', label = '$label', url = '$url', position = $position, status = $status WHERE id = '$_POST[openedid]'";
 $result = mysqli_query($dbc, $query);
 
 if ($result) {

@@ -19,7 +19,7 @@ body > .container {
     background-position: center center;
 }
 
-/* Logo styles */
+/* Logo styles 
 .navbar-brand {
 	padding: 0 15px;
 }
@@ -30,6 +30,8 @@ body > .container {
 .navbar-brand span {
 	color: #101010;
 }
+
+*/
 
 /* Forms styles */
 .reg-log-form input, .reg-log-form select {

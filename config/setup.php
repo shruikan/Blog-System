@@ -17,7 +17,7 @@ require(ROOT . D_FUNCTIONS . DS . 'navigation.php');
 # Site Settings
 $settings = get_settings($dbc);
 $site_title = $settings['site-title'];
-$site_url = ''; // User DB URL
+$site_url = '/'; // User DB URL
 $debug_status = $settings['debug-status'];
 
 # Path

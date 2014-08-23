@@ -8,10 +8,10 @@
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <!-- TinyMce -->
-<script type="text/javascript" src="<?php echo $site_url; ?>assets/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 
 <!-- Dropzone Uploader -->
 <script type="text/javascript" src="<?php echo $site_url; ?>assets/js/dropzone.min.js"></script>
 
 <!-- Main Script -->
-<script type="text/javascript" src="<?php echo $site_url; ?>assets/js/main.js"></script>
+<script type="text/javascript" src="<?php echo $site_url; ?>assets/js/script.js"></script>
