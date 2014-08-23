@@ -5,10 +5,3 @@ function selected($value1, $value2, $return) {
         echo $return;
     }
 }
-
-function get_slug($dbc, $url) {
-    $pos = strrpos($url, '/');
-    $slug = substr($url, $pos + 1);
-    
-    return $slug;
-}

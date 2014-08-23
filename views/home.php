@@ -68,7 +68,7 @@
                 <h4>Latest Posts</h4>
             </div>
             <ul class="list-group">
-                <li class="list-group-item"><a href="singlepost.html">Post 1</a></li>
+                <li class="list-group-item"><a href="#">Post 1</a></li>
             </ul>
         </div>
 
