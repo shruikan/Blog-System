@@ -5,7 +5,7 @@
             <?php if (isset($_SESSION['username'])) { ?>
                 <ul class="dropdown-menu">
                     <li><a href="#">Edit Profile</a></li>
-                    <li><a href="logout">Logout</a></li>
+                    <li><a href="<?php echo $site_url . 'logout' ?>">Logout</a></li>
                 </ul>
             <?php } else { ?>
                 <ul class="dropdown-menu">

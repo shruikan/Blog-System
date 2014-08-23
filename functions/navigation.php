@@ -9,7 +9,7 @@ function selected($value1, $value2, $return) {
 function get_slug($dbc, $url) {
     $pos = strrpos($url, '/');
     $slug = substr($url, $pos + 1);
-    
+
     return $slug;
 }
 
@@ -18,11 +18,10 @@ function main_nav($dbc, $path) {
     $result = mysqli_query($dbc, $query);
 
     while ($nav = mysqli_fetch_assoc($result)) {
-        
+
         $nav['slug'] = get_slug($dbc, $nav['url']);
-        
         ?>
-        <li <?php selected($path[call_parts][0], $nav[slug], 'class="active"'); ?>><a href="<?php echo $nav[url]; ?>"><?php echo $nav[label]; ?></a></li>
+        <li <?php selected($path['call_parts'][0], $nav['slug'], 'class="active"'); ?>><a href="<?php echo $nav['url']; ?>"><?php echo $nav['label']; ?></a></li>
         <?php
     }
 }
@@ -43,13 +42,15 @@ function get_path() {
 
         $path['call_parts'] = explode('/', $path['call']);
 
-        $path['query_utf8'] = urldecode($request_path[1]);
-        $path['query'] = utf8_decode(urldecode($request_path[1]));
-        $vars = explode('&', $path['query']);
+        if (isset($request_path[1])) {
+            $path['query_utf8'] = urldecode($request_path[1]);
+            $path['query'] = utf8_decode(urldecode($request_path[1]));
+            $vars = explode('&', $path['query']);
 
-        foreach ($vars as $var) {
-            $t = explode('=', $var);
-            $path['query_vars'][$t[0]] = $t[1];
+            foreach ($vars as $var) {
+                $t = explode('=', $var);
+                $path['query_vars'][$t[0]] = $t[1];
+            }
         }
     }
 

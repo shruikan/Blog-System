@@ -50,6 +50,8 @@ switch ($page) {
 
         if (isset($_GET['id'])) {
             $opened = get_posts($dbc, $_GET['id']);
+        } else {
+            $opened = NULL;
         }
 
         break;

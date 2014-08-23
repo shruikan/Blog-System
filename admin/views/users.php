@@ -25,10 +25,10 @@
 
             foreach ($users as $user => $value) {
                 ?>
-                <a href="?p=users&id=<?php echo $users[$user]['id']; ?>"
-                   class="list-group-item <?php selected($users[$user]['id'], $opened['id'], 'active'); ?>">
-                    <h4 class="list-group-item-heading"><?php echo $users[$user]['name']; ?></h4>
-                    <p class="list-group-item-text"><?php echo $users[$user]['email'] ?></p>
+                <a href="?p=users&id=<?php echo $value['id']; ?>"
+                   class="list-group-item <?php selected($value['id'], isset($opened['id']) ? $opened['id'] : NULL, 'active'); ?>">
+                    <h4 class="list-group-item-heading"><?php echo $value['name']; ?></h4>
+                    <p class="list-group-item-text"><?php echo $value['email'] ?></p>
                 </a>
             <?php } ?>
         </div>

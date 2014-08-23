@@ -12,7 +12,9 @@ function get_settings($dbc) {
 }
 
 function get_posts($dbc, $id) {
-
+    
+    $cond = NULL;
+    
     if (isset($id) && is_numeric($id)) {
         $cond = "WHERE id = $id";
     } else if (isset($id)) {
@@ -58,7 +60,9 @@ function get_categories($dbc) {
 }
 
 function get_user($dbc, $id) {
-
+    
+    $cond = NULL;
+    
     if (isset($id)) {
         if (is_numeric($id)) {
             $cond = "WHERE id = '$id'";

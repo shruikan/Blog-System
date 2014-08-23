@@ -11,18 +11,18 @@
             $posts = get_posts($dbc);
 
             foreach ($posts as $post => $value) {
-                $post_id = $posts[$post]['id'];
+                $post_id = $value['id'];
                 ?>
                 <div id="post_<?php echo $post_id; ?>" href="?p=posts&id=<?php echo $post_id; ?>"
                      class="list-group-item <?php selected($post_id, $id, 'active'); ?>">
-                    <h4 class="list-group-item-heading"><?php echo $posts[$post]['title']; ?></h4>
+                    <h4 class="list-group-item-heading"><?php echo $value['title']; ?></h4>
 
                     <span class="pull-right">
                         <a href="#" id="del_<?php echo $post_id; ?>" class="btn btn-danger btn-delete"><i class="fa fa-trash-o"></i></a>
                         <a href="?p=posts&id=<?php echo $post_id; ?>" class="btn btn-default"><i class="fa fa-chevron-right"></i></a>
                     </span>
 
-                    <p class="list-group-item-text"><?php echo strip_tags(substr($posts[$post]['body'], 0, 100)); ?></p>
+                    <p class="list-group-item-text"><?php echo strip_tags(substr($value['body'], 0, 100)); ?></p>
                 </div>
             <?php } ?>
 
@@ -53,9 +53,9 @@
                     $users = get_user($dbc);
                     
                     foreach ($users as $user => $value) {
-                        echo "<option value=" . $users[$user][user] . " ";
-                        selected($users[$user]['id'], $posts[$id]['user'], 'selected');
-                        echo '>' . $users[$user]['user'] . '</option>';
+                        echo "<option value=" . $value['user'] . " ";
+                        selected($value['id'], $value['user'], 'selected');
+                        echo '>' . $value['user'] . '</option>';
                     }
                     ?>
                 </select>

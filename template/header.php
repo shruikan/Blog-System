@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand"><img src="http://prikachi.com/images/898/7555898E.png" alt="Logo" /><span><?php echo $site_title; ?></span></a>
+            <a href="<?php echo $site_url; ?>" class="navbar-brand"><?php echo $site_title; ?></a>
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <form class="navbar-form navbar-right" role="search">
@@ -23,7 +23,7 @@
             <ul class="nav navbar-nav">
                 <?php main_nav($dbc, $path); ?>
             </ul>
-            <?php include (D_TEMPLATE . '/user_panel.php'); ?>
+            <?php include (ROOT . D_TEMPLATE . '/user_panel.php'); ?>
         </nav>
     </div>
 </header>

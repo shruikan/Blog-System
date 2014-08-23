@@ -3,15 +3,18 @@
         <h1>Latest Posts</h1>
 
         <?php
-        $currnet = explode('-', $path['call_parts'][1]);
+        if(isset($path['call_parts'][1])) {
+            $currnet = explode('-', $path['call_parts'][1]);
+        }
+        
         $path['call_parts'][0] == 'home' || empty($path['call_parts'][0]) ?
-                        $posts = get_posts($dbc) : $posts = get_posts($dbc, (int)$currnet[0]);
+                        $posts = get_posts($dbc, NULL) : $posts = get_posts($dbc, (int)$currnet[0]);
 
         foreach ($posts as $post => $value) {
-            $post_link = $site_url . 'post' . DS . $posts[$post]['id'] . '-' . $posts[$post]['slug'];
+            $post_link = $site_url . 'post' . DS . $value['id'] . '-' . $value['slug'];
             ?>
             <article>
-                <h2><a href="<?php echo $post_link; ?>"><?php echo $posts[$post]['title']; ?></a></h2>
+                <h2><a href="<?php echo $post_link; ?>"><?php echo $value['title']; ?></a></h2>
 
                 <div class="row">
                     <div class="col-sm-6 col-md-7">
@@ -19,7 +22,7 @@
                     </div>
                     <div class="col-sm-6 col-md-5">
                         <span class="glyphicon glyphicon-pencil"></span> <a href="<?php echo "$post_link#comment"; ?>">Comments</a>			          		
-                        &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?php echo $posts[$post]['date']; ?>			          		
+                        &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?php echo $value['date']; ?>			          		
                     </div>
                 </div>
 
@@ -32,7 +35,7 @@
                 <p class="lead"><?php echo $posts[$post]['body']; ?></p>
 
                                                    <!-- <p>Other text</p> -->
-                <?php if (!$currnet[0]) { ?>
+                <?php if (!isset($currnet[0]) && isset($path['call_parts'][1])) { ?>
                     <p class="text-right">
                         <a href="<?php echo $post_link; ?>">
                             continue reading...
