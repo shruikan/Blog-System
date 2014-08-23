@@ -25,15 +25,18 @@ switch ($page) {
 
     case 'posts':
         if (isset($_POST['post']) == 1) {
-
-            $title = mysqli_real_escape_string($dbc, $_POST[title]);
-            $label = mysqli_real_escape_string($dbc, $_POST[label]);
-            $header = mysqli_real_escape_string($dbc, $_POST[header]);
-            $body = mysqli_real_escape_string($dbc, $_POST[body]);
+            
+            $id = mysqli_real_escape_string($dbc, $_POST['id']);
+            $user = mysqli_real_escape_string($dbc, $_POST['user']);
+            $slug = mysqli_real_escape_string($dbc, $_POST['slug']);
+            $title = mysqli_real_escape_string($dbc, $_POST['title']);
+            $label = mysqli_real_escape_string($dbc, $_POST['label']);
+            $header = mysqli_real_escape_string($dbc, $_POST['header']);
+            $body = mysqli_real_escape_string($dbc, $_POST['body']);
 
             if (isset($_POST['id']) != '') {
                 $action = 'updated';
-                $query = "UPDATE posts SET user = '$_POST[user]', slug = '$_POST[slug]', title = '$title', label = '$label', header = '$header', body = '$body' WHERE id = $_GET[id]";
+                $query = "UPDATE posts SET user = '$user', slug = '$slug', title = '$title', label = '$label', header = '$header', body = '$body' WHERE id = $id";
             } else {
                 $query = "INSERT INTO posts (user, slug, title, label, header, body) VALUES ($_POST[user], '$_POST[slug]', '$title', '$label', '$header', '$body')";
                 $action = 'added';
@@ -59,16 +62,21 @@ switch ($page) {
     case 'users':
         if (isset($_POST['post']) == 1) {
 
-            $user = mysqli_real_escape_string($dbc, $_POST[user]);
-            $name = mysqli_real_escape_string($dbc, $_POST[name]);
-            $family = mysqli_real_escape_string($dbc, $_POST[family]);
-            $email = mysqli_real_escape_string($dbc, $_POST[email]);
-            $url = mysqli_real_escape_string($dbc, $_POST[url]);
+            $user = mysqli_real_escape_string($dbc, $_POST['user']);
+            $password = mysqli_real_escape_string($dbc, $_POST['password']);
+            $password_v = mysqli_real_escape_string($dbc, $_POST['password_v']);
+            $name = mysqli_real_escape_string($dbc, $_POST['name']);
+            $family = mysqli_real_escape_string($dbc, $_POST['family']);
+            $email = mysqli_real_escape_string($dbc, $_POST['email']);
+            $url = mysqli_real_escape_string($dbc, $_POST['url']);
+            
+            $status = mysqli_real_escape_string($dbc, $_POST['status']);
+            $id = mysqli_real_escape_string($dbc, $_POST['id']);
 
 
             if (!empty($_POST['password'])) {
-                if ($_POST['password'] == $_POST['password_v']) {
-                    $password = "password = SHA1('$_POST[password]'),";
+                if ($password == $password_v) {
+                    $password = "password = SHA1('$password'),";
                     $verify = true;
                 } else {
                     $verify = false;
@@ -79,11 +87,11 @@ switch ($page) {
 
             if (isset($_POST['id']) != '') {
                 $action = 'updated';
-                $query = "UPDATE users SET user = '$user', name = '$name', family = '$family', email = '$email', url = '$url', $password status = $_POST[status] WHERE id = $_GET[id]";
+                $query = "UPDATE users SET user = '$user', name = '$name', family = '$family', email = '$email', url = '$url', $password status = $status WHERE id = $id";
                 $result = mysqli_query($dbc, $query);
             } else {
                 $action = 'added';
-                $query = "INSERT INTO users (user, name, family, email, url, password, status) VALUES ('$user', '$name', '$family', '$_POST[email]', '$url', '$_POST[password]', $_POST[status])";
+                $query = "INSERT INTO users (user, name, family, email, url, password, status) VALUES ('$user', '$name', '$family', '$email', '$url', '$password', $status)";
 
                 if ($verify == true) {
                     $result = mysqli_query($dbc, $query);
@@ -110,14 +118,15 @@ switch ($page) {
     case 'navigation':
         if (isset($_POST['post']) == 1) {
 
-            $id = mysqli_real_escape_string($dbc, $_POST[id]);
-            $label = mysqli_real_escape_string($dbc, $_POST[label]);
-            $url = mysqli_real_escape_string($dbc, $_POST[url]);
-            $status = mysqli_real_escape_string($dbc, $_POST[status]);
+            $id = mysqli_real_escape_string($dbc, $_POST['id']);
+            $label = mysqli_real_escape_string($dbc, $_POST['label']);
+            $url = mysqli_real_escape_string($dbc, $_POST['url']);
+            $status = mysqli_real_escape_string($dbc, $_POST['status']);
+            $opened_id = mysqli_real_escape_string($dbc, $_POST['openedid']);
 
             if (isset($_POST['id']) != '') {
                 $action = 'updated';
-                $query = "UPDATE navigation SET id = '$id', label = '$label', url = '$url', status = $status WHERE id = '$_POST[openedid]'";
+                $query = "UPDATE navigation SET id = '$id', label = '$label', url = '$url', status = $status WHERE id = '$opened_id'";
                 $result = mysqli_query($dbc, $query);
             }
 
@@ -136,13 +145,14 @@ switch ($page) {
     case 'settings':
         if (isset($_POST['post']) == 1) {
 
-            $id = mysqli_real_escape_string($dbc, $_POST[id]);
-            $label = mysqli_real_escape_string($dbc, $_POST[label]);
-            $value = mysqli_real_escape_string($dbc, $_POST[value]);
+            $id = mysqli_real_escape_string($dbc, $_POST['id']);
+            $label = mysqli_real_escape_string($dbc, $_POST['label']);
+            $value = mysqli_real_escape_string($dbc, $_POST['value']);
+            $opened_id = mysqli_real_escape_string($dbc, $_POST['openedid']);
 
             if (isset($_POST['id']) != '') {
                 $action = 'updated';
-                $query = "UPDATE settings SET id = '$id', label = '$label', value = '$value' WHERE id = '$_POST[openedid]'";
+                $query = "UPDATE settings SET id = '$id', label = '$label', value = '$value' WHERE id = '$opened_id'";
                 $result = mysqli_query($dbc, $query);
             }
 
@@ -158,6 +168,14 @@ switch ($page) {
         }
         break;
 
+    case 'logout':
+        if (!session_start()) {
+            session_start();
+        }
+        session_destroy();
+
+        header('Location: index.php');
+        break;
     default:
         break;
 }
