@@ -93,3 +93,9 @@ function get_user($dbc, $id = NULL) {
     $data = mysqli_fetch_assoc($result);
     return $data;
 }
+
+function selected($value1, $value2, $return) {
+    if ($value1 == $value2) {
+        echo $return;
+    }
+}

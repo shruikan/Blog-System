@@ -3,6 +3,7 @@
         <h1>Latest Posts</h1>
 
         <?php
+        
         if(isset($path['call_parts'][1])) {
             $currnet = explode('-', $path['call_parts'][1]);
         }

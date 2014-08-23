@@ -38,7 +38,7 @@ switch ($page) {
                 $action = 'updated';
                 $query = "UPDATE posts SET user = '$user', slug = '$slug', title = '$title', label = '$label', header = '$header', body = '$body' WHERE id = $id";
             } else {
-                $query = "INSERT INTO posts (user, slug, title, label, header, body) VALUES ($_POST[user], '$_POST[slug]', '$title', '$label', '$header', '$body')";
+                $query = "INSERT INTO posts (user, slug, title, label, header, body) VALUES ($user, '$slug', '$title', '$label', '$header', '$body')";
                 $action = 'added';
             }
 
@@ -60,11 +60,11 @@ switch ($page) {
         break;
 
     case 'users':
-        if (isset($_POST['post']) == 1) {
+        if (isset($_POST['post'])) {
 
             $user = mysqli_real_escape_string($dbc, $_POST['user']);
-            $password = mysqli_real_escape_string($dbc, $_POST['password']);
-            $password_v = mysqli_real_escape_string($dbc, $_POST['password_v']);
+            $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
+            $password_v = mysqli_real_escape_string($dbc, sha1($_POST['password_v']));
             $name = mysqli_real_escape_string($dbc, $_POST['name']);
             $family = mysqli_real_escape_string($dbc, $_POST['family']);
             $email = mysqli_real_escape_string($dbc, $_POST['email']);
@@ -76,7 +76,7 @@ switch ($page) {
 
             if (!empty($_POST['password'])) {
                 if ($password == $password_v) {
-                    $password = "password = SHA1('$password'),";
+                    $password = "password = '$password',";
                     $verify = true;
                 } else {
                     $verify = false;
@@ -91,7 +91,7 @@ switch ($page) {
                 $result = mysqli_query($dbc, $query);
             } else {
                 $action = 'added';
-                $query = "INSERT INTO users (user, name, family, email, url, password, status) VALUES ('$user', '$name', '$family', '$email', '$url', '$password', $status)";
+                $query = "INSERT INTO users (user, name, family, email, url, password, status) VALUES ('$user', '$name', '$family', '$email', '$url', $password $status)";
 
                 if ($verify == true) {
                     $result = mysqli_query($dbc, $query);
@@ -116,7 +116,7 @@ switch ($page) {
         break;
 
     case 'navigation':
-        if (isset($_POST['post']) == 1) {
+        if (isset($_POST['login'])) {
 
             $id = mysqli_real_escape_string($dbc, $_POST['id']);
             $label = mysqli_real_escape_string($dbc, $_POST['label']);

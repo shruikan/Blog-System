@@ -8,16 +8,15 @@ define('DS', DIRECTORY_SEPARATOR);
 require(ROOT . 'config' . DS . 'constants.php');
 
 # Database Connection
-require(ROOT . D_CONFIG . DS .'connection.php');
+require(ROOT . D_CONFIG . DS . 'connection.php');
 
 # Functions
 require(ROOT . D_FUNCTIONS . DS . 'data.php');
-require(ROOT . D_FUNCTIONS . DS . 'navigation.php');
 
 # Page
 $page = isset($_GET['p']) ? $_GET['p'] : 'dashboard';
 
-if(isset($_GET['id'])) {
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
 } else {
     $id = NULL;
@@ -31,4 +30,4 @@ $debug_status = $settings['debug-status'];
 
 
 # Queries
-require(D_CONFIG . DS . 'queries.php');
+require(ROOT . D_CONFIG . DS . 'queries.php');

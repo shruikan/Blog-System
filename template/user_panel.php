@@ -9,11 +9,10 @@
                 </ul>
             <?php } else { ?>
                 <ul class="dropdown-menu">
-                    <li><a href="register">Register</a></li>
-                    <li><a href="login">Login</a></li>
+                    <li><a href="<?php echo $site_url . 'register' ?>">Register</a></li>
+                    <li><a href="<?php echo $site_url . 'login' ?>">Login</a></li>
                 </ul>
             <?php } ?>
-
         </li>
     </ul>
 </nav>

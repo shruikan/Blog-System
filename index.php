@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require('config/setup.php');
 require(D_TEMPLATE . DIRECTORY_SEPARATOR . 'head.php');

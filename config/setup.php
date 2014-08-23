@@ -8,7 +8,7 @@ define('DS', DIRECTORY_SEPARATOR);
 require(ROOT . 'config' . DS . 'constants.php');
 
 # Database Connection
-require(ROOT . D_CONFIG . DS .'connection.php');
+require(ROOT . D_CONFIG . DS . 'connection.php');
 
 # Functions
 require(ROOT . D_FUNCTIONS . DS . 'data.php');
@@ -24,6 +24,4 @@ $debug_status = $settings['debug-status'];
 $path = get_path();
 $url = $path['call_parts'][0];
 
-if(empty($url) || $url == 'post') {
-    $url = 'home';
-}
+require(ROOT . D_CONFIG . DS . 'queries.php');

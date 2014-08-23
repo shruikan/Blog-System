@@ -1,8 +1,7 @@
 <?php
-
 session_start();
-require('config/setup.php');
 
+require('config/setup.php');
 require(D_TEMPLATE . DS . 'header.php');
 
 if (isset($_SESSION['username'])) {
