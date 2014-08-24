@@ -6,7 +6,7 @@
     <div class="col-md-4">
         <div class="thumbnail">
             <a href="#">
-                <img src="http://placehold.it/270x150" class="img-responsive" />
+                <img src="http://placehold.it/180x180" class="img-responsive" />
             </a>
             <div class="caption text-center">
                 <h4>Name</h4>
@@ -20,7 +20,7 @@
     <div class="col-md-4">
         <div class="thumbnail">
             <a href="#">
-                <img src="http://placehold.it/270x150" class="img-responsive" />
+                <img src="http://placehold.it/180x180" class="img-responsive" />
             </a>
             <div class="caption text-center">
                 <h4>Name</h4>
@@ -34,7 +34,7 @@
     <div class="col-md-4">
         <div class="thumbnail">
             <a href="#">
-                <img src="http://placehold.it/270x150" class="img-responsive" />
+                <img src="http://placehold.it/180x180" class="img-responsive" />
             </a>
             <div class="caption text-center">
                 <h4>Name</h4>
@@ -48,7 +48,7 @@
     <div class="col-md-4">
         <div class="thumbnail">
             <a href="#">
-                <img src="http://placehold.it/270x150" class="img-responsive" />
+                <img src="http://placehold.it/180x180" class="img-responsive" />
             </a>
             <div class="caption text-center">
                 <h4>Name</h4>
