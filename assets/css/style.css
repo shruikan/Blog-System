@@ -13,8 +13,23 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 15px 0;
+  padding-top: 15px;
   background-color: #e3e3e3;
+}
+a {
+	transition: .5s ease all;
+}
+a:hover {
+	text-decoration: none;
+}
+/* Socials */
+footer .btn {
+	padding: 6px 6px;
+	transition: .5s ease all;
+}
+
+h1. h3, h4 {
+	font-family: Knewave, cursive;
 }
 
 #btn-debug {
