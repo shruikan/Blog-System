@@ -1,16 +1,9 @@
 $(document).ready(function() {
-    
-    
-    // target _blank to all external links
-    var a = new RegExp('/' + window.location.host + '/');
 
+    // target _blank to all external links
     $('#content a').each(function() {
-        var href = $(this).attr('href');
-        
-        if (!a.test(this.href)) {
-            event.preventDefault();
-            event.stopPropagation();
-            window.open(this.href, '_blank');
+        if (this.href.indexOf(location.hostname) == -1) {
+            $(this).attr('target', '_blank');
         }
     });
 
