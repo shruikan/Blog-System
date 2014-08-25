@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="thumbnail">
-            <a href="#">
+            <a href="https://softuni.bg/users/profile/show/anton_cholakov">
                 <img src="https://softuni.bg/Users/Profile/ShowAvatar/f40f0b81-be96-493a-9cfd-ae9e15c3e3a6" alt="Anton Cholakov" height="180" width="180" class="img-responsive" />
             </a>
             <div class="caption text-center">
@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-4">
         <div class="thumbnail">
-            <a href="#">
+            <a href="https://softuni.bg/users/profile/show/ddonchev">
                 <img src="https://softuni.bg/Users/Profile/ShowAvatar/477f2fa2-867f-4e57-b4c5-6d3c1c18eccd" alt="Doncho Donchev" height="180" width="180" class="img-responsive" />
             </a>
             <div class="caption text-center">
@@ -33,7 +33,7 @@
     </div>
     <div class="col-md-4">
         <div class="thumbnail">
-            <a href="#">
+            <a href="https://softuni.bg/users/profile/show/Flyer">
 				<img src="https://softuni.bg/Users/Profile/ShowAvatar/b7b69109-2893-4d88-9d53-39feb38bb8b5" alt="Karim Hristov" height="180" width="180" class="img-responsive" />
                 </a>
             <div class="caption text-center">
@@ -47,7 +47,7 @@
     </div>
     <div class="col-md-4">
         <div class="thumbnail">
-            <a href="#">
+            <a href="https://softuni.bg/users/profile/show/Stani">
 				<img src="https://softuni.bg/Users/Profile/ShowAvatar/ac368eb3-ea21-4ad2-a1b2-cfd90675e934" alt="Stanislava Tropcheva" height="180" width="180" class="img-responsive" />
             </a>
             <div class="caption text-center">
@@ -61,7 +61,7 @@
     </div>
     <div class="col-md-4">
         <div class="thumbnail">
-            <a href="#">
+            <a href="https://softuni.bg/users/profile/show/svetoslavpopov">
 				<img src="https://softuni.bg/Users/Profile/ShowAvatar/a7af5957-756f-4545-a8fa-1c858af6ed70" alt="Svetoslav Popov" height="180" width="180" class="img-responsive" />
             </a>
             <div class="caption text-center">
@@ -75,7 +75,7 @@
     </div>
     <div class="col-md-4">
         <div class="thumbnail">
-            <a href="#">
+            <a href="https://softuni.bg/users/profile/show/VasilPavlov">
                 <img src="https://softuni.bg/Users/Profile/ShowAvatar/ca3f843c-019b-4f99-9bd9-d63c500bac54" alt="Vasil Pavlov" height="180" width="180" class="img-responsive" />
             </a>
             <div class="caption text-center">
