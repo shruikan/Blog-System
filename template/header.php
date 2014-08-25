@@ -27,6 +27,6 @@
         </nav>
     </div>
 </header>
-<div class="container">
+<div class="container" id="content">
     <?php
     include (D_TEMPLATE . '/messages.php');
