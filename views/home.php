@@ -6,8 +6,12 @@
         $currnet = explode('-', $path['call_parts'][1]);
     }
 
-    $path['call_parts'][0] == 'home' || empty($path['call_parts'][0]) ?
-                    $posts = get_posts($dbc, NULL) : $posts = get_posts($dbc, (int) $currnet[0]);
+    if ($path['call_parts'][0] == 'home' || empty($path['call_parts'][0])) {
+        $posts = get_posts($dbc, NULL);
+    } else {
+        $posts = get_posts($dbc, (int) $currnet[0]);
+        $comments = TRUE;
+    }
 
     foreach ($posts as $post => $value) {
         $post_link = ROOT . 'post/' . $value['id'] . '-' . $value['slug'];
@@ -33,7 +37,7 @@
 
             <p class="lead"><?= $value['body']; ?></p>
 
-                                                       <!-- <p>Other text</p> -->
+                                                                   <!-- <p>Other text</p> -->
             <?php if (isset($path['call_parts'][2])) { ?>
                 <p class="text-right">
                     <a href="<?= $post_link; ?>">
@@ -50,4 +54,11 @@
         <li class="previous"><a href="<?= $post_link; ?>">&larr; Previous</a></li>
         <li class="next"><a href="<?= $post_link; ?>">Next &rarr;</a></li>
     </ul>
+    <hr />
+    <?php
+    if ($comments) {
+        require 'comments.php';
+    }
+    ?>
 </div>
+

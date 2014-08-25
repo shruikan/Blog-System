@@ -2,8 +2,8 @@
     <header>
         <h1>Login</h1>
     </header>
-    
-    <form method="post"id="login-form">
+
+    <form method="post" id="login-form">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" name="username" placeholder="Username">

@@ -72,7 +72,7 @@ if (isset($_POST['register'])) {
             if (mysqli_query($dbc, $query)) {
                 $message['success'][] = 'Your profile is successfully updated!';
             } else {
-                $message['warning'][] = 'An error occured!' . mysql_error($dbc) . ' ' . $query;
+                $message['warning'][] = 'An error occured! Please try again!';
             }
         }
     } else { // Register Profile
@@ -112,8 +112,52 @@ if (isset($_POST['register'])) {
                 $message['success'][] = 'Welcome aboard!';
                 header('Location: home');
             } else {
-                $message['warning'][] = 'An error occured!' . mysql_error($dbc) . ' ' . $query;
+                $message['warning'][] = 'An error occured! Please try again!';
             }
         }
+    }
+}
+
+if (isset($_POST['post'])) {
+
+    $comment = mysqli_real_escape_string($dbc, $_POST['comment']);
+
+    if (!isset($_SESSION['username'])) {
+        $name = format($dbc, $_POST['name']);
+        $email = mysqli_real_escape_string($dbc, strtolower($_POST['email']));
+
+        // Validation
+        if (empty($name) || empty($email) || empty($comment)) {
+            $message['warning'][] = 'Please fill all the fields!';
+        }
+        if (!empty($name) && !preg_match('/^\w{5,12}$/', $name)) {
+            $message['warning'][] = 'The username must contain only alphanumeric and be between 5 and 12 characters!';
+        }
+        if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $message['warning'][] = 'The email is not valid!';
+        }
+        if (!isset($message)) {
+            $query = "INSERT INTO comments (author, email, content) VALUES ('$name','$email','$comment')";
+        }
+    } else {
+
+        // Validation
+        if (empty($comment)) {
+            $message['warning'][] = 'Enter a comment!';
+        }
+
+        if (!isset($message)) {
+            $user = get_user($dbc, $_SESSION['username']);
+            $username = $user['username'];
+            $email = $user['email'];
+
+            $query = "INSERT INTO comments (author, email, content) VALUES ('$username','$email','$comment')";
+        }
+    }
+
+    if (mysqli_query($dbc, $query)) {
+        $message['success'][] = 'Thank you for your comment!';
+    } else {
+        $message['warning'][] = 'An error occured! Please try again!';
     }
 }

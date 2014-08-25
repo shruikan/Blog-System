@@ -1,5 +1,4 @@
 </div>
-<hr />
 <footer>
     <div class="container">
         <p class="pull-left">&copy; <a href="<?= ROOT; ?>"><?= $site_title ?></a> 2014. It's all free..</p>

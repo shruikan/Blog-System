@@ -9,7 +9,7 @@
 </div>
 
 <div class="contact-form">
-    <form class="form-horizontal col-md-8" role="form">
+    <form role="form" method="post" class="form-horizontal col-md-8" id="contacts">
 
         <div class="form-group">
             <label for="name" class="col-md-2">Name</label>
@@ -41,7 +41,7 @@
 
         <div class="form-group">
             <div class="col-md-12 text-right">
-                <button type="submit" class="btn btn-lg btn-primary">Submit your message!</button>
+                <button type="submit" name="contacts" class="btn btn-lg btn-primary">Submit your message!</button>
             </div>
         </div>
     </form>	

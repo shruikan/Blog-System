@@ -59,6 +59,20 @@ function get_posts($dbc, $id) {
     return $posts;
 }
 
+function get_comments($dbc) {
+    $query = "SELECT * FROM comments ORDER BY date DESC";
+    $result = mysqli_query($dbc, $query);
+
+    while ($data = mysqli_fetch_assoc($result)) {
+        $comments[$data['id']]['date'] = $data['date'];
+        $comments[$data['id']]['author'] = $data['author'];
+        $comments[$data['id']]['email'] = $data['email'];
+        $comments[$data['id']]['content'] = $data['content'];
+    }
+
+    return $comments;
+}
+
 function get_categories($dbc) {
     $query = "SELECT * FROM categories ORDER BY label ASC";
     $result = mysqli_query($dbc, $query);
@@ -84,25 +98,29 @@ function get_user($dbc, $id) {
 
     $query = "SELECT * FROM users $cond";
     $result = mysqli_query($dbc, $query);
+    
+    if ($result) {
+        if (!isset($id)) {
+            while ($data = mysqli_fetch_assoc($result)) {
+                $users[$data['id']]['id'] = $data['id'];
+                $users[$data['id']]['avatar'] = $data['avatar'];
+                $users[$data['id']]['username'] = $data['username'];
+                $users[$data['id']]['name'] = $data['name'];
+                $users[$data['id']]['family'] = $data['family'];
+                $users[$data['id']]['email'] = $data['email'];
+                $users[$data['id']]['site'] = $data['site'];
+                $users[$data['id']]['reg_date'] = $data['reg_date'];
+                $users[$data['id']]['status'] = $data['status'];
+            }
 
-    if (!isset($id)) {
-        while ($data = mysqli_fetch_assoc($result)) {
-            $users[$data['id']]['id'] = $data['id'];
-            $users[$data['id']]['avatar'] = $data['avatar'];
-            $users[$data['id']]['username'] = $data['username'];
-            $users[$data['id']]['name'] = $data['name'];
-            $users[$data['id']]['family'] = $data['family'];
-            $users[$data['id']]['email'] = $data['email'];
-            $users[$data['id']]['site'] = $data['site'];
-            $users[$data['id']]['reg_date'] = $data['reg_date'];
-            $users[$data['id']]['status'] = $data['status'];
+            return $users;
         }
 
-        return $users;
+        $data = mysqli_fetch_assoc($result);
+        return $data;
+    } else {
+        return NULL;
     }
-
-    $data = mysqli_fetch_assoc($result);
-    return $data;
 }
 
 function get_path() {
