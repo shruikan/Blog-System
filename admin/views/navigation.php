@@ -62,11 +62,3 @@
         <?php } ?>
     </ul>
 </div>
-
-<div class="col-md-8">
-    <?php
-    if (isset($message)) { // TODO: USE Eror reporting
-        echo $message;
-    }
-    ?>
-</div>

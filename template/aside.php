@@ -27,7 +27,7 @@
                 <h4>Categories</h4>
             </div>
             <ul class="list-group">
-                <li class="list-group-item"><a href="#"><?php echo $category; ?></a></li>
+                <li class="list-group-item"><a href="#"><?= $category; ?></a></li>
             </ul>
         </div>
     <?php } ?>

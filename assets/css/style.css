@@ -41,6 +41,14 @@ footer .btn {
 .show {
     display: inline-block;
 }
+.profile {
+    width: 88px;
+    text-align: right;
+    background-repeat: no-repeat;
+    background-size: 28px;
+    background-position: left center;
+    border-radius: 3px;
+}
 .avatar-container, .thumbnail > a > img {
     width: 100px;
     height: 100px;

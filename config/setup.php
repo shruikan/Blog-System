@@ -28,6 +28,7 @@ require('queries.php');
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
+    $user = get_user($dbc, $username);
 }
 
 # Aside Layout Pages
