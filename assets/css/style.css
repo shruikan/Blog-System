@@ -12,11 +12,11 @@ body > .container {
 h1, h2, h3, h4 {
     font-family: Knewave, cursive;
 }
+h2 a:hover {
+    text-decoration: none;
+}
 a {
     transition: .5s all;
-}
-a:hover {
-    text-decoration: none;
 }
 footer {
     position: absolute;

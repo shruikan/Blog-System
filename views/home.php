@@ -8,6 +8,7 @@
 
     if ($path['call_parts'][0] == 'home' || empty($path['call_parts'][0])) {
         $posts = get_posts($dbc, NULL);
+        $comments = FALSE;
     } else {
         $posts = get_posts($dbc, (int) $current[0]);
         $comments = TRUE;

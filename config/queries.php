@@ -12,8 +12,11 @@ if (isset($_POST['login'])) {
         $result = mysqli_query($dbc, $query);
 
         if (mysqli_num_rows($result) > 0) {
+            $data = mysqli_fetch_assoc($result);
+            
             $_SESSION['id'] = mysqli_insert_id($dbc);
-            $_SESSION['username'] = $username;
+            $_SESSION['username'] = $data['username'];
+            $_SESSION['level'] = $data['level'];
             header('Location: home');
         } else {
             $message['warning'][] = 'Wrong login data!';

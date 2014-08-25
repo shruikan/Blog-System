@@ -3,6 +3,7 @@
 //error_reporting(0);
 
 $dir = $_SERVER['DOCUMENT_ROOT'] . 'admin/';
+//$dir = '';
 
 # Constants
 define('DIR', $dir);
