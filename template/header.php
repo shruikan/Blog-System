@@ -23,9 +23,11 @@
             <ul class="nav navbar-nav">
                 <?php main_nav($dbc, $path, $site_url); ?>
             </ul>
-            <?php include (ROOT . D_TEMPLATE . '/user_panel.php'); ?>
+            <?php include (ROOT . D_TEMPLATE . DS . 'user_panel.php'); ?>
         </nav>
     </div>
 </header>
 <div class="container">
-<!--TODO FIX-->
+    <?php
+    include (ROOT . D_TEMPLATE . DS . 'messages.php');
+    
