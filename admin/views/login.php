@@ -1,7 +1,7 @@
 <section class="panel panel-info login">
     <header class="panel-heading strong">
         Login
-    </header> <!-- END Panel Heading -->
+    </header>
 
     <div class="panel-body">
         <form role="form" method="post">
@@ -16,5 +16,5 @@
             </div>
             <button type="submit" name="login" class="btn btn-default">Submit</button>
         </form>
-    </div> <!-- END Panel Body -->
+    </div>
 </section>

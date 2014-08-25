@@ -2,35 +2,34 @@
 
 //error_reporting(0);
 
-# Constants
-define('ROOT', $_SERVER['DOCUMENT_ROOT']);
-//define('ROOT', '');
-define('DS', DIRECTORY_SEPARATOR);
-require(ROOT . 'config' . DS . 'constants.php');
-
 # Database Connection
-require(ROOT . D_CONFIG . DS . 'connection.php');
+require('connection.php');
+
+# Constants
+require('config/constants.php');
 
 # Functions
-require(ROOT . D_FUNCTIONS . DS . 'data.php');
-require(ROOT . D_FUNCTIONS . DS . 'navigation.php');
+require(D_FUNCTIONS . '/data.php');
+
 
 # Site Settings
 $settings = get_settings($dbc);
 $site_title = $settings['site-title'];
-$site_url = $settings['site-url']; // User DB URL
+$site_url = $settings['site-url'];
 $debug_status = $settings['debug-status'];
 
-# Path
+define('ROOT', $site_url);
+//define('ROOT', 'localhost/Blog-System.git/trunk/');
+
+# Navigation
 $path = get_path();
 $url = $path['call_parts'][0];
+require(D_FUNCTIONS . '/navigation.php');
 
-require(ROOT . D_CONFIG . DS . 'queries.php');
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 }
-
 
 # Aside Layout Pages
 $aside = array('home');

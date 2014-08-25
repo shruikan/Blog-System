@@ -2,8 +2,15 @@
 session_start();
 
 require('config/setup.php');
-require(D_TEMPLATE . DIRECTORY_SEPARATOR . 'head.php');
-if (!include (D_VIEWS . DIRECTORY_SEPARATOR . $url . '.php')) {
-    include (D_VIEWS . DIRECTORY_SEPARATOR . '404.php');
+require(D_TEMPLATE . DS . 'head.php');
+
+if (!include (D_VIEWS . DS . $url . '.php')) {
+    include (D_VIEWS . DS . '404.php');
+    include (D_TEMPLATE . DS . 'aside.php');
 }
-require(D_TEMPLATE . DIRECTORY_SEPARATOR . 'footer.php');
+
+if(in_array($url, $aside)) {
+    include (D_TEMPLATE . DS . 'aside.php');
+}
+
+require(D_TEMPLATE . DS . 'footer.php');

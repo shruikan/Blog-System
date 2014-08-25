@@ -1,4 +1,6 @@
-<h1>Contact Us</h1>
+<header>
+    <h1>Contact Us</h1>
+</header>
 
 <div class="well">
     <p class="lead">

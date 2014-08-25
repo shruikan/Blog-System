@@ -1,6 +1,6 @@
 <?php
 
-require ('..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'connection.php');
+require ('../config/connection.php');
 
 $list = $_GET['list'];
 

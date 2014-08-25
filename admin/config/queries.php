@@ -1,19 +1,24 @@
 <?php
 
+// LOGIN
 if (isset($_POST['login'])) {
-
-    $username = mysqli_real_escape_string($dbc, $_POST['username']);
+    $username = format($dbc, $_POST['username']);
     $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
 
-    $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-    $result = mysqli_query($dbc, $query);
+    // Validation
+    if (!empty($username) && !empty($password)) {
 
-    if (mysqli_num_rows($result) > 0) {
-        $_SESSION['username'] = $username;
-        header('Location: index.php');
+        $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+        $result = mysqli_query($dbc, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+            $_SESSION['id'] = mysqli_insert_id($dbc);
+            $_SESSION['username'] = $username;
+        } else {
+            $message['warning'][] = 'Wrong login data!';
+        }
     } else {
-        echo '<div class="alert alert-warning">Wrong login data!</div>'; // TODO: Make error reporting
-        header('Location: index.php');
+        $message['warning'][] = 'Enter your username and password!';
     }
 }
 
@@ -25,7 +30,7 @@ switch ($page) {
 
     case 'posts':
         if (isset($_POST['post']) == 1) {
-            
+
             $id = mysqli_real_escape_string($dbc, $_POST['id']);
             $username = mysqli_real_escape_string($dbc, $_POST['username']);
             $slug = mysqli_real_escape_string($dbc, $_POST['slug']);
@@ -45,9 +50,9 @@ switch ($page) {
             $result = mysqli_query($dbc, $query);
 
             if ($result) {
-                $message = '<div class="alert alert-success">Post was ' . $action . '!</div>';
+                $message['success'][] = "Post was $action!";
             } else {
-                $message = '<div class="alert alert-danger">Post could not be ' . $action . '!Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
+                $message['warning'][] = "Post could not be $action!" . get_error($dbc, $query);
             }
         }
 
@@ -61,18 +66,15 @@ switch ($page) {
 
     case 'users':
         if (isset($_POST['post'])) {
-
-            $username = mysqli_real_escape_string($dbc, $_POST['username']);
-            $password = mysqli_real_escape_string($dbc, $_POST['password']);
-            $password_v = mysqli_real_escape_string($dbc, $_POST['password_v']);
-            $name = mysqli_real_escape_string($dbc, $_POST['name']);
-            $family = mysqli_real_escape_string($dbc, $_POST['family']);
-            $email = mysqli_real_escape_string($dbc, $_POST['email']);
-            $site = mysqli_real_escape_string($dbc, $_POST['site']);
-            
+            $username = format($dbc, $_POST['username']);
+            $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
+            $password_v = mysqli_real_escape_string($dbc, sha1($_POST['password_v']));
+            $email = mysqli_real_escape_string($dbc, strtolower($_POST['email']));
+            $name = format($dbc, $_POST['name']);
+            $family = format($dbc, $_POST['family']);
+            $site = format($dbc, $_POST['site']);
             $status = mysqli_real_escape_string($dbc, $_POST['status']);
             $id = mysqli_real_escape_string($dbc, $_POST['id']);
-
 
             if (!empty($_POST['password'])) {
                 if ($password == $password_v) {
@@ -99,9 +101,9 @@ switch ($page) {
             }
 
             if ($result) {
-                $message = '<div class="alert alert-success">User was ' . $action . '!</div>';
+                $message['success'][] = "User was $action!";
             } else {
-                $message = '<div class="alert alert-warning">User could not be ' . $action . '!Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
+                $message['warning'][] = "User could not be $action!" . get_error($dbc, $query);
 
                 if ($verify == false) {
                     $message = '<div class="alert alert-warning">Password do not match!</div>';
@@ -131,9 +133,9 @@ switch ($page) {
             }
 
             if ($result) {
-                $message = '<div class="alert alert-success">Navigation was ' . $action . '!</div>';
+                $message['success'][] = "Navigation was $action!";
             } else {
-                $message = '<div class="alert alert-danger">Navigation could not be ' . $action . '! Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
+                $message['warning'][] = "Navigation could not be $action!" . get_error($dbc, $query);
             }
         }
 
@@ -157,9 +159,9 @@ switch ($page) {
             }
 
             if ($result) {
-                $message = '<div class="alert alert-success">Settings was ' . $action . '!</div>';
+                $message['success'][] = "Settings was $action!";
             } else {
-                $message = '<div class="alert alert-danger">Settings could not be ' . $action . '! Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
+                $message['success'][] = "Settings could not be $action!" . get_error($dbc, $query);
             }
         }
 

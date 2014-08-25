@@ -1,9 +1,9 @@
 <div class="col-md-12">
-    <h1>Site Settings</h1>
+    <header>
+        <h1>Site Settings</h1>
+    </header>
+    
     <?php
-    if (isset($message)) { // TODO: USE Eror reporting
-        echo $message;
-    }
 
     $query = "SELECT * FROM settings ORDER BY id ASC";
     $result = mysqli_query($dbc, $query);

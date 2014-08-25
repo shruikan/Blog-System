@@ -16,7 +16,7 @@ if (isset($_POST['login'])) {
             $_SESSION['username'] = $username;
             header('Location: home');
         } else {
-            $message['warning'][] = 'Wrong login data!'; // TODO: Make error reporting
+            $message['warning'][] = 'Wrong login data!';
         }
     } else {
         $message['warning'][] = 'Enter your username and password!';
@@ -30,12 +30,13 @@ if (isset($_POST['register'])) {
     $username = format($dbc, $_POST['username']);
     $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
     $password_v = mysqli_real_escape_string($dbc, sha1($_POST['password_v']));
-    $name = format($dbc, $_POST['name']);
-    $family = format($dbc, $_POST['family']);
-    $email = format($dbc, $_POST['email'], true);
-    $site = format($dbc, $_POST['site']);
+    $email = mysqli_real_escape_string($dbc, strtolower($_POST['email']));
 
     if ($url == 'user') { // Edit Profile
+        $name = format($dbc, $_POST['name']);
+        $family = format($dbc, $_POST['family']);
+        $site = format($dbc, $_POST['site']);
+
         // Validation
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $message['warning'][] = 'The email is not valid!';
@@ -48,7 +49,7 @@ if (isset($_POST['register'])) {
         }
         if (!isset($message)) { // Check for existing email
             $chek = "SELECT username FROM users WHERE email = '$email'";
-            $result = mysqli_query($db, $chek);
+            $result = mysqli_query($dbc, $chek);
 
             if (mysqli_num_rows($result) > 0) {
                 $notice['warning'][] = 'The email is already in use!';
@@ -91,13 +92,14 @@ if (isset($_POST['register'])) {
         if ($password != $password_v) {
             $message['warning'][] = 'The passwords does not match!';
         }
-        if (!isset($message)) { // Check for existing email
-            $chek = "SELECT username FROM users WHERE username='$username' OR email='$email'";
-            $result = mysqli_query($db, $chek);
+
+        // Check for existing email
+        if (!isset($message)) {
+            $query = "SELECT * FROM users WHERE username='$username' OR email='$email'";
+            $result = mysqli_query($dbc, $query);
 
             if (mysqli_num_rows($result) > 0) {
-
-                $notice['warning'][] = 'The username or email is already in use!';
+                $message['warning'][] = 'The username or email is already in use!';
             }
         }
 
@@ -114,22 +116,4 @@ if (isset($_POST['register'])) {
             }
         }
     }
-}
-
-switch ($url) {
-    case '':
-    case 'post': $url = 'home';
-        break;
-
-    case 'user': $url = 'register';
-        break;
-
-    case 'logout':
-        if (!session_start()) {
-            session_start();
-        }
-        session_destroy();
-
-        header('Location: home');
-        break;
 }

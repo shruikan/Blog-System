@@ -15,7 +15,7 @@
 
 
 <!-- Dropzone Uploader -->
-<script type="text/javascript" src="<?php echo $site_url; ?>assets/js/dropzone.min.js"></script>
+<script type="text/javascript" src="<?= ROOT; ?>assets/js/dropzone.min.js"></script>
 
 <!-- Main Script -->
-<script type="text/javascript" src="<?php echo $site_url; ?>assets/js/script.js"></script>
+<script type="text/javascript" src="<?= ROOT; ?>assets/js/script.js"></script>

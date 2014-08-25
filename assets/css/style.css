@@ -1,38 +1,35 @@
 /* Basic Styles */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 body > .container {
     margin-top: 60px;
 }
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding-top: 15px;
-  background-color: #e3e3e3;
-}
 h1, h2, h3, h4 {
-	font-family: Knewave, cursive;
+    font-family: Knewave, cursive;
 }
 a {
-	transition: .5s ease all;
+    transition: .5s all;
 }
 a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
-/* Socials */
-footer .btn {
-	padding: 6px 6px;
-	transition: .5s ease all;
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-top: 15px;
+    background-color: #e3e3e3;
 }
 
-h1. h3, h4 {
-	font-family: Knewave, cursive;
+/* Socials */
+footer .btn {
+    padding: 6px 6px;
+    transition: .5s all;
 }
 
 #btn-debug {
@@ -44,36 +41,41 @@ h1. h3, h4 {
 .show {
     display: inline-block;
 }
-.avatar-container {
+.avatar-container, .thumbnail > a > img {
     width: 100px;
     height: 100px;
     border-radius: 5px;
     background-size: cover;
     background-position: center center;
 }
+.thumbnail > a > img {
+    margin-top: 10px;
+    width: 250px;
+    height: 180px;
+}
 
 /* Logo styles 
 .navbar-brand {
-	padding: 0 15px;
+        padding: 0 15px;
 }
 .navbar-brand img {
-	width: 74px;
-	opacity: .92;
+        width: 74px;
+        opacity: .92;
 }
 .navbar-brand span {
-	color: #101010;
+        color: #101010;
 }
 
 */
 
 /* Forms styles */
 .reg-log-form input, .reg-log-form select {
-	width: 94%;
+    width: 94%;
 }
 .green-tick {
-	color: rgb(3, 199, 3);
-	top: 8px;
-	left: -14px;
+    color: rgb(3, 199, 3);
+    top: 8px;
+    left: -14px;
 }
 
 /* Img zoom effect */

@@ -1,13 +1,14 @@
 <?php
 
-function format($dbc, $id, $up) {
+function format($dbc, $id) {
     $id = strtolower($id);
-    
-    if (!$up) {
-        $id = ucfirst($id);
+    return mysqli_real_escape_string($dbc, ucfirst($id));
+}
+
+function selected($value1, $value2, $return) {
+    if ($value1 == $value2) {
+        echo $return;
     }
-    
-    return mysqli_real_escape_string($dbc, $id);
 }
 
 function get_settings($dbc) {
@@ -46,7 +47,7 @@ function get_posts($dbc, $id) {
         }
 
         $posts[$data['id']]['id'] = $data['id'];
-        $posts[$data['id']]['username'] = $data['username'];
+        $posts[$data['id']]['user'] = get_user($dbc, $data['user']);
         $posts[$data['id']]['date'] = "$data[month] $data[day], $data[year] at $data[hour]:$data[minutes]:$data[seconds]";
         $posts[$data['id']]['category'] = $data['category'];
         $posts[$data['id']]['slug'] = $data['slug'];
@@ -102,4 +103,46 @@ function get_user($dbc, $id) {
 
     $data = mysqli_fetch_assoc($result);
     return $data;
+}
+
+function get_path() {
+    $path = array();
+
+    if (isset($_SERVER['REQUEST_URI'])) {
+        $request_path = explode('?', $_SERVER['REQUEST_URI']);
+
+        $path['base'] = rtrim(dirname($_SERVER['SCRIPT_NAME']), '\/');
+        $path['call_utf8'] = substr(urldecode($request_path[0]), strlen($path['base']) + 1);
+        $path['call'] = utf8_decode($path['call_utf8']);
+
+        if ($path['call'] == basename($_SERVER['PHP_SELF'])) {
+            $path['call'] = '';
+        }
+
+        $path['call_parts'] = explode('/', $path['call']);
+
+        if (isset($request_path[1])) {
+            $path['query_utf8'] = urldecode($request_path[1]);
+            $path['query'] = utf8_decode(urldecode($request_path[1]));
+            $vars = explode('&', $path['query']);
+
+            foreach ($vars as $var) {
+                $t = explode('=', $var);
+                $path['query_vars'][$t[0]] = $t[1];
+            }
+        }
+    }
+
+    return $path;
+}
+
+function main_nav($dbc, $path) {
+    $query = "SELECT * FROM navigation ORDER BY position ASC";
+    $result = mysqli_query($dbc, $query);
+
+    while ($nav = mysqli_fetch_assoc($result)) {
+        ?>
+        <li <?php selected($path['call_parts'][0], $nav['url'], 'class="active"'); ?>><a href="<?= ROOT . $nav['url']; ?>"><?= $nav['label']; ?></a></li>
+        <?php
+    }
 }

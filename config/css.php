@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css"/>
 
 <!-- Dropzone -->
-<link rel="stylesheet" href="<?php echo $site_url; ?>assets/css/dropzone.css">
+<link rel="stylesheet" href="<?= ROOT ?>assets/css/dropzone.css">
 
 <!-- Main Style -->
-<link rel="stylesheet" href="<?php echo $site_url; ?>assets/css/style.css">
+<link rel="stylesheet" href="<?= ROOT ?>assets/css/style.css">

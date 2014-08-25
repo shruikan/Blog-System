@@ -1,5 +1,8 @@
 <div class="col-md-4">
-    <h1>Post Manager</h1>
+    <header>
+        <h1>Post Manager</h1>
+    </header>
+    
     <div class="list-group">
         <a href="?p=posts" class="list-group-item">
             <i class="fa fa-plus"> New Post</i>

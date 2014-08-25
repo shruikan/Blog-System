@@ -1,11 +1,11 @@
 </div>
 
 <footer>
-    <p>&copy; <?php echo $site_title ?>. It's all free.</p>
+    <p>&copy; <?= $site_title ?>. It's all free.</p>
 </footer>
 <?php
 if ($debug_status == 1) {
-    require(ROOT . D_WIDGETS . DS . 'debug.php');
+    require(D_WIDGETS . '/debug.php');
 }
 ?>
 

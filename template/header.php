@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="<?php echo $site_url; ?>" class="navbar-brand"><?php echo $site_title; ?></a>
+            <a href="<?= ROOT; ?>" class="navbar-brand"><?= $site_title; ?></a>
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <form class="navbar-form navbar-right" role="search">
@@ -21,13 +21,12 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav">
-                <?php main_nav($dbc, $path, $site_url); ?>
+                <?php main_nav($dbc, $path); ?>
             </ul>
-            <?php include (ROOT . D_TEMPLATE . DS . 'user_panel.php'); ?>
+            <?php include (D_TEMPLATE . '/user_panel.php'); ?>
         </nav>
     </div>
 </header>
 <div class="container">
     <?php
-    include (ROOT . D_TEMPLATE . DS . 'messages.php');
-    
+    include (D_TEMPLATE . '/messages.php');

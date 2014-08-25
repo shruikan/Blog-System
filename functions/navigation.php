@@ -1,50 +1,18 @@
 <?php
+switch ($url) {
+    case '':
+    case 'post': $url = 'home';
+        break;
 
-function selected($value1, $value2, $return) {
-    if ($value1 == $value2) {
-        echo $return;
-    }
-}
+    case 'user': $url = 'register';
+        break;
 
-function main_nav($dbc, $path, $url) {
-    $query = "SELECT * FROM navigation ORDER BY position ASC";
-    $result = mysqli_query($dbc, $query);
-
-    while ($nav = mysqli_fetch_assoc($result)) {
-
-        ?>
-        <li <?php selected($path['call_parts'][0], $nav['url'], 'class="active"'); ?>><a href="<?php echo $url . $nav['url']; ?>"><?php echo $nav['label']; ?></a></li>
-        <?php
-    }
-}
-
-function get_path() {
-    $path = array();
-
-    if (isset($_SERVER['REQUEST_URI'])) {
-        $request_path = explode('?', $_SERVER['REQUEST_URI']);
-
-        $path['base'] = rtrim(dirname($_SERVER['SCRIPT_NAME']), '\/');
-        $path['call_utf8'] = substr(urldecode($request_path[0]), strlen($path['base']) + 1);
-        $path['call'] = utf8_decode($path['call_utf8']);
-
-        if ($path['call'] == basename($_SERVER['PHP_SELF'])) {
-            $path['call'] = '';
+    case 'logout':
+        if (!session_start()) {
+            session_start();
         }
+        session_destroy();
 
-        $path['call_parts'] = explode('/', $path['call']);
-
-        if (isset($request_path[1])) {
-            $path['query_utf8'] = urldecode($request_path[1]);
-            $path['query'] = utf8_decode(urldecode($request_path[1]));
-            $vars = explode('&', $path['query']);
-
-            foreach ($vars as $var) {
-                $t = explode('=', $var);
-                $path['query_vars'][$t[0]] = $t[1];
-            }
-        }
-    }
-
-    return $path;
+        header('Location: home');
+        break;
 }

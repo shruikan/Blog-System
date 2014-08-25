@@ -1,5 +1,14 @@
 <?php
 
+function format($dbc, $id) {
+    $id = strtolower($id);
+    return mysqli_real_escape_string($dbc, ucfirst($id));
+}
+
+function get_error($dbc, $query) {
+    return " Error:" . mysql_error($dbc) . " | $query";
+}
+
 function get_settings($dbc) {
     $query = "SELECT * FROM settings";
     $result = mysqli_query($dbc, $query);
@@ -12,9 +21,9 @@ function get_settings($dbc) {
 }
 
 function get_posts($dbc, $id = NULL) {
-    
+
     $cond = NULL;
-    
+
     if (isset($id) && is_numeric($id)) {
         $cond = "WHERE id = $id";
     } else if (isset($id)) {
@@ -36,7 +45,7 @@ function get_posts($dbc, $id = NULL) {
         }
 
         $posts[$data['id']]['id'] = $data['id'];
-        $posts[$data['id']]['username'] = $data['username'];
+        $posts[$data['id']]['user'] = $data['user'];
         $posts[$data['id']]['date'] = "$data[month] $data[day], $data[year] at $data[hour]:$data[minutes]:$data[seconds]";
         $posts[$data['id']]['category'] = $data['category'];
         $posts[$data['id']]['slug'] = $data['slug'];
@@ -60,9 +69,9 @@ function get_categories($dbc) {
 }
 
 function get_user($dbc, $id = NULL) {
-    
+
     $cond = NULL;
-    
+
     if (isset($id)) {
         if (is_numeric($id)) {
             $cond = "WHERE id = '$id'";

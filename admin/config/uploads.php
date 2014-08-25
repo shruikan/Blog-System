@@ -2,9 +2,9 @@
 
 $ds = DIRECTORY_SEPARATOR;
 
-require ('connection.php');
+require ('setup.php');
 
-$storeFolder = '../../uploads';
+$storeFolder = ROOT . 'uploads';
 $id = $_GET['id'];
 
 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
@@ -27,10 +27,10 @@ if (!empty($_FILES)) {
     $targetFile = $targetPath . $name;
 
     move_uploaded_file($tempFile, $targetFile);
-    
-    $deleteFile = $targetPath.$old['avatar'];
-    
-    if(!empty($old['avatar']) && !is_dir($deleteFile)) {
+
+    $deleteFile = $targetPath . $old['avatar'];
+
+    if (!empty($old['avatar']) && !is_dir($deleteFile)) {
         unlink($deleteFile);
     }
 }

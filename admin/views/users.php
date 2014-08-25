@@ -1,18 +1,25 @@
-<?php if (isset($opened['id'])): ?>
+<?php if (isset($opened['id'])) { ?>
     <script>
         $(document).ready(function() {
             Dropzone.autoDiscover = false;
 
             var myDrop = new Dropzone('#avatar-dropzone');
             myDrop.on('success', function(file) {
-                $('#avatar').load('ajax/avatar.php?id=<?php echo $opened['id']; ?>');
+                $('#avatar').load('ajax/avatar.php?id=<?= $opened['id']; ?>');
             });
         });
     </script>
-<?php endif; ?>
+    <?php
+} else {
+    $opened = NULL;
+}
+?>
 
 <div class="col-md-4">
-    <h1>User Manager</h1>
+    <header>
+        <h1>User Manager</h1>
+    </header>
+
     <div class="list-group">
         <a href="?p=users" class="list-group-item">
             <i class="fa fa-plus"> New User</i>
@@ -22,10 +29,10 @@
 
         foreach ($users as $user => $value) {
             ?>
-            <a href="?p=users&id=<?php echo $value['id']; ?>"
+            <a href="?p=users&id=<?= $value['id']; ?>"
                class="list-group-item <?php selected($value['id'], isset($opened['id']) ? $opened['id'] : NULL, 'active'); ?>">
-                <h4 class="list-group-item-heading"><?php echo $value['name']; ?></h4>
-                <p class="list-group-item-text"><?php echo $value['email'] ?></p>
+                <h4 class="list-group-item-heading"><?= $value['name']; ?></h4>
+                <p class="list-group-item-text"><?= $value['email'] ?></p>
             </a>
         <?php } ?>
     </div>
@@ -37,15 +44,15 @@
     }
     ?>
     <label>Drop or click to upload avatar:</label>
-    <form action="<?php echo D_CONFIG . DS; ?>uploads.php?id=<?php echo $opened['id']; ?>" class="dropzone" id="avatar-dropzone">
+    <form action="<?= ROOT . D_CONFIG . DS . D_UPLOADS ?>.php?id=<?= $opened['id']; ?>" class="dropzone" id="avatar-dropzone">
     </form>
 
-    <form action="?p=users&id=<?php echo $opened['id']; ?>" method="post" class="reg-log-form">
+    <form action="?p=users&id=<?= $opened['id']; ?>" method="post" class="reg-log-form">
 
         <?php if (!empty($opened['avatar'])) { ?>
             <label for="avatar">Avatar:</label>
             <div id="avatar">
-                <div class="avatar-container" style="background-image: url('../uploads/<?php echo $opened['avatar']; ?>')"></div>
+                <div class="avatar-container" style="background-image: url('<?= ROOT . D_UPLOADS . DS . $opened['avatar']; ?>')"></div>
             </div>
         <?php } ?>
 
@@ -70,31 +77,31 @@
 
         <div class="form-group">
             <label for="username">Username:</label>
-            <input class="form-control" type="text" name="username" id="username" value="<?php echo $opened['username'] ?>"
+            <input class="form-control" type="text" name="username" id="username" value="<?= $opened['username'] ?>"
                    placeholder="Username" autocomplete="off">
         </div>
 
         <div class="form-group">
             <label for="name">First Name:</label>
-            <input class="form-control" type="text" name="name" id="name" value="<?php echo $opened['name'] ?>"
+            <input class="form-control" type="text" name="name" id="name" value="<?= $opened['name'] ?>"
                    placeholder="Name" autocomplete="off">
         </div>
 
         <div class="form-group">
             <label for="family">Last Name:</label>
-            <input class="form-control" type="text" name="family" id="family" value="<?php echo $opened['family'] ?>"
+            <input class="form-control" type="text" name="family" id="family" value="<?= $opened['family'] ?>"
                    placeholder="Family" autocomplete="off">
         </div>
 
         <div class="form-group">
             <label for="email">Email:</label>
-            <input class="form-control" type="email" name="email" id="email" value="<?php echo $opened['email'] ?>"
+            <input class="form-control" type="email" name="email" id="email" value="<?= $opened['email'] ?>"
                    placeholder="Email" autocomplete="off">
         </div>
 
         <div class="form-group">
             <label for="site">Site URL:</label>
-            <input class="form-control" type="site" name="site" id="site" value="<?php echo $opened['site'] ?>"
+            <input class="form-control" type="site" name="site" id="site" value="<?= $opened['site'] ?>"
                    placeholder="http://" autocomplete="off">
         </div>
 
@@ -114,7 +121,7 @@
         <input type="hidden" name="post" value="1">
 
         <?php if (isset($opened['id'])) { ?>
-            <input type="hidden" name="id" value="<?php echo $opened['id']; ?>">
+            <input type="hidden" name="id" value="<?= $opened['id']; ?>">
             <?php
         }
         ?>

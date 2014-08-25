@@ -1,17 +1,14 @@
 <?php
 
 //error_reporting(0);
-
 # Constants
-define('ROOT', ''); // TODO: USE $_SERVER
-define('DS', DIRECTORY_SEPARATOR);
-require(ROOT . 'config' . DS . 'constants.php');
+require('config/constants.php');
 
 # Database Connection
-require(ROOT . D_CONFIG . DS . 'connection.php');
+require(D_CONFIG . '/connection.php');
 
 # Functions
-require(ROOT . D_FUNCTIONS . DS . 'data.php');
+require(D_FUNCTIONS . '/data.php');
 
 # Page
 $page = isset($_GET['p']) ? $_GET['p'] : 'posts';
@@ -25,9 +22,11 @@ if (isset($_GET['id'])) {
 # Site Settings
 $settings = get_settings($dbc);
 $site_title = $settings['site-title'];
-$site_url = ''; // Use DB URL
+$site_url = $settings['site-url'];
 $debug_status = $settings['debug-status'];
+
+define('ROOT', $site_url . 'admin/');
 
 
 # Queries
-require(ROOT . D_CONFIG . DS . 'queries.php');
+require(D_CONFIG . '/queries.php');

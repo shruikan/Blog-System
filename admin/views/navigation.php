@@ -1,5 +1,8 @@
 <div class="col-md-4">
-    <h1>Navigation</h1>
+    <header>
+       <h1>Navigation</h1> 
+    </header>
+    
     <ul id="sort-nav" class="list-group">
 
         <?php
