@@ -1,14 +1,18 @@
 <?php
 
 //error_reporting(0);
+
+$dir = $_SERVER['DOCUMENT_ROOT'] . 'admin/';
+
 # Constants
-require('config/constants.php');
+define('DIR', $dir);
+require(DIR . 'config/constants.php');
 
 # Database Connection
-require(D_CONFIG . '/connection.php');
+require(DIR . D_CONFIG . '/connection.php');
 
 # Functions
-require(D_FUNCTIONS . '/data.php');
+require(DIR . D_FUNCTIONS . '/data.php');
 
 # Page
 $page = isset($_GET['p']) ? $_GET['p'] : 'posts';
@@ -25,8 +29,8 @@ $site_title = $settings['site-title'];
 $site_url = $settings['site-url'];
 $debug_status = $settings['debug-status'];
 
-define('ROOT', $site_url . 'admin/');
-
+define('LINK', DIR . D_CONFIG . '/connection.php');
+define('ROOT', $site_url);
 
 # Queries
-require(D_CONFIG . '/queries.php');
+require(DIR . D_CONFIG . '/queries.php');

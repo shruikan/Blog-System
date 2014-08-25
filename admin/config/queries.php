@@ -4,7 +4,7 @@
 if (isset($_POST['login'])) {
     $username = format($dbc, $_POST['username']);
     $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
-
+    
     // Validation
     if (!empty($username) && !empty($password)) {
 
@@ -12,7 +12,10 @@ if (isset($_POST['login'])) {
         $result = mysqli_query($dbc, $query);
 
         if (mysqli_num_rows($result) > 0) {
+            $data = mysqli_fetch_assoc($result);
+            
             $_SESSION['id'] = mysqli_insert_id($dbc);
+            $_SESSION['level'] = $data['level'];
             $_SESSION['username'] = $username;
         } else {
             $message['warning'][] = 'Wrong login data!';
@@ -23,11 +26,6 @@ if (isset($_POST['login'])) {
 }
 
 switch ($page) {
-
-    case 'dashboard':
-        // TODO: Dashboard
-        break;
-
     case 'posts':
         if (isset($_POST['post']) == 1) {
 
@@ -43,7 +41,7 @@ switch ($page) {
                 $action = 'updated';
                 $query = "UPDATE posts SET username = '$username', slug = '$slug', title = '$title', label = '$label', header = '$header', body = '$body' WHERE id = $id";
             } else {
-                $query = "INSERT INTO posts (username, slug, title, label, header, body) VALUES ($username, '$slug', '$title', '$label', '$header', '$body')";
+                $query = "INSERT INTO posts (username, slug, title, label, header, body) VALUES ('$username', '$slug', '$title', '$label', '$header', '$body')";
                 $action = 'added';
             }
 
@@ -72,28 +70,28 @@ switch ($page) {
             $email = mysqli_real_escape_string($dbc, strtolower($_POST['email']));
             $name = format($dbc, $_POST['name']);
             $family = format($dbc, $_POST['family']);
-            $site = format($dbc, $_POST['site']);
+            $site = mysqli_real_escape_string($dbc, $_POST['site']);
             $status = mysqli_real_escape_string($dbc, $_POST['status']);
             $id = mysqli_real_escape_string($dbc, $_POST['id']);
 
             if (!empty($_POST['password'])) {
                 if ($password == $password_v) {
-                    $password = "password = 'sha1($password)',";
+                    $pass = "password = '$pass',";
                     $verify = true;
                 } else {
                     $verify = false;
                 }
             } else {
-                $verify = false;
+                $verify = true;
             }
 
-            if (isset($_POST['id']) != '') {
+            if (isset($_POST['id'])) {
                 $action = 'updated';
-                $query = "UPDATE users SET username = '$username', name = '$name', family = '$family', email = '$email', site = '$site', $password status = $status WHERE id = $id";
+                $query = "UPDATE users SET username = '$username', name = '$name', family = '$family', email = '$email', site = '$site', $pass status = $status WHERE id = $id";
                 $result = mysqli_query($dbc, $query);
             } else {
                 $action = 'added';
-                $query = "INSERT INTO users (username, name, family, email, site, password, status) VALUES ('$username', '$name', '$family', '$email', '$site', $password $status)";
+                $query = "INSERT INTO users (username, name, family, email, site, password, status) VALUES ('$username', '$name', '$family', '$email', '$site', '$password', $status)";
 
                 if ($verify == true) {
                     $result = mysqli_query($dbc, $query);
@@ -106,7 +104,7 @@ switch ($page) {
                 $message['warning'][] = "User could not be $action!" . get_error($dbc, $query);
 
                 if ($verify == false) {
-                    $message = '<div class="alert alert-warning">Password do not match!</div>';
+                    $message['warning'][] = 'Password do not match!';
                 }
             }
         }
@@ -128,7 +126,7 @@ switch ($page) {
 
             if (isset($_POST['id']) != '') {
                 $action = 'updated';
-                $query = "UPDATE navigation SET id = '$id', label = '$label', site = '$site', status = $status WHERE id = '$opened_id'";
+                $query = "UPDATE navigation SET id = $id, label = '$label', site = '$site', status = $status WHERE id = $opened_id";
                 $result = mysqli_query($dbc, $query);
             }
 

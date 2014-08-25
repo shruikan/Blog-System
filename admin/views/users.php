@@ -37,12 +37,7 @@
         <?php } ?>
     </div>
 </div>
-<div class="col-md-7">
-    <?php
-    if (isset($message)) {
-        echo $message;
-    }
-    ?>
+<div class="col-md-8">
     <label>Drop or click to upload avatar:</label>
     <form action="<?= ROOT . D_CONFIG . DS . D_UPLOADS ?>.php?id=<?= $opened['id']; ?>" class="dropzone" id="avatar-dropzone">
     </form>
@@ -52,7 +47,7 @@
         <?php if (!empty($opened['avatar'])) { ?>
             <label for="avatar">Avatar:</label>
             <div id="avatar">
-                <div class="avatar-container" style="background-image: url('<?= ROOT . D_UPLOADS . DS . $opened['avatar']; ?>')"></div>
+                <div class="avatar-container" style="background-image: url('../uploads/<?= $opened['avatar']; ?>')"></div>
             </div>
         <?php } ?>
 

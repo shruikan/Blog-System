@@ -45,7 +45,7 @@ function get_posts($dbc, $id = NULL) {
         }
 
         $posts[$data['id']]['id'] = $data['id'];
-        $posts[$data['id']]['user'] = $data['user'];
+        $posts[$data['id']]['username'] = $data['username'];
         $posts[$data['id']]['date'] = "$data[month] $data[day], $data[year] at $data[hour]:$data[minutes]:$data[seconds]";
         $posts[$data['id']]['category'] = $data['category'];
         $posts[$data['id']]['slug'] = $data['slug'];

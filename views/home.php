@@ -16,12 +16,12 @@
             <h2><a href="<?= $post_link; ?>"><?= $value['title']; ?></a></h2>
 
             <div class="row">
-                <div class="col-sm-6 col-md-6">
+                <div class="col-sm-6 col-md-5">
                     <span class="glyphicon glyphicon-bookmark"></span> <a href="<?= $post_link ?>">Tags</a>
                 </div>
-                <div class="col-sm-6 col-md-6">
+                <div class="col-sm-6 col-md-7">
                     <span class="glyphicon glyphicon-pencil"></span> <a href="<?= "$post_link#comment"; ?>">Comments</a>			          		
-                    &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?= $value['date'] . ' by ' . $value['user']['username']; ?>			          		
+                    &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?= $value['date'] . ' by ' . $value['username']['username']; ?>			          		
                 </div>
             </div>
 

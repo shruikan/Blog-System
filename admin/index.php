@@ -5,7 +5,7 @@ session_start();
 require('config/setup.php');
 require(D_TEMPLATE . '/header.php');
 
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['username']) && $_SESSION['level'] == 3) {
     require(D_TEMPLATE . '/navigation.php');
     require(D_VIEWS . DS . $page . '.php');
 } else {

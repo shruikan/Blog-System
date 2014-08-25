@@ -1,10 +1,8 @@
 <?php
 
-$ds = DIRECTORY_SEPARATOR;
+require ('config/setup.php');
 
-require ('setup.php');
-
-$storeFolder = ROOT . 'uploads';
+$storeFolder = ROOT . D_UPLOADS;
 $id = $_GET['id'];
 
 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
@@ -23,7 +21,7 @@ $result = mysqli_query($dbc, $query);
 if (!empty($_FILES)) {
 
     $tempFile = $_FILES['file']['tmp_name'];
-    $targetPath = dirname(__FILE__) . $ds . $storeFolder . $ds;
+    $targetPath = dirname(__FILE__) . DS . $storeFolder . DS;
     $targetFile = $targetPath . $name;
 
     move_uploaded_file($tempFile, $targetFile);
