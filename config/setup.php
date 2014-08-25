@@ -30,3 +30,7 @@ require(ROOT . D_CONFIG . DS . 'queries.php');
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 }
+
+
+# Aside Layout Pages
+$aside = array('home');

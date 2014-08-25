@@ -10,6 +10,10 @@
 <!-- TinyMce -->
 <script type="text/javascript" src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 
+<!-- BootstrapValidator -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js"></script>
+
+
 <!-- Dropzone Uploader -->
 <script type="text/javascript" src="<?php echo $site_url; ?>assets/js/dropzone.min.js"></script>
 

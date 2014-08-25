@@ -2,62 +2,116 @@
 
 // LOGIN
 if (isset($_POST['login'])) {
-    $user = mysqli_real_escape_string($dbc, $_POST['user']);
+    $username = format($dbc, $_POST['username']);
     $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
 
-    $query = "SELECT * FROM users WHERE user = '$user' AND password = '$password'";
-    $result = mysqli_query($dbc, $query);
+    // Validation
+    if (!empty($username) && !empty($password)) {
 
-    if (mysqli_num_rows($result) > 0) {
-        $_SESSION['username'] = $user;
-        header('Location: home');
+        $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+        $result = mysqli_query($dbc, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+            $_SESSION['id'] = mysqli_insert_id($dbc);
+            $_SESSION['username'] = $username;
+            header('Location: home');
+        } else {
+            $message['warning'][] = 'Wrong login data!'; // TODO: Make error reporting
+        }
     } else {
-        $message = '<div class="alert alert-warning">Wrong login data!</div>'; // TODO: Make error reporting
+        $message['warning'][] = 'Enter your username and password!';
     }
 }
 
-// REGISTER
+// EDIT AND REGISTER PROFILE
 if (isset($_POST['register'])) {
+
     $ip = ip2long($_SERVER['REMOTE_ADDR']);
-    $username = $_SESSION['username'];
-    $user = mysqli_real_escape_string($dbc, $_POST['user']);
-    $password = mysqli_real_escape_string($dbc, $_POST['password']);
-    $password_v = mysqli_real_escape_string($dbc, $_POST['password_v']);
-    $name = mysqli_real_escape_string($dbc, $_POST['name']);
-    $family = mysqli_real_escape_string($dbc, $_POST['family']);
-    $email = mysqli_real_escape_string($dbc, $_POST['email']);
-    $site = mysqli_real_escape_string($dbc, $_POST['url']);
+    $username = format($dbc, $_POST['username']);
+    $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
+    $password_v = mysqli_real_escape_string($dbc, sha1($_POST['password_v']));
+    $name = format($dbc, $_POST['name']);
+    $family = format($dbc, $_POST['family']);
+    $email = format($dbc, $_POST['email'], true);
+    $site = format($dbc, $_POST['site']);
 
-    if (!empty($password)) {
-        if ($password == $password_v) {
-            $password = "password = 'sha1($password)',";
-            $verify = true;
-        } else {
-            $verify = false;
+    if ($url == 'user') { // Edit Profile
+        // Validation
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $message['warning'][] = 'The email is not valid!';
         }
-    } else {
-        $verify = false;
-    }
-
-    if ($url == 'edit') {
-        $query = "UPDATE users SET name = '$name', family = '$family', email = '$email', $password url = '$site' WHERE user = '$username'";
-        $result = mysqli_query($dbc, $query);
-    } else {
-        $query = "INSERT INTO users (ip, user, email, password) VALUES ('$ip', '$user', '$email', $password)";
-
-        if ($verify) {
-            $result = mysqli_query($dbc, $query);
+        if (!empty($password) && $password == $password_v && strlen($password) < 5) {
+            $message['warning'][] = 'The password is too short!';
         }
-    }
+        if ($password != $password_v) {
+            $message['warning'][] = 'The passwords does not match!';
+        }
+        if (!isset($message)) { // Check for existing email
+            $chek = "SELECT username FROM users WHERE email = '$email'";
+            $result = mysqli_query($db, $chek);
 
-    if ($result) {
-        $message = '<div class="alert alert-success">Welcome aboard!</div>';
-        header('Location: home');
-    } else {
-        $message = '<div class="alert alert-danger">Error!</div>';
+            if (mysqli_num_rows($result) > 0) {
+                $notice['warning'][] = 'The email is already in use!';
+            }
+        }
 
-        if (!$verify) {
-            $message = '<div class="alert alert-warning">Password do not match!</div>';
+        if (!isset($message)) {
+            // Check for existing fields
+            $name = empty($name) ? "name = NULL," : "name = '$name',";
+            $family = empty($family) ? "family = NULL," : "family = '$family',";
+            $site = empty($site) ? "site = NULL," : "site = '$site',";
+
+            if (!empty($password)) {
+                $password = "password = '$password',";
+            }
+
+            $username = $_SESSION['username'];
+            $query = "UPDATE users SET $name $family $site $password email = '$email' WHERE username = '$username'";
+
+            if (mysqli_query($dbc, $query)) {
+                $message['success'][] = 'Your profile is successfully updated!';
+            } else {
+                $message['warning'][] = 'An error occured!' . mysql_error($dbc) . ' ' . $query;
+            }
+        }
+    } else { // Register Profile
+        // Validation
+        if (empty($username) || empty($email) || empty($password) || empty($password_v)) {
+            $message['warning'][] = 'Please fill all the fields!';
+        }
+        if (!empty($username) && !preg_match('/^\w{5,12}$/', $username)) {
+            $message['warning'][] = 'The username must contain only alphanumeric and be between 5 and 12 characters!';
+        }
+        if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $message['warning'][] = 'The email is not valid!';
+        }
+        if (!empty($password) && $password == $password_v && strlen($password) < 5) {
+            $message['warning'][] = 'The password is too short!';
+        }
+        if ($password != $password_v) {
+            $message['warning'][] = 'The passwords does not match!';
+        }
+        if (!isset($message)) { // Check for existing email
+            $chek = "SELECT username FROM users WHERE username='$username' OR email='$email'";
+            $result = mysqli_query($db, $chek);
+
+            if (mysqli_num_rows($result) > 0) {
+
+                $notice['warning'][] = 'The username or email is already in use!';
+            }
+        }
+
+        if (!isset($message)) {
+
+            $query = "INSERT INTO users (ip, username, password, email) VALUES ('$ip', '$username','$password','$email')";
+
+            if (mysqli_query($dbc, $query)) {
+                $_SESSION['username'] = $username;
+                $message['success'][] = 'Welcome aboard!';
+                header('Location: home');
+            } else {
+                $message['warning'][] = 'An error occured!' . mysql_error($dbc) . ' ' . $query;
+            }
         }
     }
 }
@@ -67,7 +121,7 @@ switch ($url) {
     case 'post': $url = 'home';
         break;
 
-    case 'edit': $url = 'register';
+    case 'user': $url = 'register';
         break;
 
     case 'logout':
