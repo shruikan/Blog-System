@@ -36,7 +36,7 @@ function get_posts($dbc, $id = NULL) {
         }
 
         $posts[$data['id']]['id'] = $data['id'];
-        $posts[$data['id']]['user'] = $data['user'];
+        $posts[$data['id']]['username'] = $data['username'];
         $posts[$data['id']]['date'] = "$data[month] $data[day], $data[year] at $data[hour]:$data[minutes]:$data[seconds]";
         $posts[$data['id']]['category'] = $data['category'];
         $posts[$data['id']]['slug'] = $data['slug'];
@@ -67,7 +67,7 @@ function get_user($dbc, $id = NULL) {
         if (is_numeric($id)) {
             $cond = "WHERE id = '$id'";
         } else {
-            $cond = "WHERE user = '$id'";
+            $cond = "WHERE username = '$id'";
         }
     }
 
@@ -78,11 +78,11 @@ function get_user($dbc, $id = NULL) {
         while ($data = mysqli_fetch_assoc($result)) {
             $users[$data['id']]['id'] = $data['id'];
             $users[$data['id']]['avatar'] = $data['avatar'];
-            $users[$data['id']]['user'] = $data['user'];
+            $users[$data['id']]['username'] = $data['username'];
             $users[$data['id']]['name'] = $data['name'];
             $users[$data['id']]['family'] = $data['family'];
             $users[$data['id']]['email'] = $data['email'];
-            $users[$data['id']]['url'] = $data['url'];
+            $users[$data['id']]['site'] = $data['site'];
             $users[$data['id']]['reg_date'] = $data['reg_date'];
             $users[$data['id']]['status'] = $data['status'];
         }

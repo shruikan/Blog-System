@@ -9,7 +9,6 @@
     <?php } ?>
 
     <ul class="nav navbar-nav">
-        <li><a href="?p=dashboard">Dashboard</a></li>
         <li><a href="?p=posts">Posts</a></li>
         <li><a href="?p=users">Users</a></li>
         <li><a href="?p=navigation">Navigation</a></li>

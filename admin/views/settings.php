@@ -1,6 +1,5 @@
-<h1>Site Settings</h1>
-
 <div class="col-md-12">
+    <h1>Site Settings</h1>
     <?php
     if (isset($message)) { // TODO: USE Eror reporting
         echo $message;
@@ -17,7 +16,7 @@
             <form action="?p=settings&id=<?php echo $opened['id']; ?>" method="post" class="form-inline">
 
                 <div class="form-group">
-                    <label for="user" class="sr-only">ID:</label>
+                    <label for="id" class="sr-only">ID:</label>
                     <input class="form-control" type="text" name="id" id="id" value="<?php echo $opened['id'] ?>"
                            placeholder="ID" autocomplete="off">
                 </div>

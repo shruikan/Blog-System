@@ -1,6 +1,5 @@
-<h1>Post Manager</h1>
-
 <div class="col-md-4">
+    <h1>Post Manager</h1>
     <div class="list-group">
         <a href="?p=posts" class="list-group-item">
             <i class="fa fa-plus"> New Post</i>
@@ -44,17 +43,17 @@
         </div>
 
         <div class="form-group">
-            <label for="user">User:</label>
+            <label for="username">User:</label>
 
-            <select class="form-control" name="user" id="user">
+            <select class="form-control" name="username" id="username">
                 <option value="0">No user</option>
                 <?php
                 $users = get_user($dbc);
 
                 foreach ($users as $user => $value) {
-                    echo "<option value=" . $value['user'] . " ";
-                    selected($value['id'], $value['user'], 'selected');
-                    echo '>' . $value['user'] . '</option>';
+                    echo "<option value=" . $value['username'] . " ";
+                    selected($value['id'], $value['username'], 'selected');
+                    echo '>' . $value['username'] . '</option>';
                 }
                 ?>
             </select>

@@ -14,7 +14,7 @@ require(ROOT . D_CONFIG . DS . 'connection.php');
 require(ROOT . D_FUNCTIONS . DS . 'data.php');
 
 # Page
-$page = isset($_GET['p']) ? $_GET['p'] : 'dashboard';
+$page = isset($_GET['p']) ? $_GET['p'] : 'posts';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -25,7 +25,7 @@ if (isset($_GET['id'])) {
 # Site Settings
 $settings = get_settings($dbc);
 $site_title = $settings['site-title'];
-$site_url = ''; // User DB URL
+$site_url = ''; // Use DB URL
 $debug_status = $settings['debug-status'];
 
 

@@ -2,14 +2,14 @@
 
 if (isset($_POST['login'])) {
 
-    $user = mysqli_real_escape_string($dbc, $_POST['user']);
+    $username = mysqli_real_escape_string($dbc, $_POST['username']);
     $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
 
-    $query = "SELECT * FROM users WHERE user = '$user' AND password = '$password'";
+    $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
     $result = mysqli_query($dbc, $query);
 
     if (mysqli_num_rows($result) > 0) {
-        $_SESSION['username'] = $user;
+        $_SESSION['username'] = $username;
         header('Location: index.php');
     } else {
         echo '<div class="alert alert-warning">Wrong login data!</div>'; // TODO: Make error reporting
@@ -27,7 +27,7 @@ switch ($page) {
         if (isset($_POST['post']) == 1) {
             
             $id = mysqli_real_escape_string($dbc, $_POST['id']);
-            $user = mysqli_real_escape_string($dbc, $_POST['user']);
+            $username = mysqli_real_escape_string($dbc, $_POST['username']);
             $slug = mysqli_real_escape_string($dbc, $_POST['slug']);
             $title = mysqli_real_escape_string($dbc, $_POST['title']);
             $label = mysqli_real_escape_string($dbc, $_POST['label']);
@@ -36,9 +36,9 @@ switch ($page) {
 
             if (isset($_POST['id']) != '') {
                 $action = 'updated';
-                $query = "UPDATE posts SET user = '$user', slug = '$slug', title = '$title', label = '$label', header = '$header', body = '$body' WHERE id = $id";
+                $query = "UPDATE posts SET username = '$username', slug = '$slug', title = '$title', label = '$label', header = '$header', body = '$body' WHERE id = $id";
             } else {
-                $query = "INSERT INTO posts (user, slug, title, label, header, body) VALUES ($user, '$slug', '$title', '$label', '$header', '$body')";
+                $query = "INSERT INTO posts (username, slug, title, label, header, body) VALUES ($username, '$slug', '$title', '$label', '$header', '$body')";
                 $action = 'added';
             }
 
@@ -62,13 +62,13 @@ switch ($page) {
     case 'users':
         if (isset($_POST['post'])) {
 
-            $user = mysqli_real_escape_string($dbc, $_POST['user']);
+            $username = mysqli_real_escape_string($dbc, $_POST['username']);
             $password = mysqli_real_escape_string($dbc, $_POST['password']);
             $password_v = mysqli_real_escape_string($dbc, $_POST['password_v']);
             $name = mysqli_real_escape_string($dbc, $_POST['name']);
             $family = mysqli_real_escape_string($dbc, $_POST['family']);
             $email = mysqli_real_escape_string($dbc, $_POST['email']);
-            $url = mysqli_real_escape_string($dbc, $_POST['url']);
+            $site = mysqli_real_escape_string($dbc, $_POST['site']);
             
             $status = mysqli_real_escape_string($dbc, $_POST['status']);
             $id = mysqli_real_escape_string($dbc, $_POST['id']);
@@ -87,11 +87,11 @@ switch ($page) {
 
             if (isset($_POST['id']) != '') {
                 $action = 'updated';
-                $query = "UPDATE users SET user = '$user', name = '$name', family = '$family', email = '$email', url = '$url', $password status = $status WHERE id = $id";
+                $query = "UPDATE users SET username = '$username', name = '$name', family = '$family', email = '$email', site = '$site', $password status = $status WHERE id = $id";
                 $result = mysqli_query($dbc, $query);
             } else {
                 $action = 'added';
-                $query = "INSERT INTO users (user, name, family, email, url, password, status) VALUES ('$user', '$name', '$family', '$email', '$url', $password $status)";
+                $query = "INSERT INTO users (username, name, family, email, site, password, status) VALUES ('$username', '$name', '$family', '$email', '$site', $password $status)";
 
                 if ($verify == true) {
                     $result = mysqli_query($dbc, $query);
@@ -101,7 +101,7 @@ switch ($page) {
             if ($result) {
                 $message = '<div class="alert alert-success">User was ' . $action . '!</div>';
             } else {
-                $message = '<div class="alert alert-danger">User could not be ' . $action . '!Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
+                $message = '<div class="alert alert-warning">User could not be ' . $action . '!Error: ' . mysql_error($dbc) . ' ' . $query . '</div>';
 
                 if ($verify == false) {
                     $message = '<div class="alert alert-warning">Password do not match!</div>';
@@ -120,13 +120,13 @@ switch ($page) {
 
             $id = mysqli_real_escape_string($dbc, $_POST['id']);
             $label = mysqli_real_escape_string($dbc, $_POST['label']);
-            $url = mysqli_real_escape_string($dbc, $_POST['url']);
+            $site = mysqli_real_escape_string($dbc, $_POST['site']);
             $status = mysqli_real_escape_string($dbc, $_POST['status']);
             $opened_id = mysqli_real_escape_string($dbc, $_POST['openedid']);
 
             if (isset($_POST['id']) != '') {
                 $action = 'updated';
-                $query = "UPDATE navigation SET id = '$id', label = '$label', url = '$url', status = $status WHERE id = '$opened_id'";
+                $query = "UPDATE navigation SET id = '$id', label = '$label', site = '$site', status = $status WHERE id = '$opened_id'";
                 $result = mysqli_query($dbc, $query);
             }
 

@@ -1,6 +1,6 @@
 </div>
 
-<footer class="container footer navbar-fixed-bottom">
+<footer>
     <p>&copy; <?php echo $site_title ?>. It's all free.</p>
 </footer>
 <?php

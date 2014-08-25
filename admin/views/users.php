@@ -1,4 +1,4 @@
-<?php if (isset($opened['id'])) { ?>
+<?php if (isset($opened['id'])): ?>
     <script>
         $(document).ready(function() {
             Dropzone.autoDiscover = false;
@@ -9,11 +9,10 @@
             });
         });
     </script>
-<?php } ?>
-
-<h1>User Manager</h1>
+<?php endif; ?>
 
 <div class="col-md-4">
+    <h1>User Manager</h1>
     <div class="list-group">
         <a href="?p=users" class="list-group-item">
             <i class="fa fa-plus"> New User</i>
@@ -70,8 +69,8 @@
         </div>
 
         <div class="form-group">
-            <label for="user">Username:</label>
-            <input class="form-control" type="text" name="user" id="user" value="<?php echo $opened['user'] ?>"
+            <label for="username">Username:</label>
+            <input class="form-control" type="text" name="username" id="username" value="<?php echo $opened['username'] ?>"
                    placeholder="Username" autocomplete="off">
         </div>
 
@@ -94,9 +93,9 @@
         </div>
 
         <div class="form-group">
-            <label for="url">Site URL:</label>
-            <input class="form-control" type="url" name="url" id="url" value="<?php echo $opened['url'] ?>"
-                   placeholder="URL" autocomplete="off">
+            <label for="site">Site URL:</label>
+            <input class="form-control" type="site" name="site" id="site" value="<?php echo $opened['site'] ?>"
+                   placeholder="http://" autocomplete="off">
         </div>
 
         <div class="form-group">

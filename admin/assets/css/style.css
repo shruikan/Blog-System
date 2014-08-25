@@ -1,5 +1,11 @@
 /* Basic Styles */
 
+footer {
+    position: absolute;
+    bottom: 0;
+    margin: 50px 0 20px 30px;
+    clear: both;
+}
 #btn-debug {
     position: absolute;
 }
