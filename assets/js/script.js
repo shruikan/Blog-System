@@ -49,7 +49,7 @@ $(document).ready(function() {
         event.preventDefault();
     });
 
-    // VALIDATIONS
+// VALIDATIONS
     // 
     // login
     $('#login-form').bootstrapValidator({
@@ -139,10 +139,6 @@ $(document).ready(function() {
                     stringLength: {
                         min: 5,
                         message: 'The password must be between more than 5 characters'
-                    },
-                    identical: {
-                        field: 'password',
-                        message: 'The password and its confirm must be the same'
                     }
                 }
             },
@@ -202,7 +198,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            url: {
+            site: {
                 group: '.col-md-6',
                 validators: {
                     uri: {
@@ -222,17 +218,13 @@ $(document).ready(function() {
             },
             password: {
                 validators: {
-                    identical: {
-                        field: 'password_v',
-                        message: 'The password and its confirm must be the same'
-                    },
                     stringLength: {
                         min: 5,
                         message: 'The password must be between more than 5 characters'
                     }
                 }
             },
-            confirm_v: {
+            password_v: {
                 validators: {
                     identical: {
                         field: 'password',

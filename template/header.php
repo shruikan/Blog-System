@@ -1,5 +1,5 @@
 <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
-    <?php if ($debug_status == 1) { ?>
+    <?php if ($debug_status == 1 && $level == 3) { ?>
         <button type="button" id="btn-debug" class="btn btn-default"><i class="fa fa-bug"></i></button>
     <?php } ?>
 

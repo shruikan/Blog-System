@@ -13,7 +13,7 @@ if (isset($_POST['login'])) {
 
         if (mysqli_num_rows($result) > 0) {
             $data = mysqli_fetch_assoc($result);
-            
+
             $_SESSION['id'] = mysqli_insert_id($dbc);
             $_SESSION['username'] = $data['username'];
             $_SESSION['level'] = $data['level'];
@@ -31,11 +31,11 @@ if (isset($_POST['register'])) {
 
     $ip = ip2long($_SERVER['REMOTE_ADDR']);
     $username = format($dbc, $_POST['username']);
-    $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
-    $password_v = mysqli_real_escape_string($dbc, sha1($_POST['password_v']));
+    $password = mysqli_real_escape_string($dbc, $_POST['password']);
+    $password_v = mysqli_real_escape_string($dbc, $_POST['password_v']);
     $email = mysqli_real_escape_string($dbc, strtolower($_POST['email']));
 
-    if ($path['call_parts'][1]) { // Edit Profile
+    if (isset($path['call_parts'][1]) && $path['call_parts'][1] == $_SESSION['username']) { // Edit Profile
         $name = format($dbc, $_POST['name']);
         $family = format($dbc, $_POST['family']);
         $site = format($dbc, $_POST['site']);
@@ -64,10 +64,7 @@ if (isset($_POST['register'])) {
             $name = empty($name) ? "name = NULL," : "name = '$name',";
             $family = empty($family) ? "family = NULL," : "family = '$family',";
             $site = empty($site) ? "site = NULL," : "site = '$site',";
-
-            if (!empty($password)) {
-                $password = "password = '$password',";
-            }
+            $password = empty($password) ? $password = NULL : "password = 'sha1($password)',";
 
             $username = $_SESSION['username'];
             $query = "UPDATE users SET $name $family $site $password email = '$email' WHERE username = '$username'";
@@ -108,7 +105,7 @@ if (isset($_POST['register'])) {
 
         if (!isset($message)) {
 
-            $query = "INSERT INTO users (ip, username, password, email) VALUES ('$ip', '$username','$password','$email')";
+            $query = "INSERT INTO users (ip, username, password, email) VALUES ('$ip', '$username','" . sha1($password) . "','$email')";
 
             if (mysqli_query($dbc, $query)) {
                 $_SESSION['username'] = $username;

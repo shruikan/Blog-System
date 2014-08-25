@@ -3,14 +3,14 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <div class="profile" style="background-image: url('<?= ROOT . D_UPLOADS . DS . $user['avatar']; ?>')">
-                    <?= isset($username) ? $username : 'Guest'; ?> <b class="caret"></b>
+                    <?= isset($_SESSION['username']) ? $username : 'Guest'; ?> <b class="caret"></b>
                 </div>
             </a>
 
             <?php if (isset($_SESSION['username'])) { ?>
                 <ul class="dropdown-menu">
                     <li><a href="<?= ROOT; ?>user/<?= $username; ?>">Edit Profile</a></li>
-                    <?php if ($_SESSION['level'] == 3): ?>
+                    <?php if ($level == 3): ?>
                         <li><a href="<?= ROOT; ?>admin">Admin Panel</a></li>
                     <?php endif; ?>
                     <li><a href="<?= ROOT; ?>logout">Logout</a></li>

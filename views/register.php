@@ -11,7 +11,8 @@
         $username = $user['username'];
         $button = 'Save';
 
-        if (isset($_GET['id'])): ?>
+        if (isset($_GET['id'])):
+            ?>
             <script>
                 $(document).ready(function() {
                     Dropzone.autoDiscover = false;
@@ -22,19 +23,19 @@
                     });
                 });
             </script>
-        <?php endif; ?>
+    <?php endif; ?>
 
         <form action="<?= ROOT . D_CONFIG . DS; ?>uploads.php?id=<?= $user['id']; ?>" class="dropzone" id="avatar-dropzone">
         </form>
 
-        <form method="post" id="edit-form">
+        <form role="form" method="post" id="edit-form">
 
-            <?php if (!empty($user['avatar'])) { ?>
+    <?php if (!empty($user['avatar'])) { ?>
                 <label for="avatar">Avatar:</label>
                 <div id="avatar">
                     <div class="avatar-container" style="background-image: url('<?= ROOT . 'uploads/' . $user['avatar']; ?>')"></div>
                 </div>
-            <?php } ?>
+    <?php } ?>
             <div class="form-group">
                 <label for="name">First Name:</label>
                 <input class="form-control" type="text" name="name" id="name" value="<?= $user['name']; ?>"
@@ -52,9 +53,9 @@
                 <input class="form-control" type="site" name="site" id="site" value="<?= $user['site']; ?>"
                        placeholder="http://" autocomplete="off">
             </div>
-        <?php } else { ?>
-            <form method="post" id="register-form">
-            <?php } ?>
+            <?php } else { ?>
+            <form role="form" method="post" id="register-form">
+<?php } ?>
 
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -83,7 +84,7 @@
                        placeholder="Verify Password" autocomplete="off">
             </div>
 
-            <input type="submit" name="register" id="register" class="btn btn-success" value="<?= $button; ?>">
+            <button type="submit" name="register" id="register" class="btn btn-success"><?= $button; ?></button>
 
         </form>
 </div>

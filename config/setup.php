@@ -30,6 +30,7 @@ require('queries.php');
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
+    $level = $_SESSION['level'];
     $user = get_user($dbc, $username);
 }
 

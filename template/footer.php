@@ -18,7 +18,7 @@
 </footer>
 
 <?php
-if ($debug_status == 1) {
+if ($debug_status == 1 && $level == 3) {
     require(D_WIDGETS . '/debug.php');
 }
 ?>
