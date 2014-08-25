@@ -12,6 +12,7 @@ require('config/constants.php');
 require(D_FUNCTIONS . '/data.php');
 
 
+
 # Site Settings
 $settings = get_settings($dbc);
 $site_title = $settings['site-title'];
@@ -26,6 +27,8 @@ $path = get_path();
 $url = $path['call_parts'][0];
 require(D_FUNCTIONS . '/navigation.php');
 
+# Queries
+require('queries.php');
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];

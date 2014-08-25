@@ -32,7 +32,7 @@ if (isset($_POST['register'])) {
     $password_v = mysqli_real_escape_string($dbc, sha1($_POST['password_v']));
     $email = mysqli_real_escape_string($dbc, strtolower($_POST['email']));
 
-    if ($url == 'user') { // Edit Profile
+    if ($path['call_parts'][1]) { // Edit Profile
         $name = format($dbc, $_POST['name']);
         $family = format($dbc, $_POST['family']);
         $site = format($dbc, $_POST['site']);
