@@ -121,6 +121,7 @@ if (isset($_POST['register'])) {
 if (isset($_POST['post'])) {
 
     $comment = mysqli_real_escape_string($dbc, $_POST['comment']);
+    $post_id = $_POST['post_id'];
 
     if (!isset($_SESSION['username'])) {
         $name = format($dbc, $_POST['name']);
@@ -137,9 +138,9 @@ if (isset($_POST['post'])) {
             $message['warning'][] = 'The email is not valid!';
         }
         if (!isset($message)) {
-            $query = "INSERT INTO comments (author, email, content) VALUES ('$name','$email','$comment')";
+            $query = "INSERT INTO comments (post_id, author, email, content) VALUES ($post_id, '$name','$email','$comment')";
         }
-    } else {
+    } else { // Logged user
 
         // Validation
         if (empty($comment)) {
@@ -151,7 +152,7 @@ if (isset($_POST['post'])) {
             $username = $user['username'];
             $email = $user['email'];
 
-            $query = "INSERT INTO comments (author, email, content) VALUES ('$username','$email','$comment')";
+            $query = "INSERT INTO comments (post_id, author, email, content) VALUES ($post_id, '$username','$email','$comment')";
         }
     }
 

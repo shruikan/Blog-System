@@ -59,8 +59,8 @@ function get_posts($dbc, $id) {
     return $posts;
 }
 
-function get_comments($dbc) {
-    $query = "SELECT * FROM comments ORDER BY date DESC";
+function get_comments($dbc, $id) {
+    $query = "SELECT * FROM comments WHERE post_id = $id ORDER BY date DESC";
     $result = mysqli_query($dbc, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {

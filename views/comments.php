@@ -3,7 +3,7 @@
 </header>
 
 <?php
-$comments = get_comments($dbc);
+$comments = get_comments($dbc, $current[0]);
 
 if ($comments) {
     foreach ($comments as $comment => $value) {
@@ -46,6 +46,7 @@ if ($comments) {
 
         <div class="form-group">
             <div class="col-md-12 text-right">
+                <input type="hidden" name="post_id" value="<?= $current[0]; ?>">
                 <input type="submit" name="post" class="btn btn-lg btn-primary" value="Submit your message!"></input>
             </div>
         </div>

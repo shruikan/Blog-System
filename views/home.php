@@ -3,13 +3,13 @@
 
     <?php
     if (isset($path['call_parts'][1])) {
-        $currnet = explode('-', $path['call_parts'][1]);
+        $current = explode('-', $path['call_parts'][1]);
     }
 
     if ($path['call_parts'][0] == 'home' || empty($path['call_parts'][0])) {
         $posts = get_posts($dbc, NULL);
     } else {
-        $posts = get_posts($dbc, (int) $currnet[0]);
+        $posts = get_posts($dbc, (int) $current[0]);
         $comments = TRUE;
     }
 
