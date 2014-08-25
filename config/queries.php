@@ -118,6 +118,7 @@ if (isset($_POST['register'])) {
     }
 }
 
+// COMMENTS
 if (isset($_POST['post'])) {
 
     $comment = mysqli_real_escape_string($dbc, $_POST['comment']);
@@ -141,7 +142,6 @@ if (isset($_POST['post'])) {
             $query = "INSERT INTO comments (post_id, author, email, content) VALUES ($post_id, '$name','$email','$comment')";
         }
     } else { // Logged user
-
         // Validation
         if (empty($comment)) {
             $message['warning'][] = 'Enter a comment!';
@@ -160,5 +160,45 @@ if (isset($_POST['post'])) {
         $message['success'][] = 'Thank you for your comment!';
     } else {
         $message['warning'][] = 'An error occured! Please try again!';
+    }
+}
+
+// EMAIL
+if (isset($_POST['mail'])) {
+
+    $subject = format($dbc, $_POST['subject']);
+    $content = wordwrap($_POST['message'], 70);
+    $family = NULL;
+
+    if (!isset($_SESSION['username'])) {
+
+        $name = format($dbc, $_POST['name']);
+        $email = $_POST['email'];
+
+        if (empty($subject) || empty($content) || empty($email)) {
+            $message['warning'][] = 'Please fill all the fields!';
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $message['warning'][] = 'The email is not valid!';
+        }
+    } else {
+        $user = get_user($dbc, $_SESSION['username']);
+        $name = $user['name'];
+        $family = $user['family'];
+        $email = $user['email'];
+
+        if (empty($subject) || empty($content)) {
+            $message['warning'][] = 'Please fill all the fields!';
+        }
+    }
+    if (!isset($message)) {
+        $headers = 'From: ' . "$email\r\n" .
+                'Reply-To: ' . "$email\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+
+        mail($site_email, $subject, $content . "\r\n$name $family", $headers);
+
+
+        $message['success'][] = 'Thank you for the feedback!';
     }
 }

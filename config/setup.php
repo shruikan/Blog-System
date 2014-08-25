@@ -14,10 +14,12 @@ require(D_FUNCTIONS . '/data.php');
 $settings = get_settings($dbc);
 $site_title = $settings['site-title'];
 $site_url = $settings['site-url'];
+$site_email = $settings['site-email'];
 $debug_status = $settings['debug-status'];
 
 define('ROOT', $site_url);
 //define('ROOT', 'localhost/Blog-System.git/trunk/');
+
 # Navigation
 $path = get_path();
 $url = $path['call_parts'][0];
