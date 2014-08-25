@@ -1,5 +1,15 @@
 <?php
 
+function format($dbc, $id, $up) {
+    $id = strtolower($id);
+    
+    if (!$up) {
+        $id = ucfirst($id);
+    }
+    
+    return mysqli_real_escape_string($dbc, $id);
+}
+
 function get_settings($dbc) {
     $query = "SELECT * FROM settings";
     $result = mysqli_query($dbc, $query);
@@ -12,9 +22,9 @@ function get_settings($dbc) {
 }
 
 function get_posts($dbc, $id) {
-    
+
     $cond = NULL;
-    
+
     if (isset($id) && is_numeric($id)) {
         $cond = "WHERE id = $id";
     } else if (isset($id)) {
@@ -36,7 +46,7 @@ function get_posts($dbc, $id) {
         }
 
         $posts[$data['id']]['id'] = $data['id'];
-        $posts[$data['id']]['user'] = $data['user'];
+        $posts[$data['id']]['username'] = $data['username'];
         $posts[$data['id']]['date'] = "$data[month] $data[day], $data[year] at $data[hour]:$data[minutes]:$data[seconds]";
         $posts[$data['id']]['category'] = $data['category'];
         $posts[$data['id']]['slug'] = $data['slug'];
@@ -60,14 +70,14 @@ function get_categories($dbc) {
 }
 
 function get_user($dbc, $id) {
-    
+
     $cond = NULL;
-    
+
     if (isset($id)) {
         if (is_numeric($id)) {
             $cond = "WHERE id = '$id'";
         } else {
-            $cond = "WHERE user = '$id'";
+            $cond = "WHERE username = '$id'";
         }
     }
 
@@ -78,11 +88,11 @@ function get_user($dbc, $id) {
         while ($data = mysqli_fetch_assoc($result)) {
             $users[$data['id']]['id'] = $data['id'];
             $users[$data['id']]['avatar'] = $data['avatar'];
-            $users[$data['id']]['user'] = $data['user'];
+            $users[$data['id']]['username'] = $data['username'];
             $users[$data['id']]['name'] = $data['name'];
             $users[$data['id']]['family'] = $data['family'];
             $users[$data['id']]['email'] = $data['email'];
-            $users[$data['id']]['url'] = $data['url'];
+            $users[$data['id']]['site'] = $data['site'];
             $users[$data['id']]['reg_date'] = $data['reg_date'];
             $users[$data['id']]['status'] = $data['status'];
         }
