@@ -40,20 +40,8 @@ function get_posts($dbc, $id) {
         if ($data['id'] == 0) {
             continue;
         }
-        if (isset($id)) {
-            $posts[$data['id']]['body'] = $data['body'];
-        } else {
-            $posts[$data['id']]['body'] = substr($data['body'], 0, 230);
-        }
-
-        $posts[$data['id']]['id'] = $data['id'];
-        $posts[$data['id']]['username'] = get_user($dbc, $data['username']);
-        $posts[$data['id']]['date'] = "$data[month] $data[day], $data[year] at $data[hour]:$data[minutes]:$data[seconds]";
-        $posts[$data['id']]['category'] = $data['category'];
-        $posts[$data['id']]['slug'] = $data['slug'];
-        $posts[$data['id']]['label'] = $data['label'];
-        $posts[$data['id']]['title'] = $data['title'];
-        $posts[$data['id']]['header'] = $data['header'];
+        // TODO: Limit index page posts
+        $posts[$data['id']] = $data;
     }
 
     return $posts;
@@ -64,10 +52,7 @@ function get_comments($dbc, $id) {
     $result = mysqli_query($dbc, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {
-        $comments[$data['id']]['date'] = $data['date'];
-        $comments[$data['id']]['author'] = $data['author'];
-        $comments[$data['id']]['email'] = $data['email'];
-        $comments[$data['id']]['content'] = $data['content'];
+        $comments[$data['id']] = $data;
     }
 
     return $comments;
@@ -98,22 +83,12 @@ function get_user($dbc, $id) {
 
     $query = "SELECT * FROM users $cond";
     $result = mysqli_query($dbc, $query);
-    
+
     if ($result) {
         if (!isset($id)) {
             while ($data = mysqli_fetch_assoc($result)) {
-                $users[$data['id']]['id'] = $data['id'];
-                $users[$data['id']]['avatar'] = $data['avatar'];
-                $users[$data['id']]['username'] = $data['username'];
-                $users[$data['id']]['name'] = $data['name'];
-                $users[$data['id']]['family'] = $data['family'];
-                $users[$data['id']]['email'] = $data['email'];
-                $users[$data['id']]['site'] = $data['site'];
-                $users[$data['id']]['reg_date'] = $data['reg_date'];
-                $users[$data['id']]['status'] = $data['status'];
+                $users[$data['id']] = $data;
             }
-
-            return $users;
         }
 
         $data = mysqli_fetch_assoc($result);

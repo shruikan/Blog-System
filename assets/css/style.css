@@ -26,6 +26,7 @@ footer {
     background-color: #e3e3e3;
 }
 
+
 /* Socials */
 footer .btn {
     padding: 6px 6px;
@@ -60,6 +61,74 @@ footer .btn {
     margin-top: 10px;
     width: 250px;
     height: 200px;
+}
+
+// Comment Box
+.detailBox {
+    width:320px;
+    border:1px solid #bbb;
+    margin:50px;
+}
+.titleBox {
+    background-color:#fdfdfd;
+    padding:10px;
+}
+.titleBox label{
+    color:#444;
+    margin:0;
+    display:inline-block;
+}
+.titleBox h2 {
+    display: inline-block;
+}
+.commentBox {
+    border-top:1px dotted #bbb;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    overflow:hidden;
+}
+.commentList li {
+    height: 70px;
+    margin-top: 20px;
+    border-bottom: 1px solid #eee;
+}
+.commentList li:last-of-type {
+    border: 0;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    margin-right: 10px;
+    width:50px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:15%;
+}
+.commentText {
+    float: left;
+}
+.commentText p {
+    margin: 5px 0 0 0;
+}
+.close {
+    display: block;
+    clear: both;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    border-bottom:1px dotted #bbb;
+    padding:0 20px 0 20px;
+    margin-bottom: 10px;
 }
 
 /* Logo styles 

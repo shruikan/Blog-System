@@ -37,8 +37,7 @@
             <br />
 
             <p class="lead"><?= $value['body']; ?></p>
-
-                                                                   <!-- <p>Other text</p> -->
+                <!-- <p>Other text</p> -->
             <?php if (isset($path['call_parts'][2])) { ?>
                 <p class="text-right">
                     <a href="<?= $post_link; ?>">
@@ -46,16 +45,14 @@
                     </a>
                 </p>
             <?php } ?>
-
-            <hr>
         </article>
     <?php } ?>
-
+    <hr>
     <ul class="pager">
         <li class="previous"><a href="<?= $post_link; ?>">&larr; Previous</a></li>
         <li class="next"><a href="<?= $post_link; ?>">Next &rarr;</a></li>
     </ul>
-    <hr />
+    <hr>
     <?php
     if ($comments) {
         require 'comments.php';

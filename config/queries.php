@@ -64,7 +64,7 @@ if (isset($_POST['register'])) {
             $name = empty($name) ? "name = NULL," : "name = '$name',";
             $family = empty($family) ? "family = NULL," : "family = '$family',";
             $site = empty($site) ? "site = NULL," : "site = '$site',";
-            $password = empty($password) ? $password = NULL : "password = 'sha1($password)',";
+            $password = empty($password) ? $password = NULL : "password = sha1('$password'),";
 
             $username = $_SESSION['username'];
             $query = "UPDATE users SET $name $family $site $password email = '$email' WHERE username = '$username'";
@@ -202,3 +202,25 @@ if (isset($_POST['mail'])) {
         $message['success'][] = 'Thank you for the feedback!';
     }
 }
+
+// SEARCH
+if($_POST['searchVal']) {
+    $search = preg_replace('#[^0-9a-z]#i', '', $content, $_POST['searchVal']);
+    $query = "SELECT * FROM users WHERE first LIKE '%$search%' OR last LIKE %$search%";
+    $result = mysqli_query($dbc, $query);
+    $count = mysqli_num_rows($result);
+    $output = '';
+    
+    if($count == 0) {
+        $output = 'No search result!';
+    } else {
+        while($data = mysqli_fetch_assoc($result)) {
+            $first = $data['first'];
+            $last = $data['last'];
+            
+            $output .= "<div>$first $last</div>";
+        }
+    }
+}
+
+echo $output;
