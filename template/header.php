@@ -13,12 +13,13 @@
             </button>
             <a href="<?= SITE; ?>" class="navbar-brand"><?= $site_title; ?></a>
         </div>
+        
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <form role="search" method="post" class="navbar-form navbar-right">
                 <div class="form-group">
                     <input type="search" name="search" id="search" class="form-control" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <input type="submit" class="btn btn-default" value="Submit">
             </form>
             <ul class="nav navbar-nav">
                 <?php
@@ -31,6 +32,7 @@
             </ul>
             <?php require (D_TEMPLATE . 'user_panel.php'); ?>
         </nav>
+        
     </div>
 </header>
 <div class="container" id="content">
@@ -40,3 +42,4 @@
 
     <?php
     require (D_TEMPLATE . 'messages.php');
+    

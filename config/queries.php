@@ -203,24 +203,12 @@ if (isset($_POST['mail'])) {
     }
 }
 
-// SEARCH
-if($_POST['searchVal']) {
-    $search = preg_replace('#[^0-9a-z]#i', '', $content, $_POST['searchVal']);
-    $query = "SELECT * FROM users WHERE first LIKE '%$search%' OR last LIKE %$search%";
+
+if ($_POST['search']) {
+    $query = "SELECT * FROM posts WHERE label LIKE '%" . $_POST['search'] . "%'";
     $result = mysqli_query($dbc, $query);
-    $count = mysqli_num_rows($result);
-    $output = '';
-    
-    if($count == 0) {
-        $output = 'No search result!';
-    } else {
-        while($data = mysqli_fetch_assoc($result)) {
-            $first = $data['first'];
-            $last = $data['last'];
-            
-            $output .= "<div>$first $last</div>";
-        }
+
+    while ($data = mysqli_fetch_assoc($result)) {
+        $output[$data['id']] = $data;
     }
 }
-
-echo $output;

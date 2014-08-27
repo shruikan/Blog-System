@@ -2,21 +2,6 @@
     <h1>Latest Posts</h1>
 
     <?php
-    if (isset($path['call_parts'][1])) {
-        $current = explode('-', $path['call_parts'][1]);
-    }
-
-    if ($path['call_parts'][0] == 'home' || empty($path['call_parts'][0])) {
-        $posts = get_posts($dbc);
-        $comments = FALSE;
-    } else {
-        $posts = get_posts($dbc, (int) $current[0]);
-        $comments = TRUE;
-    }
-    if($path['call_parts'][0] == 'category') {
-        $posts = get_category_post($dbc, 'news');
-    }
-
     foreach ($posts as $post => $value) {
         $post_link = SITE . 'post/' . $value['id'] . '-' . $value['slug'];
         ?>
@@ -29,7 +14,7 @@
                 </div>
                 <div class="col-sm-6 col-md-7">
                     <span class="glyphicon glyphicon-pencil"></span> <a href="<?= "$post_link#comment"; ?>">Comments</a>			          		
-                    &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?= $value['date'] . ' by ' . $value['username']; ?>			          		
+                    &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?= $value['date'] . ' by ' . $value['username'] . ', ' . $value['counter'] . ' views'; ?>			          		
                 </div>
             </div>
 
@@ -62,4 +47,3 @@
     }
     ?>
 </div>
-

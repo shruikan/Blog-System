@@ -29,28 +29,29 @@ function get_posts($dbc, $id = NULL, $by = NULL) {
     if (isset($id) && is_numeric($id)) {
         $cond = "WHERE id = $id";
     } else if (isset($by)) {
-        $cond = "WHERE $by = '$id'";
+        $cond = "WHERE $by LIKE '$id'";
     }
 
     $query = "SELECT *, MONTHNAME(date) AS month, DAYOFMONTH(date) AS day, YEAR(date) AS year, HOUR(date) AS hour, MINUTE(date) AS minutes, SECOND(date) AS seconds FROM posts $cond ORDER BY date DESC";
     $result = mysqli_query($dbc, $query);
 
-    while ($data = mysqli_fetch_assoc($result)) {
-
-        $posts[$data['id']] = $data;
+    if ($result) {
+        while ($data = mysqli_fetch_assoc($result)) {
+            $posts[$data['id']] = $data;
+        }
     }
 
     return $posts;
 }
 
 function get_category_post($dbc, $id) {
-    $query = "SELECT * FROM posts WHERE catrgory = '$id' ORDER BY date DESC LIMIT 5";
+    $query = "SELECT * FROM posts WHERE category = '$id' ORDER BY date DESC LIMIT 5";
     $result = mysqli_query($dbc, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {
         $posts[$data['id']] = $data;
     }
-    
+
     return $posts;
 }
 
@@ -61,7 +62,7 @@ function get_latest_posts($dbc) {
     while ($data = mysqli_fetch_assoc($result)) {
         $posts[$data['id']] = $data;
     }
-    
+
     return $posts;
 }
 
@@ -83,7 +84,7 @@ function get_latest_comments($dbc) {
     while ($data = mysqli_fetch_assoc($result)) {
         $comments[$data['id']] = $data;
     }
-    
+
     return $comments;
 }
 
@@ -181,3 +182,4 @@ function main_nav($dbc, $path) {
 
     return $navigation;
 }
+
