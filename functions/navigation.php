@@ -3,6 +3,9 @@ switch ($url) {
     case '':
     case 'post': $url = 'home';
         break;
+    
+    case 'category': $url = 'home';
+        break;
 
     case 'user': $url = 'register';
         break;

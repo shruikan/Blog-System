@@ -1,5 +1,5 @@
 <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
-    <?php if ($debug_status == 1 && $level == 3): ?>
+    <?php if ($debug_status == 1 && $user['level'] == 3): ?>
         <button type="button" id="btn-debug" class="btn btn-default"><i class="fa fa-bug"></i></button>
     <?php endif; ?>
 
@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="<?= ROOT; ?>" class="navbar-brand"><?= $site_title; ?></a>
+            <a href="<?= SITE; ?>" class="navbar-brand"><?= $site_title; ?></a>
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <form role="search" method="post" class="navbar-form navbar-right">
@@ -21,17 +21,22 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav">
-                <?php main_nav($dbc, $path); ?>
+                <?php
+                $navigation = main_nav($dbc, $path);
+
+                foreach ($navigation as $nav) {
+                    ?>
+                    <li <?php selected($url, $nav['url'], 'class="active"'); ?>><a href="<?= SITE . $nav['url']; ?>"><?= $nav['label']; ?></a></li>
+                <?php } ?>
             </ul>
-            <?php include (D_TEMPLATE . '/user_panel.php'); ?>
+            <?php require (D_TEMPLATE . 'user_panel.php'); ?>
         </nav>
     </div>
 </header>
 <div class="container" id="content">
-    
-<!--    TODO: Implement-->
+
+    <!--    TODO: Implement-->
     <div id="search-output"></div>
-        
-        <?php
-    include (D_TEMPLATE . '/messages.php');
-    
+
+    <?php
+    require (D_TEMPLATE . 'messages.php');

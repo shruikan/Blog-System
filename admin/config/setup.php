@@ -1,19 +1,16 @@
 <?php
 
+// ADMIN PENAEL SETTINGS
+
 //error_reporting(0);
 
-$dir = $_SERVER['DOCUMENT_ROOT'] . 'admin/';
-//$dir = '';
-
-# Constants
-define('DIR', $dir);
-require(DIR . 'config/constants.php');
-
+$root = $_SERVER['DOCUMENT_ROOT'] . 'admin/';
+//$root = 'localhost/Blog-System.git/trunk/admin/';
 # Database Connection
-require(DIR . D_CONFIG . '/connection.php');
+$dbc = mysqli_connect('localhost', 'shruikan', 'pass123', 'shruikan') OR die('Could not connect: ' . mysqli_connect_error());
 
 # Functions
-require(DIR . D_FUNCTIONS . '/data.php');
+require($root . 'functions/data.php');
 
 # Page
 $page = isset($_GET['p']) ? $_GET['p'] : 'posts';
@@ -27,11 +24,13 @@ if (isset($_GET['id'])) {
 # Site Settings
 $settings = get_settings($dbc);
 $site_title = $settings['site-title'];
-$site_url = $settings['site-url'];
 $debug_status = $settings['debug-status'];
+$site_url = $settings['site-url'];
 
-define('LINK', DIR . D_CONFIG . '/connection.php');
-define('ROOT', $site_url);
+
+# Constants
+require($root . 'config/constants.php');
+
 
 # Queries
-require(DIR . D_CONFIG . '/queries.php');
+require(D_CONFIG . 'queries.php');

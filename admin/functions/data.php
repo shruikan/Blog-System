@@ -6,7 +6,7 @@ function format($dbc, $id) {
 }
 
 function get_error($dbc, $query) {
-    return " Error:" . mysql_error($dbc) . " | $query";
+    return " Error: " . mysql_error($dbc) . " | $query";
 }
 
 function get_settings($dbc) {
@@ -38,31 +38,32 @@ function get_posts($dbc, $id = NULL) {
         if ($data['id'] == 0) {
             continue;
         }
-        if (isset($id)) {
-            $posts[$data['id']]['body'] = $data['body'];
-        } else {
-            $posts[$data['id']]['body'] = substr($data['body'], 0, 230);
-        }
 
-        $posts[$data['id']]['id'] = $data['id'];
-        $posts[$data['id']]['username'] = $data['username'];
-        $posts[$data['id']]['date'] = "$data[month] $data[day], $data[year] at $data[hour]:$data[minutes]:$data[seconds]";
-        $posts[$data['id']]['category'] = $data['category'];
-        $posts[$data['id']]['slug'] = $data['slug'];
-        $posts[$data['id']]['label'] = $data['label'];
-        $posts[$data['id']]['title'] = $data['title'];
-        $posts[$data['id']]['header'] = $data['header'];
+        $posts[$data['id']] = $data;
     }
 
     return $posts;
 }
 
-function get_categories($dbc) {
-    $query = "SELECT * FROM categories ORDER BY label ASC";
+function get_categories($dbc, $id = NULL) {
+    $cond = NULL;
+    
+    if (isset($id)) {
+        
+        if (is_numeric($id)) {
+            $cond = "WHERE id = '$id'";
+        } else {
+            $cond = "WHERE label = '$id'";
+        }
+    }
+    
+    $query = "SELECT * FROM categories $cond";
     $result = mysqli_query($dbc, $query);
 
+
     while ($data = mysqli_fetch_assoc($result)) {
-        $categories[$data['id']] = $data['label'];
+        
+        $categories[$data['id']] = $data;
     }
 
     return $categories;
@@ -83,24 +84,20 @@ function get_user($dbc, $id = NULL) {
     $query = "SELECT * FROM users $cond";
     $result = mysqli_query($dbc, $query);
 
-    if (!isset($id)) {
-        while ($data = mysqli_fetch_assoc($result)) {
-            $users[$data['id']]['id'] = $data['id'];
-            $users[$data['id']]['avatar'] = $data['avatar'];
-            $users[$data['id']]['username'] = $data['username'];
-            $users[$data['id']]['name'] = $data['name'];
-            $users[$data['id']]['family'] = $data['family'];
-            $users[$data['id']]['email'] = $data['email'];
-            $users[$data['id']]['site'] = $data['site'];
-            $users[$data['id']]['reg_date'] = $data['reg_date'];
-            $users[$data['id']]['status'] = $data['status'];
+    if ($result) {
+        if (!isset($id)) {
+            while ($data = mysqli_fetch_assoc($result)) {
+                $users[$data['id']] = $data;
+            }
+
+            return $users;
         }
 
-        return $users;
+        $data = mysqli_fetch_assoc($result);
+        return $data;
+    } else {
+        return FALSE;
     }
-
-    $data = mysqli_fetch_assoc($result);
-    return $data;
 }
 
 function selected($value1, $value2, $return) {

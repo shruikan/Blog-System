@@ -2,7 +2,7 @@
 
 $ds = DIRECTORY_SEPARATOR;
 
-require ('connection.php');
+require ('../config/link.php');
 
 $storeFolder = '../uploads';
 $id = $_GET['id'];

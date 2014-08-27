@@ -13,9 +13,14 @@
 <!-- BootstrapValidator -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js"></script>
 
+<!-- Handlebars -->
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.amd.min.js"></script>
 
 <!-- Dropzone Uploader -->
-<script type="text/javascript" src="<?= ROOT; ?>assets/js/dropzone.min.js"></script>
+<script type="text/javascript" src="<?= JS; ?>dropzone.min.js"></script>
 
 <!-- Main Script -->
-<script type="text/javascript" src="<?= ROOT; ?>assets/js/script.js"></script>
+<script type="text/javascript" src="<?= JS; ?>script.js"></script>
+
+<!-- Validations -->
+<script type="text/javascript" src="<?= JS; ?>validations.js"></script>

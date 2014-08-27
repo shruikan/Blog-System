@@ -35,7 +35,7 @@ if (isset($_POST['register'])) {
     $password_v = mysqli_real_escape_string($dbc, $_POST['password_v']);
     $email = mysqli_real_escape_string($dbc, strtolower($_POST['email']));
 
-    if (isset($path['call_parts'][1]) && $path['call_parts'][1] == $_SESSION['username']) { // Edit Profile
+    if (isset($_SESSION['username'])) { // Edit Profile
         $name = format($dbc, $_POST['name']);
         $family = format($dbc, $_POST['family']);
         $site = format($dbc, $_POST['site']);

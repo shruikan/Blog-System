@@ -16,6 +16,7 @@
                     <?= $list['label']; ?> <i class="fa fa-chevron-down"></i>
                 </a>
                 <div id="form_<?= $list['id']; ?>" class="collapse">
+                    
                     <form class="form-horizontal nav-form" role="form" action="?p=navigation&id=<?= $list['id']; ?>" method="post">
 
                         <div class="form-group">

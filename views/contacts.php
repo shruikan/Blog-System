@@ -9,8 +9,8 @@
 </div>
 
 <div class="contact-form">
-    <form role="form" method="post" class="form-horizontal col-md-8" id="contacts">
-        <?php if (!isset($username)): ?>
+    <form role="form" method="post" class="form-horizontal col-md-8" id="mail-form">
+        <?php if (!$user['username']): ?>
             <div class="form-group">
                 <label for="name" class="col-md-2">Name</label>
                 <div class="col-md-10">

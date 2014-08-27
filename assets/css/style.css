@@ -146,6 +146,26 @@ footer .btn {
 */
 
 /* Forms styles */
+
+.post-image {
+    width: 100%;
+    height: 350px;
+    border-radius: 5px;
+    background-size: cover;
+    background-position: center center;
+}
+
+.fa-times {
+    color: darkred;
+    display: block;
+    clear: both;
+    width: 12px;
+}
+
+.fa-times:hover {
+    cursor: pointer;
+}
+
 .reg-log-form input, .reg-log-form select {
     width: 94%;
 }

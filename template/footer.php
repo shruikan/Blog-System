@@ -1,7 +1,7 @@
 </div>
 <footer>
     <div class="container">
-        <p class="pull-left">&copy; <a href="<?= ROOT; ?>"><?= $site_title ?></a> 2014. It's all free..</p>
+        <p class="pull-left">&copy; <a href="./"><?= $site_title ?></a> 2014. It's all free..</p>
         <p class="pull-right socials">
             Follow Us: 
             <a href="https://www.facebook.com/pages/Shruikan/1472623803008038" class="btn btn-social btn-facebook">
@@ -18,8 +18,8 @@
 </footer>
 
 <?php
-if ($debug_status == 1 && $level == 3) {
-    require(D_WIDGETS . '/debug.php');
+if ($debug_status == 1 && $user['level'] == 3) {
+    require(D_WIDGETS . 'debug.php');
 }
 ?>
 

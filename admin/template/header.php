@@ -4,8 +4,8 @@
         <title><?= ucfirst($page) . ' | ' . $site_title; ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php
-        require(DIR . D_CONFIG . '/css.php');
-        require(DIR . D_CONFIG . '/js.php');
+        require(D_CONFIG . 'css.php');
+        require(D_CONFIG . 'js.php');
         ?>
     </head>
     <body>

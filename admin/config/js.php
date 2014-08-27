@@ -11,7 +11,7 @@
 <script type="text/javascript" src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 
 <!-- Dropzone Uploader -->
-<script type="text/javascript" src="<?= ROOT; ?>admin/assets/js/dropzone.min.js"></script>
+<script type="text/javascript" src="<?= JS; ?>dropzone.min.js"></script>
 
 <!-- Main Script -->
-<script type="text/javascript" src="<?= ROOT; ?>admin/assets/js/script.js"></script>
+<script type="text/javascript" src="<?= JS; ?>script.js"></script>

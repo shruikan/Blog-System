@@ -2,7 +2,7 @@
     <div class="navbar-btn pull-right"><?= $_SESSION['username']; ?> [<a href="?p=logout">logout</a>]</div>
 
     <ul class="nav navbar-nav">
-        <li><a href="<?= ROOT; ?>"><i class="fa fa-chevron-left"></i> Home Page</a></li>
+        <li><a href="../"><i class="fa fa-chevron-left"></i> Home Page</a></li>
         <li><a href="?p=posts">Posts</a></li>
         <li><a href="?p=users">Users</a></li>
         <li><a href="?p=navigation">Navigation</a></li>
@@ -19,4 +19,4 @@
     <?php endif; ?>
 </nav> <!-- END Main Nav -->
 <?php
-include (D_TEMPLATE . '/messages.php');
+require (D_TEMPLATE . 'messages.php');

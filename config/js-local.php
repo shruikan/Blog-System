@@ -1,17 +1,26 @@
 <!-- jQuery -->
-<script type="text/javascript" src="<?= ROOT; ?>assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?= JS; ?>jquery.min.js"></script>
 
 <!-- jQuery UI -->
-<script type="text/javascript" src="<?= ROOT; ?>assets/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?= JS; ?>jquery-ui.min.js"></script>
 
 <!-- Bootstrap -->
-<script type="text/javascript" src="<?= ROOT; ?>assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?= JS; ?>bootstrap.min.js"></script>
+
+<!-- BootstrapValidator -->
+<script type="text/javascript" src="<?= JS; ?>bootstrapValidator.min.js"></script>
 
 <!-- TinyMce -->
-<script type="text/javascript" src="<?= ROOT; ?>assets/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="<?= JS; ?>tinymce/tinymce.min.js"></script>
 
 <!-- Dropzone -->
-<script type="text/javascript" src="<?= ROOT; ?>assets/js/dropzone.min.js"></script>
+<script type="text/javascript" src="<?= JS; ?>dropzone.min.js"></script>
+
+<!-- Handlebars -->
+<script type="text/javascript" src="<?= JS; ?>handlebars.js"></script>
 
 <!-- Main Script -->
-<script type="text/javascript" src="<?= ROOT; ?>assets/js/script.js"></script>
+<script type="text/javascript" src="<?= JS; ?>script.js"></script>
+
+<!-- Validations -->
+<script type="text/javascript" src="<?= JS; ?>validations.js"></script>

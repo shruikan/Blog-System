@@ -1,38 +1,36 @@
 <?php
 
 //error_reporting(0);
-# Constants
-require('config/constants.php');
 
 # Database Connection
-require(D_CONFIG . '/connection.php');
+$dbc = mysqli_connect('localhost', 'shruikan', 'pass123', 'shruikan') OR die('Could not connect: ' . mysqli_connect_error());
 
-# Functions
-require(D_FUNCTIONS . '/data.php');
+$root = $_SERVER['DOCUMENT_ROOT'];
+//$root = 'localhost/Blog-System.git/trunk/';
+
+require($root . 'functions/data.php');
 
 # Site Settings
 $settings = get_settings($dbc);
 $site_title = $settings['site-title'];
-$site_url = $settings['site-url'];
 $site_email = $settings['site-email'];
 $debug_status = $settings['debug-status'];
+$site_url = $settings['site-url'];
 
-define('ROOT', $site_url);
-//define('ROOT', 'localhost/Blog-System.git/trunk/');
+
+require($root . 'config/constants.php');
+require($root . 'config/queries.php');
+
 
 # Navigation
 $path = get_path();
 $url = $path['call_parts'][0];
-require(D_FUNCTIONS . '/navigation.php');
+require($root . 'functions/navigation.php');
 
-# Queries
-require('queries.php');
 
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
-    $level = $_SESSION['level'];
-    $user = get_user($dbc, $username);
-}
+# User
+$user = get_user($dbc, $_SESSION['username']);
+
 
 # Aside Layout Pages
 $aside = array('home');

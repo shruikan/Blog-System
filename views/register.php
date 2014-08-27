@@ -1,4 +1,4 @@
-<div class="col-md-7">
+<div class="col-md-8">
     <header>
         <h1><?= ucfirst($path['call_parts'][0]) . ' profile'; ?></h1>
     </header>
@@ -7,35 +7,31 @@
     $button = 'Register';
 
     if ($path['call_parts'][0] == 'user') {
-        $user = get_user($dbc, $_SESSION['username']);
-        $username = $user['username'];
         $button = 'Save';
+        ?>
 
-        if (isset($_GET['id'])):
-            ?>
+        <form action="<?= CONFIG; ?>uploads.php?id=<?= $user['id']; ?>" class="dropzone" id="avatar-dropzone">
+        </form>
+    
             <script>
                 $(document).ready(function() {
                     Dropzone.autoDiscover = false;
 
                     var myDrop = new Dropzone('#avatar-dropzone');
-                    myDrop.on('success', function(file) {
-                        $('#avatar').load('ajax/avatar.php?id=<?= $user['id']; ?>');
+                    myDrop.on('success', function() {
+                        $('#avatar').load('../ajax/avatar.php?id=<?= $user['id']; ?>');
                     });
                 });
             </script>
-    <?php endif; ?>
-
-        <form action="<?= ROOT . D_CONFIG . DS; ?>uploads.php?id=<?= $user['id']; ?>" class="dropzone" id="avatar-dropzone">
-        </form>
 
         <form role="form" method="post" id="edit-form">
 
-    <?php if (!empty($user['avatar'])) { ?>
+            <?php if (!empty($user['avatar'])) { ?>
                 <label for="avatar">Avatar:</label>
                 <div id="avatar">
-                    <div class="avatar-container" style="background-image: url('<?= ROOT . 'uploads/' . $user['avatar']; ?>')"></div>
+                    <div class="avatar-container" style="background-image: url('<?= UPLOADS . $user['avatar']; ?>')"></div>
                 </div>
-    <?php } ?>
+            <?php } ?>
             <div class="form-group">
                 <label for="name">First Name:</label>
                 <input class="form-control" type="text" name="name" id="name" value="<?= $user['name']; ?>"
@@ -53,14 +49,14 @@
                 <input class="form-control" type="site" name="site" id="site" value="<?= $user['site']; ?>"
                        placeholder="http://" autocomplete="off">
             </div>
-            <?php } else { ?>
+        <?php } else { ?>
             <form role="form" method="post" id="register-form">
-<?php } ?>
+            <?php } ?>
 
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input class="form-control" type="text" name="username" id="username" value="<?= isset($username) ? $username : ''; ?>" <?php
-                if (isset($user)) {
+                <input class="form-control" type="text" name="username" id="username" value="<?= isset($user['username']) ? $user['username'] : ''; ?>" <?php
+                if (isset($user['username'])) {
                     echo 'disabled';
                 }
                 ?> placeholder="Username" autocomplete="off">

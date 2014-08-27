@@ -1,19 +1,15 @@
-<?php if (isset($opened['id'])) { ?>
+<?php if (isset($opened['id'])): ?>
     <script>
         $(document).ready(function() {
             Dropzone.autoDiscover = false;
 
             var myDrop = new Dropzone('#avatar-dropzone');
             myDrop.on('success', function(file) {
-                $('#avatar').load('ajax/avatar.php?id=<?= $opened['id']; ?>');
+                $('#avatar').load('../ajax/avatar.php?id=<?= $opened['id']; ?>');
             });
         });
     </script>
-    <?php
-} else {
-    $opened = NULL;
-}
-?>
+    <?php endif; ?>
 
 <div class="col-md-4">
     <header>
@@ -34,22 +30,23 @@
                 <h4 class="list-group-item-heading"><?= $value['name']; ?></h4>
                 <p class="list-group-item-text"><?= $value['email'] ?></p>
             </a>
-        <?php } ?>
+<?php } ?>
     </div>
 </div>
 <div class="col-md-8">
     <label>Drop or click to upload avatar:</label>
-    <form action="<?= ROOT . D_CONFIG . DS . D_UPLOADS ?>.php?id=<?= $opened['id']; ?>" class="dropzone" id="avatar-dropzone">
+
+    <form action="<?= CONFIG; ?>uploads.php?id=<?= $opened['id']; ?>&type=avatar" class="dropzone" id="avatar-dropzone">
     </form>
 
     <form action="?p=users&id=<?= $opened['id']; ?>" method="post" class="reg-log-form">
 
-        <?php if (!empty($opened['avatar'])) { ?>
+<?php if (!empty($opened['avatar'])) { ?>
             <label for="avatar">Avatar:</label>
             <div id="avatar">
-                <div class="avatar-container" style="background-image: url('../uploads/<?= $opened['avatar']; ?>')"></div>
+                <div class="avatar-container" style="background-image: url('../../uploads/<?= $opened['avatar']; ?>')"></div>
             </div>
-        <?php } ?>
+<?php } ?>
 
         <div class="form-group">
             <label for="status">Status:</label>

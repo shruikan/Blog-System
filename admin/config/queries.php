@@ -4,7 +4,7 @@
 if (isset($_POST['login'])) {
     $username = format($dbc, $_POST['username']);
     $password = mysqli_real_escape_string($dbc, sha1($_POST['password']));
-    
+
     // Validation
     if (!empty($username) && !empty($password)) {
 
@@ -13,7 +13,7 @@ if (isset($_POST['login'])) {
 
         if (mysqli_num_rows($result) > 0) {
             $data = mysqli_fetch_assoc($result);
-            
+
             $_SESSION['id'] = mysqli_insert_id($dbc);
             $_SESSION['level'] = $data['level'];
             $_SESSION['username'] = $username;
@@ -27,21 +27,22 @@ if (isset($_POST['login'])) {
 
 switch ($page) {
     case 'posts':
-        if (isset($_POST['post']) == 1) {
+        if (isset($_POST['post'])) {
 
             $id = mysqli_real_escape_string($dbc, $_POST['id']);
             $username = mysqli_real_escape_string($dbc, $_POST['username']);
             $slug = mysqli_real_escape_string($dbc, $_POST['slug']);
             $title = mysqli_real_escape_string($dbc, $_POST['title']);
             $label = mysqli_real_escape_string($dbc, $_POST['label']);
-            $header = mysqli_real_escape_string($dbc, $_POST['header']);
-            $body = mysqli_real_escape_string($dbc, $_POST['body']);
+            $category = mysqli_real_escape_string($dbc, $_POST['category']);
+            $header = $_POST['header'];
+            $body = $_POST['body'];
 
             if (isset($_POST['id']) != '') {
                 $action = 'updated';
-                $query = "UPDATE posts SET username = '$username', slug = '$slug', title = '$title', label = '$label', header = '$header', body = '$body' WHERE id = $id";
+                $query = "UPDATE posts SET username = '$username', category = '$category', slug = '$slug', title = '$title', label = '$label', header = '$header', body = '$body' WHERE id = $id";
             } else {
-                $query = "INSERT INTO posts (username, slug, title, label, header, body) VALUES ('$username', '$slug', '$title', '$label', '$header', '$body')";
+                $query = "INSERT INTO posts (username, category, slug, title, label, header, body) VALUES ('$username', '$category', '$slug', '$title', '$label', '$header', '$body')";
                 $action = 'added';
             }
 
@@ -116,7 +117,7 @@ switch ($page) {
         break;
 
     case 'navigation':
-        if (isset($_POST['login'])) {
+        if (isset($_POST['post'])) {
 
             $id = mysqli_real_escape_string($dbc, $_POST['id']);
             $label = mysqli_real_escape_string($dbc, $_POST['label']);
@@ -143,7 +144,7 @@ switch ($page) {
         break;
 
     case 'settings':
-        if (isset($_POST['post']) == 1) {
+        if (isset($_POST['post'])) {
 
             $id = mysqli_real_escape_string($dbc, $_POST['id']);
             $label = mysqli_real_escape_string($dbc, $_POST['label']);

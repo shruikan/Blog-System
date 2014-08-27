@@ -5,12 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <?php
-        require(D_CONFIG . '/css.php');
-        require(D_CONFIG . '/js.php');
+        require(D_CONFIG . 'css-local.php');
+        require(D_CONFIG . 'js-local.php');
         ?>
 
     </head>
     <body>
         <?php
-        require(D_TEMPLATE . '/header.php');
+        require(D_TEMPLATE . 'header.php');
         

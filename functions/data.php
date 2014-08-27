@@ -22,14 +22,14 @@ function get_settings($dbc) {
     return $settings;
 }
 
-function get_posts($dbc, $id) {
+function get_posts($dbc, $id = NULL, $by = NULL) {
 
     $cond = NULL;
 
     if (isset($id) && is_numeric($id)) {
         $cond = "WHERE id = $id";
-    } else if (isset($id)) {
-        $cond = "WHERE label = $id";
+    } else if (isset($by)) {
+        $cond = "WHERE $by = '$id'";
     }
 
     $query = "SELECT *, MONTHNAME(date) AS month, DAYOFMONTH(date) AS day, YEAR(date) AS year, HOUR(date) AS hour, MINUTE(date) AS minutes, SECOND(date) AS seconds FROM posts $cond ORDER BY date DESC";
@@ -37,13 +37,31 @@ function get_posts($dbc, $id) {
 
     while ($data = mysqli_fetch_assoc($result)) {
 
-        if ($data['id'] == 0) {
-            continue;
-        }
-        // TODO: Limit index page posts
         $posts[$data['id']] = $data;
     }
 
+    return $posts;
+}
+
+function get_category_post($dbc, $id) {
+    $query = "SELECT * FROM posts WHERE catrgory = '$id' ORDER BY date DESC LIMIT 5";
+    $result = mysqli_query($dbc, $query);
+
+    while ($data = mysqli_fetch_assoc($result)) {
+        $posts[$data['id']] = $data;
+    }
+    
+    return $posts;
+}
+
+function get_latest_posts($dbc) {
+    $query = "SELECT * FROM posts ORDER BY date DESC LIMIT 5";
+    $result = mysqli_query($dbc, $query);
+
+    while ($data = mysqli_fetch_assoc($result)) {
+        $posts[$data['id']] = $data;
+    }
+    
     return $posts;
 }
 
@@ -58,18 +76,29 @@ function get_comments($dbc, $id) {
     return $comments;
 }
 
+function get_latest_comments($dbc) {
+    $query = "SELECT * FROM comments ORDER BY date DESC LIMIT 5";
+    $result = mysqli_query($dbc, $query);
+
+    while ($data = mysqli_fetch_assoc($result)) {
+        $comments[$data['id']] = $data;
+    }
+    
+    return $comments;
+}
+
 function get_categories($dbc) {
     $query = "SELECT * FROM categories ORDER BY label ASC";
     $result = mysqli_query($dbc, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {
-        $categories[$data['id']] = $data['label'];
+        $categories[$data['id']] = $data;
     }
 
     return $categories;
 }
 
-function get_user($dbc, $id) {
+function get_user($dbc, $id = NULL) {
 
     $cond = NULL;
 
@@ -89,12 +118,24 @@ function get_user($dbc, $id) {
             while ($data = mysqli_fetch_assoc($result)) {
                 $users[$data['id']] = $data;
             }
+
+            return $users;
         }
 
         $data = mysqli_fetch_assoc($result);
         return $data;
     } else {
-        return NULL;
+        return FALSE;
+    }
+}
+
+function get_avatar($dbc, $id, $path) {
+    $user = get_user($dbc, $id);
+
+    if ($user['avatar'] == 'avatar.png' || empty($user['avatar'])) {
+        return $path . 'avatar.png';
+    } else {
+        return $path . $user['avatar'];
     }
 }
 
@@ -132,10 +173,11 @@ function get_path() {
 function main_nav($dbc, $path) {
     $query = "SELECT * FROM navigation ORDER BY position ASC";
     $result = mysqli_query($dbc, $query);
+    $navigation = NULL;
 
     while ($nav = mysqli_fetch_assoc($result)) {
-        ?>
-        <li <?php selected($path['call_parts'][0], $nav['url'], 'class="active"'); ?>><a href="<?= ROOT . $nav['url']; ?>"><?= $nav['label']; ?></a></li>
-        <?php
+        $navigation[$nav['id']] = $nav;
     }
+
+    return $navigation;
 }

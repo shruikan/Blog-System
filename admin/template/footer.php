@@ -3,7 +3,7 @@
 </footer>
 <?php
 if ($debug_status == 1) {
-    require(D_WIDGETS . '/debug.php');
+    require(D_WIDGETS . 'debug.php');
 }
 ?>
 

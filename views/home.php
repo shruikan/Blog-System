@@ -7,15 +7,18 @@
     }
 
     if ($path['call_parts'][0] == 'home' || empty($path['call_parts'][0])) {
-        $posts = get_posts($dbc, NULL);
+        $posts = get_posts($dbc);
         $comments = FALSE;
     } else {
         $posts = get_posts($dbc, (int) $current[0]);
         $comments = TRUE;
     }
+    if($path['call_parts'][0] == 'category') {
+        $posts = get_category_post($dbc, 'news');
+    }
 
     foreach ($posts as $post => $value) {
-        $post_link = ROOT . 'post/' . $value['id'] . '-' . $value['slug'];
+        $post_link = SITE . 'post/' . $value['id'] . '-' . $value['slug'];
         ?>
         <article>
             <h2><a href="<?= $post_link; ?>"><?= $value['title']; ?></a></h2>
@@ -26,17 +29,17 @@
                 </div>
                 <div class="col-sm-6 col-md-7">
                     <span class="glyphicon glyphicon-pencil"></span> <a href="<?= "$post_link#comment"; ?>">Comments</a>			          		
-                    &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?= $value['date'] . ' by ' . $value['username']['username']; ?>			          		
+                    &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?= $value['date'] . ' by ' . $value['username']; ?>			          		
                 </div>
             </div>
 
             <hr>
 
-            <a href="<?= $post_link; ?>"><img src="http://placehold.it/900x300" class="img-responsive"></a>
+            <a href="<?= $post_link; ?>"><img src="<?= UPLOADS . $value['image']; ?>" class="img-responsive post-image"></a>
 
             <br />
 
-            <p class="lead"><?= $value['body']; ?></p>
+            <p class="lead"><?= $comments ? $value['body'] : substr($value['body'], 0, 2250); ?></p>
                 <!-- <p>Other text</p> -->
             <?php if (isset($path['call_parts'][2])) { ?>
                 <p class="text-right">
