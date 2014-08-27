@@ -2,6 +2,7 @@
 
 switch ($url) {
     case '':
+    case 'home':
     case 'post': $url = 'home';
         $posts = get_posts($dbc);
         $comments = FALSE;
