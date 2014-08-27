@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-sm-6 col-md-7">
                     <span class="glyphicon glyphicon-pencil"></span> <a href="<?= "$post_link#comment"; ?>">Comments</a>			          		
-                    &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?= $value['date'] . ' by ' . $value['username'] . ', ' . $value['counter'] . ' views'; ?>			          		
+                    &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?= $value['date'] . ' by ' . $value['username'] . ' <i class="fa fa-eye"></i> ' . $value['counter'] . ' views'; ?>			          		
                 </div>
             </div>
 
@@ -24,7 +24,7 @@
 
             <br />
 
-            <p class="lead"><?= $comments ? $value['body'] : substr($value['body'], 0, 2250); ?></p>
+            <p class="lead"><?= $comments ? $value['body'] : substr($value['body'], 0, 1000); ?></p>
                 <!-- <p>Other text</p> -->
             <?php if (isset($path['call_parts'][2])) { ?>
                 <p class="text-right">

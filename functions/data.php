@@ -182,4 +182,3 @@ function main_nav($dbc, $path) {
 
     return $navigation;
 }
-
